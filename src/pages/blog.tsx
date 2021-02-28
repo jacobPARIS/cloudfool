@@ -3,7 +3,7 @@ import Head from 'next/head'
 import PageHeader from 'components/page-header'
 import CardRow from 'components/card-row'
 
-export default function Home({posts}) {
+export default function Home({posts}: any) {
   return (
     <div className="dark:bg-gray-800">
       <Head>
@@ -27,7 +27,7 @@ export default function Home({posts}) {
         </section>
 
         <section className="grid grid-cols-1 gap-4 lg:grid-cols-12 lg:gap-6">
-          {posts.map((post) => (
+          {posts.map((post: any) => (
             <CardRow resource={post} />
           ))}
         </section>

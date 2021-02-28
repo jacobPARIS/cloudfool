@@ -1,4 +1,4 @@
-export default function SocialBanner(props) {
+export default function SocialBanner(props: any) {
   return (
     <div {...props}>
       <div className="max-w-screen-xl px-4 mx-auto sm:px-6 lg:px-6">
