@@ -1,7 +1,7 @@
 module.exports = {
   darkMode: 'class',
   purge: {
-    content: ['./src/**/*.tsx'],
+    content: ['./src/**/*.js', './src/**/*.mdx', './src/**/*.tsx'],
     options: {
       safelist: ['dark'],
     },
