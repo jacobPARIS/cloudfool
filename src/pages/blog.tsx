@@ -62,20 +62,3 @@ export async function getStaticProps() {
     },
   }
 }
-
-export async function getStaticPaths() {
-  const postFilePaths = fs
-    .readdirSync(ARTICLES_PATH)
-    // Only include md(x) files
-    .filter((path) => /\.mdx?$/.test(path))
-    .map((filename) => filename.slice(0, filename.indexOf('.mdx')))
-
-  return {
-    paths: postFilePaths.map((slug) => ({
-      params: {
-        slug,
-      },
-    })),
-    fallback: false,
-  }
-}
