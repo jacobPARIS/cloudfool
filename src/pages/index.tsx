@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 
 import SocialBanner from 'components/social-banner'
 import PageHeader from 'components/page-header'
@@ -17,6 +18,12 @@ const resources = [
     path: 'blog/add-footnotes-to-your-html',
     description:
       'Use HTML anchor tags to add accessible semantic footnotes to your article or webpage',
+  },
+  {
+    title: "The developer's guide to javascript functions",
+    name: 'Javascript Tutorial',
+    path: 'blog/js-functions',
+    description: 'An overview of functions and callbacks',
   },
 ]
 export default function Home() {
@@ -60,10 +67,16 @@ export default function Home() {
 
         <SocialBanner className="mb-8" />
 
-        <section className="grid grid-cols-1 gap-4 lg:grid-cols-12 lg:gap-6">
-          {resources.map((resource) => (
-            <CardRow resource={resource} />
-          ))}
+        <section>
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-12 lg:gap-6">
+            {resources.map((resource) => (
+              <CardRow resource={resource} />
+            ))}
+          </div>
+
+          <footer className="flex justify-end px-4 py-3 text-lg text-gray-700 hover:text-red-700">
+            <Link href="blog"> See all articles </Link>
+          </footer>
         </section>
       </main>
     </div>
