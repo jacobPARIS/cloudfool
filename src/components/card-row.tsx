@@ -3,7 +3,7 @@ import Markdown from 'react-markdown'
 
 export default function CardRow({resource}: any) {
   return (
-    <div className="p-5 bg-white dark:bg-gray-800 dark:text-gray-200 sm:p-8">
+    <div className="col-span-4 p-5 bg-white dark:bg-gray-800 dark:text-gray-200 sm:p-8">
       <div className="flex flex-col items-center space-x-0 space-y-5 text-center sm:flex-row sm:space-x-5 sm:space-y-0 sm:text-left">
         <div className="flex flex-col items-center justify-center sm:items-start">
           <h2 className="mb-1 text-xs font-semibold tracking-tight text-gray-700 uppercase dark:text-gray-300">
