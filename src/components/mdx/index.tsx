@@ -23,7 +23,7 @@ export default {
   a: (props: any) => <a class="text-blue-700 underline" {...props} />,
   p: (props: any) => <p class="mb-4" {...props} />,
   li: (props: any) => <li class="list-disc" {...props} />,
-  ul: (props: any) => <ul class="ml-5" {...props} />,
+  ul: (props: any) => <ul class="ml-5 mb-4" {...props} />,
   ins: (props: any) => <ins class="-mx-4 px-4 block bg-green-800" {...props} />,
   del: (props: any) => <ins class="-mx-4 px-4 block bg-red-800" {...props} />,
   blockquote: (props: any) => <blockquote class="italic" {...props} />,
