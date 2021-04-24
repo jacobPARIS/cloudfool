@@ -16,11 +16,21 @@ Footnotes, fine print, disclaimers, citations: these are secondary locations for
 ## Example
 
 <p id="reference">
-  You can afford a $1,000,000 house<a href="#footnote">*</a>
+  You can afford a $1,000,000 house<a
+    href="#footnote"
+    title="By house, we mean studio apartment, and by can, we mean can't."
+    >*</a
+  >
 </p>
 
 ```html numbered
-<p id="reference">You can afford a $1,000,000 house<a href="#footnote">*</a></p>
+<p id="reference">
+  You can afford a $1,000,000 house<a
+    href="#footnote"
+    title="By house, we mean studio apartment, and by can, we mean can't."
+    >*</a
+  >
+</p>
 
 <p id="footnote">
   <a href="#reference"> * </a>
