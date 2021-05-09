@@ -7,7 +7,7 @@ There are two things you need to know about in order to write queries: type defi
 
 Here is a simple query to get a list of user emails
 
-```gql
+```js
   query { # the "query" field
     users { # the "users" field
       email # the "email" field
@@ -21,7 +21,7 @@ There are two top-level fields, and each request should be one or the other. Tha
 
 Type definitions allow us to describe how we want this query to look. The above query expects that under `type Query` is a field named `users` whose resolver returns something with a field `email`
 
-```gql
+```js
 const typedefs = gql`
   type Query {
     users: [User]
@@ -71,7 +71,7 @@ const resolvers = {
 
 With the above resolver set up, running a **query** on **users** will load the list of users and pass it down to the **email** resolver that returns each email
 
-```gql
+```js
 query {
   users {
     email
