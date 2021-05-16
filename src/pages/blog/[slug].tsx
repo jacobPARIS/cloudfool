@@ -1,3 +1,5 @@
+import fs from 'fs'
+import path from 'path'
 import * as React from 'react'
 import {NextSeo} from 'next-seo'
 
@@ -11,8 +13,6 @@ import {useRouter} from 'next/router'
 import matter from 'gray-matter'
 import Link from 'next/link'
 
-import fs from 'fs'
-import path from 'path'
 
 const ARTICLES_PATH = path.join(process.cwd(), 'src', 'articles')
 export default function Blog({
@@ -54,7 +54,7 @@ export default function Blog({
 
       <PageHeader />
 
-      <article className="max-w-screen-md mx-auto mt-3 mb-16 lg:mt-14 md:mt-8">
+      <article className="max-w-screen-md px-5 mx-auto mt-3 mb-16 lg:mt-14 md:mt-8">
         <header>
           <h1 className="w-full max-w-screen-md mb-8 text-3xl font-extrabold lg:text-6xl md:text-5xl sm:text-4xl lg:mb-10 leading-tighter">
             {title}
