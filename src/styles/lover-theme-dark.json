@@ -55,7 +55,8 @@
         "punctuation.separator.comma",
         "meta.brace",
         "meta",
-        "text"
+        "text",
+        "source"
       ],
       "settings": {
         "foreground": "#EEFFFF"

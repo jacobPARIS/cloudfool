@@ -64,7 +64,7 @@ export default function CodeBlock({language, metastring, children}: any) {
     <div className="relative mb-5 -mx-5 overflow-hidden rounded-none bg-code sm:mx-0 sm:rounded-md">
       {labeled && (
         <>
-          <div className="px-5 pt-5 pb-0 text-xs font-bold text-white pointer-events-none select-none sm:pb-3">
+          <div className="px-10 pt-3 pb-0 text-white pointer-events-none select-none sm:px-5 sm:pb-3">
             {language.replace('language-', '')}
             <span className="ml-2 font-light">{filePath}</span>
           </div>
@@ -97,7 +97,7 @@ const Line: FunctionComponent<{highlight?: boolean}> = ({
     style={{
       backgroundColor: highlight ? '#007acc' : '',
     }}
-    className={highlight ? '-mx-4 px-4' : ''}
+    className={highlight ? '-mx-4 px-4 whitespace-pre-wrap' : 'whitespace-pre-wrap'}
   >
     {children}
   </div>

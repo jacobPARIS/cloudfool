@@ -11,13 +11,13 @@ And besides: reviewers with a preoccupation for being human linters are spending
 
 As it turns out, running custom ESLint rules locally is really easy, so there's lots of room to explore automating rules and guidelines that are important to your project but maybe not anyone else. I used the package [eslint-plugin-local-rules](https://www.npmjs.com/package/eslint-plugin-local-rules) which makes this a breeze.
 
-```sh
+```bash labeled
 npm install eslint-plugin-local-rules --save-dev
 ```
 
 Local rules go in a local directory, so I made a new file at `./eslint-local-rules/no-title-case.js` and pieced together enough example code and stack overflow responses until I had a plugin that looked right
 
-```js
+```js numbered labeled filepath[./eslint-local-rules/no-title-case.js]
 function checkString(str, node, context) {
   // \p{Ll} matches a lowercase letter that has an uppercase variant
   // \s matches any whitespace character
@@ -69,7 +69,7 @@ module.exports = {
 
 The `eslint-local-rules` plugin actually looks for an index file containing all the rules, so I started a collection there at `./eslint-local-rules/index.js`
 
-```js
+```js numbered labeled filepath[./eslint-local-rules/index.js]
 module.exports = {
   'no-title-case': require('./no-title-case'),
 }
@@ -77,7 +77,7 @@ module.exports = {
 
 And the last step was to add the plugin and enable the rule in the `.eslintrc` file. I didn't want to be too aggressive here and block CI from passing, so I set the rule to warn instead of throw errors.
 
-```js
+```js numbered labeled filepath[.eslintrc]
 module.exports = {
   plugins: ['local-rules'],
   rules: {
