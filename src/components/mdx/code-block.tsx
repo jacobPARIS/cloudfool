@@ -1,6 +1,4 @@
 import * as React from 'react'
-import {FunctionComponent} from 'react'
-import {Children, ReactNode, ReactElement} from 'react'
 import useClipboard from 'react-use-clipboard'
 
 export default function CodeBlock({language, metastring, children}: any) {
@@ -12,9 +10,9 @@ export default function CodeBlock({language, metastring, children}: any) {
   let code = ''
 
   // create arrays of arrays wit only spans inside
-  const linesArr: ReactNode[][] = [[]]
+  const linesArr: React.ReactNode[][] = [[]]
 
-  Children.forEach(children, (child) => {
+  React.Children.forEach(children, (child) => {
     const index = linesArr.length - 1
 
     if (typeof child === 'string') {
@@ -32,13 +30,13 @@ export default function CodeBlock({language, metastring, children}: any) {
 
       // add content to code
       if (child && typeof child === 'object') {
-        code += (child as ReactElement).props.children
+        code += (child as React.ReactElement).props.children
       }
     }
   })
 
   // transform lines into divs > [span]
-  const linesNodes = []
+  const linesNodes: JSX.Element[] = []
   for (let i = 0; i < linesArr.length; i++) {
     const lineIndex = i + 1
     const childs = numbered
@@ -89,7 +87,7 @@ export default function CodeBlock({language, metastring, children}: any) {
   )
 }
 
-const Line: FunctionComponent<{highlight?: boolean}> = ({
+const Line: React.FunctionComponent<{highlight?: boolean}> = ({
   highlight,
   children,
 }) => (
@@ -97,19 +95,21 @@ const Line: FunctionComponent<{highlight?: boolean}> = ({
     style={{
       backgroundColor: highlight ? '#007acc' : '',
     }}
-    className={highlight ? '-mx-4 px-4 whitespace-pre-wrap' : 'whitespace-pre-wrap'}
+    className={
+      highlight ? '-mx-4 px-4 whitespace-pre-wrap' : 'whitespace-pre-wrap'
+    }
   >
     {children}
   </div>
 )
 
-const NumberElement: FunctionComponent = ({children}) => (
+const NumberElement: React.FunctionComponent = ({children}) => (
   <span className="inline-block text-xs text-blue-300 opacity-50 pointer-events-none select-none line-number w-7">
     {children}
   </span>
 )
 
-const CopyToClipboard: FunctionComponent<{code: string}> = ({code}) => {
+const CopyToClipboard: React.FunctionComponent<{code: string}> = ({code}) => {
   const [isCopied, setCopied] = useClipboard(code, {successDuration: 1000})
   return (
     <button
