@@ -1,0 +1,40 @@
+---
+title: Test a textbox with testing library
+description: Examples of test cases around text boxes with Jest and Testing Library
+---
+
+These examples are built with the following opinion:
+
+- The simplified queries from [rtl-simple-queries](https://github.com/balavishnuvj/rtl-simple-queries) are installed
+
+## A textbox has the correct value
+
+If a textbox has been updated by user interaction, we can test its value directly.
+
+<TestTextInput class="mb-10">
+
+```js numbered labeled
+const usernameInput = screen.fetchByRole('textbox', {
+  name: 'Username',
+})
+
+expect(usernameInput).toHaveValue('Alice')
+```
+
+</TestTextInput>
+
+## An input has the correct value after being updated externally
+
+<TestTextInputAsync>
+
+If a textbox has been updated by an outside source, such as an API or another component, we can't guarantee that will happen immediately. In these cases, use the `async` queries.
+
+```js numbered labeled
+const usernameInput = await screen.fetchByRoleAsync('textbox', {
+  name: 'Username',
+})
+
+expect(usernameInput).toHaveValue('Alice')
+```
+
+</TestTextInputAsync>
