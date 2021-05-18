@@ -1,7 +1,20 @@
 import DefaultLayout from '../../layouts'
 import CodeBlock from './code-block'
+import TestTextInput from './test-text-input'
+import TestTextInputAsync from './test-text-input-async'
+import PageComponent from './page-component'
 export default {
   DefaultLayout,
+  TestTextInput: (props: any) => (
+    <PageComponent>
+      <TestTextInput {...props} />
+    </PageComponent>
+  ),
+  TestTextInputAsync: (props: any) => (
+    <PageComponent>
+      <TestTextInputAsync {...props} />
+    </PageComponent>
+  ),
   h1: (props: any) => (
     <h1 class="text-4xl font-black mb-6 text-gray-800" {...props} />
   ),
