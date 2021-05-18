@@ -7,11 +7,11 @@ These examples are built with the following opinion:
 
 - The simplified queries from [rtl-simple-queries](https://github.com/balavishnuvj/rtl-simple-queries) are installed
 
-## A textbox has the correct value
+## A textbox loads immediately with the correct value
 
-If a textbox has been updated by user interaction, we can test its value directly.
+There is no interaction needed here, just finding the input and reading its value
 
-<TestTextInput class="mb-10">
+<TestTextInput defaultValue="Alice" class="mb-10">
 
 ```js numbered labeled
 const usernameInput = screen.fetchByRole('textbox', {
@@ -23,11 +23,29 @@ expect(usernameInput).toHaveValue('Alice')
 
 </TestTextInput>
 
-## An input has the correct value after being updated externally
+## A textbox appears immediately and eventually loads the correct value
 
-<TestTextInputAsync>
+If the value for the textbox comes from a server, there might be time where the input has appeared before its value has loaded. Consider whether this is intended behaviour, or if the component should wait until its data is ready before loading at all.
 
-If a textbox has been updated by an outside source, such as an API or another component, we can't guarantee that will happen immediately. In these cases, use the `async` queries.
+<TestTextInput defaultValue="Alice" dataTimeout={1500} class="mb-10">
+
+```js numbered labeled
+const usernameInput = screen.fetchByRole('textbox', {
+  name: 'Username',
+})
+
+await waitFor(() => {
+  expect(usernameInput).toHaveValue('Alice')
+})
+```
+
+</TestTextInput>
+
+## A textbox will eventually appear with the correct value
+
+If the textbox is not initially on the screen, for example if the user opens up a form, we might need to wait for the textbox itself to appear.
+
+<TestTextInput defaultValue="Alice" inputTimeout={1500} class="mb-10">
 
 ```js numbered labeled
 const usernameInput = await screen.fetchByRoleAsync('textbox', {
@@ -37,4 +55,22 @@ const usernameInput = await screen.fetchByRoleAsync('textbox', {
 expect(usernameInput).toHaveValue('Alice')
 ```
 
-</TestTextInputAsync>
+</TestTextInput>
+
+## A textbox was updated by a user
+
+If a textbox has been updated by user interaction, we can test its value directly.
+
+<TestTextInput defaultValue="Alice" dataTimeout={1500} class="mb-10">
+
+```js numbered labeled
+const usernameInput = screen.fetchByRole('textbox', {
+  name: 'Username',
+})
+
+userEvent.type(usernameInput, 'Alice')
+
+expect(usernameInput).toHaveValue('Alice')
+```
+
+</TestTextInput>
