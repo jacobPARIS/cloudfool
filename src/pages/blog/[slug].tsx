@@ -6,27 +6,21 @@ import {NextSeo} from 'next-seo'
 import mdxComponents from 'components/mdx'
 import PageHeader from 'components/page-header'
 
-import renderToString from 'next-mdx-remote/render-to-string'
-import hydrate from 'next-mdx-remote/hydrate'
+import {serialize} from 'next-mdx-remote/serialize'
+// @ts-ignore
+import {MDXRemote} from 'next-mdx-remote'
 import Image from 'next/image'
 import {useRouter} from 'next/router'
 import matter from 'gray-matter'
 import Link from 'next/link'
 
-
 const ARTICLES_PATH = path.join(process.cwd(), 'src', 'articles')
-export default function Blog({
-  title = 'Missing title',
-  seo = {},
-  body = ``,
-}: any) {
+export default function Blog({title = 'Missing title', seo = {}, source}: any) {
   const router = useRouter()
   const url = process.env.NEXT_PUBLIC_DEPLOYMENT_URL + router.asPath
   const canonicalUrl = seo.canonicalUrl ? seo.canonicalUrl : url
 
   const ogImage = seo.ogImage ? seo.ogImage : `https://placekitten.com/500/300`
-
-  const content = hydrate(body, {components: mdxComponents})
 
   return (
     <>
@@ -56,20 +50,20 @@ export default function Blog({
 
       <article className="max-w-screen-md px-5 mx-auto mt-3 mb-16 lg:mt-14 md:mt-8">
         <header>
-          <h1 className="w-full max-w-screen-md mb-8 text-3xl font-extrabold lg:text-6xl md:text-5xl sm:text-4xl lg:mb-10 leading-tighter">
+          <h1 className="w-full max-w-screen-md my-10 leading-tight text-gray-800 text-28 font-300">
             {title}
           </h1>
         </header>
 
-        <main className="mt-5 prose dark:prose-dark sm:prose-lg lg:prose-xl max-w-none">
-          {content}
+        <main className="mt-5 leading-relaxed prose text-gray-500 dark:prose-dark sm:prose-lg lg:prose-xl max-w-none text-17">
+          <MDXRemote {...source} components={mdxComponents} />
         </main>
       </article>
     </>
   )
 }
 
-function Author({name, image, path}: any) {
+function Author({name, image, path}) {
   function Profile() {
     return (
       <>
@@ -104,13 +98,12 @@ function Author({name, image, path}: any) {
     )
   ) : null
 }
-export async function getStaticProps(context: any) {
+export async function getStaticProps(context) {
   const pageBuffer = fs.readFileSync(
     path.join(ARTICLES_PATH, `${context.params.slug}.mdx`),
   )
   const {content, data} = matter(pageBuffer.toString())
-  const mdxSource = await renderToString(content, {
-    components: mdxComponents,
+  const mdxSource = await serialize(content, {
     mdxOptions: {
       remarkPlugins: [
         require(`remark-slug`),
@@ -130,7 +123,7 @@ export async function getStaticProps(context: any) {
   })
 
   return {
-    props: {...data, body: mdxSource},
+    props: {...data, source: mdxSource},
     revalidate: 1,
   }
 }

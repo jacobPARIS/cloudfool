@@ -70,16 +70,7 @@ export default function CodeBlock({language, metastring, children}: any) {
         </>
       )}
       <div className="p-3">
-        <pre
-          className="px-5 py-0 -mx-5 sm:mx-0 sm:px-3"
-          style={{
-            fontSize: '85% !important',
-            lineHeight: '1.75 !important',
-            borderRadius: '0 !important',
-            margin: '0 !important',
-            padding: '0 !important',
-          }}
-        >
+        <pre className="px-5 py-0 -mx-5 sm:mx-0 sm:px-3 text-14 font-400">
           <code>{linesNodes}</code>
         </pre>
       </div>

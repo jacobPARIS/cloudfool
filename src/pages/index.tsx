@@ -41,27 +41,27 @@ export default function Home() {
 
       <main className="dark:bg-gray-900">
         <section className="py-8 mx-auto max-w-7xl px-42 sm:px-6">
-          <div className="mb-4">
-            <span className="text-4xl font-black text-gray-900 dark:text-gray-100 sm:text-6xl">
+          <div className="my-10">
+            <span className="leading-tight text-gray-800 text-28 font-300">
               {sample(greetings)}
             </span>
 
-            <h1 className="inline text-4xl font-black text-gray-900 dark:text-gray-100 sm:text-6xl">
+            <h1 className="inline leading-tight text-gray-800 text-28 font-300">
               Jacob Paris
             </h1>
 
-            <span className="text-4xl font-black text-gray-900 dark:text-gray-100 sm:text-6xl">
+            <span className="leading-tight text-gray-800 text-28 font-300">
               {sample(punctuation)}
             </span>
           </div>
 
-          <p className="max-w-3xl mb-4 text-2xl text-gray-800 dark:text-gray-100">
-            I'm a digital nomad from Canada 🇨🇦
+          <p className="max-w-3xl mb-4 text-gray-700 font-400 text-17 dark:text-gray-100">
+            I'm a nomad from Canada 🇨🇦
           </p>
 
-          <p className="max-w-3xl mb-4 text-2xl text-gray-800 dark:text-gray-100">
+          <p className="max-w-3xl mb-4 text-gray-500 text-17 dark:text-gray-100">
             When I'm not working, I'm diving all-in on one hobby or another.
-            This month I'm <b className="text-red-800">snowboarding</b>.
+            This month I'm <b className="text-red-800">surfing</b>.
           </p>
         </section>
 

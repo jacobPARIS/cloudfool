@@ -3,9 +3,66 @@
 @tailwind utilities;
 
 html {
-  font-family: 'Source Sans Pro', 'Helvetica', 'Arial', sans-serif;
+  font-family: 'Inter', 'Helvetica', 'Arial', sans-serif;
+  font-weight: 300;
 }
 
 .bg-code {
   background-color: #35435f;
+}
+
+.font-300 {
+  font-weight: 300;
+}
+
+.font-400 {
+  font-weight: 400;
+}
+
+.font-500 {
+  font-weight: 500;
+}
+
+.font-600 {
+  font-weight: 600;
+}
+
+.font-700 {
+  font-weight: 700;
+}
+
+.text-12 {
+  font-size: 0.75rem;
+}
+
+.text-13 {
+  font-size: 0.8125rem;
+}
+
+.text-14 {
+  font-size: 0.875rem;
+}
+
+.text-15 {
+  font-size: 0.9375rem;
+}
+
+.text-16 {
+  font-size: 1rem;
+}
+
+.text-17 {
+  font-size: 1.0625rem;
+}
+
+.text-18 {
+  font-size: 1.125rem;
+}
+
+.text-24 {
+  font-size: 1.5rem;
+}
+
+.text-28 {
+  font-size: 1.825rem;
 }

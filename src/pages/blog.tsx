@@ -14,15 +14,15 @@ export default function Home({posts}: any) {
       <PageHeader />
 
       <main className="dark:bg-gray-900">
-        <section className="py-24 mx-auto max-w-7xl px-42 sm:px-6 lg:px-16 sm:py-16">
+        <section className="px-8 py-12 mx-auto max-w-7xl ">
           <div className="mb-4">
-            <h1 className="inline text-4xl font-black text-gray-900 dark:text-gray-100 sm:text-6xl">
+            <h1 className="inline my-10 leading-tight text-gray-800 text-28 font-300">
               Articles
             </h1>
           </div>
 
-          <p className="max-w-3xl mb-4 text-2xl text-gray-800 dark:text-gray-100">
-            Here's what I've been writing lately
+          <p className="max-w-3xl mb-4 text-gray-500 text-17 dark:text-gray-100">
+            I've had some things on my mind
           </p>
         </section>
 
