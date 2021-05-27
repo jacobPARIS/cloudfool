@@ -22,7 +22,7 @@ export default function TestStatus({isSuccessful}) {
   }
 
   return (
-    <p className="flex items-center text-red-600">
+    <p className="flex items-center text-blue-600">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="w-6 h-6"

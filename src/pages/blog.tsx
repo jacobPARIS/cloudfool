@@ -5,7 +5,7 @@ import CardRow from 'components/card-row'
 
 export default function Home({posts}: any) {
   return (
-    <div className="dark:bg-gray-800">
+    <div className="bg-gray-50 dark:bg-gray-800">
       <Head>
         <title>Jacob Paris</title>
         <link rel="icon" href="/favicon.ico" />
@@ -13,7 +13,7 @@ export default function Home({posts}: any) {
 
       <PageHeader />
 
-      <main className="dark:bg-gray-900">
+      <main className="px-4 -mb-24 dark:bg-gray-900">
         <section className="px-8 py-12 mx-auto max-w-7xl ">
           <div className="mb-4">
             <h1 className="inline my-10 leading-tight text-gray-800 text-28 font-300">
@@ -32,6 +32,10 @@ export default function Home({posts}: any) {
           ))}
         </section>
       </main>
+
+      <footer className="pt-48 pb-8 text-center bg-blue-950">
+        <small className="text-white"> Made with ❤️ by Jacob Paris </small>
+      </footer>
     </div>
   )
 }

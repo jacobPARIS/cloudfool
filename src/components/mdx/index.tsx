@@ -38,10 +38,10 @@ export default {
     <ins className="block px-4 -mx-4 bg-green-800" {...props} />
   ),
   del: (props: any) => (
-    <ins className="block px-4 -mx-4 bg-red-800" {...props} />
+    <ins className="block px-4 -mx-4 bg-blue-800" {...props} />
   ),
 
-  code: (props: any) => <code className="bg-red-600 text-16" {...props} />,
+  code: (props: any) => <code className="bg-blue-600 text-16" {...props} />,
   blockquote: (props: any) => <blockquote className="italic" {...props} />,
   pre: (props: any) => (
     <CodeBlock

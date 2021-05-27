@@ -31,7 +31,7 @@ export default function Home() {
   const punctuation = ['!', '!!', '', '.', ' 🙏']
 
   return (
-    <div className="dark:bg-gray-800">
+    <div className="bg-gray-50 dark:bg-gray-800">
       <Head>
         <title>Jacob Paris</title>
         <link rel="icon" href="/favicon.ico" />
@@ -39,7 +39,7 @@ export default function Home() {
 
       <PageHeader />
 
-      <main className="dark:bg-gray-900">
+      <main className="px-4 dark:bg-gray-900">
         <section className="py-8 mx-auto max-w-7xl px-42 sm:px-6">
           <div className="my-10">
             <span className="leading-tight text-gray-800 text-28 font-300">
@@ -61,11 +61,9 @@ export default function Home() {
 
           <p className="max-w-3xl mb-4 text-gray-500 text-17 dark:text-gray-100">
             When I'm not working, I'm diving all-in on one hobby or another.
-            This month I'm <b className="text-red-800">surfing</b>.
+            This month I'm <b className="text-blue-800">surfing</b>.
           </p>
         </section>
-
-        <SocialBanner className="mb-8" />
 
         <section>
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-12 lg:gap-6">
@@ -74,11 +72,16 @@ export default function Home() {
             ))}
           </div>
 
-          <footer className="flex justify-end px-4 py-3 text-lg text-gray-700 hover:text-red-700">
+          <footer className="flex justify-end px-4 py-3 text-lg text-gray-700 hover:text-blue-700">
             <Link href="blog"> See all articles </Link>
           </footer>
         </section>
       </main>
+      <footer className="py-4 text-center bg-blue-950">
+        <SocialBanner className="my-8" />
+
+        <small className="text-white"> Made with ❤️ by Jacob Paris </small>
+      </footer>
     </div>
   )
 }

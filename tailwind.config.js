@@ -9,7 +9,11 @@ module.exports = {
   theme: {
     typography: (theme) => ({}),
     extend: {
-      colors: {},
+      colors: {
+        blue: {
+          950: '#242C42',
+        },
+      },
       typography: (theme) => ({
         dark: {
           css: {

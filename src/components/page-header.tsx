@@ -1,15 +1,19 @@
 import Link from 'next/link'
 export default function PageHeader() {
   return (
-    <header className="flex justify-between">
-      <div className="px-4 py-3 text-lg text-gray-700 hover:text-red-700">
-        <Link href="/">Jacob Paris</Link>
+    <header className="flex justify-between bg-blue-950">
+      <div className="px-4 py-2 text-lg text-blue-100">
+        <Link href="/">
+          <a className="text-blue-100 hover:text-blue-200">Jacob Paris</a>
+        </Link>
       </div>
 
       <nav>
         <ul className="flex">
-          <li className="px-4 py-3 text-lg text-gray-700 hover:text-red-700">
-            <Link href="/blog">Articles</Link>
+          <li className="px-4 py-2 text-lg text-blue-100">
+            <Link href="/">
+              <a className="text-blue-100 hover:text-blue-200">Articles</a>
+            </Link>
           </li>
         </ul>
       </nav>
