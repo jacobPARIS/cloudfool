@@ -11,7 +11,7 @@ export default function PageHeader() {
       <nav>
         <ul className="flex">
           <li className="px-4 py-2 text-lg text-blue-100">
-            <Link href="/">
+            <Link href="/blog">
               <a className="text-blue-100 hover:text-blue-200">Articles</a>
             </Link>
           </li>
