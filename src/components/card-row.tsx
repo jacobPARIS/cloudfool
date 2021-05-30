@@ -5,7 +5,7 @@ import rehypeSanitize from 'rehype-sanitize'
 
 import Tag from './tag'
 export default function CardRow({resource}: any) {
-  const tags = resource.tags
+  const tags = resource.tags || []
 
   return (
     <section className="col-span-6 p-5 bg-white rounded shadow-sm dark:bg-gray-800 dark:text-gray-200 sm:p-8">
