@@ -1,6 +1,7 @@
 ---
 title: Create a custom local eslint rule
 description: Running custom ESLint rules locally is really easy, so there's lots of room to explore automating rules and guidelines that are important to your project but maybe not anyone else.
+tags: ESLint
 ---
 
 We have a styleguide at work that says all of our labels should be in sentence-case, so instead of "Add Products" it's "Add products" with a lowercase 'p', and instead of "User Account" it's "User account" with a lowercase 'a'.
@@ -46,7 +47,7 @@ function checkString(str, node, context) {
 module.exports = {
   meta: {
     docs: {
-      description: 'Enforce that string literals aren\'t in title case.',
+      description: "Enforce that string literals aren't in title case.",
       recommended: false,
     },
     fixable: 'code',

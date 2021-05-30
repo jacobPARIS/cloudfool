@@ -2,8 +2,17 @@ import Head from 'next/head'
 
 import PageHeader from 'components/page-header'
 import CardRow from 'components/card-row'
+import Tag from 'components/tag'
+import {useRouter} from 'next/router'
+export default function Home({posts, tags}: any) {
+  const router = useRouter()
+  const {tag: queryTag} = router.query
 
-export default function Home({posts}: any) {
+  const filterPosts = posts.filter((post) => {
+    if (!queryTag) return true
+
+    return post.tags.includes(queryTag)
+  })
   return (
     <div className="bg-gray-50 dark:bg-gray-800">
       <Head>
@@ -26,8 +35,25 @@ export default function Home({posts}: any) {
           </p>
         </section>
 
+        <section className="px-8">
+          <ul className="flex mb-8 -mx-3">
+            <li>
+              <Tag text="All posts" highlight={!queryTag} />
+            </li>
+            {tags.map((tag) => (
+              <li>
+                <Tag text={tag} slug={tag} highlight={tag === queryTag} />
+              </li>
+            ))}
+          </ul>
+
+          <p className="my-3 text-gray-500 text-17">
+            {filterPosts.length} post{filterPosts.length !== 1 && 's'}
+            {queryTag && ` about ${queryTag}`}
+          </p>
+        </section>
         <section className="grid grid-cols-1 gap-4 lg:grid-cols-12 lg:gap-6">
-          {posts.map((post: any) => (
+          {filterPosts.map((post: any) => (
             <CardRow resource={post} />
           ))}
         </section>
@@ -56,13 +82,19 @@ export async function getStaticProps() {
 
       return {
         ...page.data,
+        tags: page.data.tags
+          ? page.data.tags.split(',').map((tag) => tag.trim())
+          : [],
         path: `blog/${filename.slice(0, filename.indexOf('.mdx'))}`,
       }
     })
 
+  const tags = Array.from(new Set(posts.flatMap((post) => post.tags)))
+
   return {
     props: {
       posts: posts,
+      tags: tags,
     },
   }
 }

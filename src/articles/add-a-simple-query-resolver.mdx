@@ -1,6 +1,7 @@
 ---
 title: Add a simple query resolver
 description: There are two things you need to know about in order to write queries
+tags: GraphQL
 ---
 
 There are two things you need to know about in order to write queries: type definitions, and resolvers
@@ -52,20 +53,20 @@ const resolvers = {
   Query: {
     users() {
       return [
-        { id: 0, email: 'alice@example.com' },
-        { id: 1, email: 'bob@example.com' },
-        { id: 2, email: 'carol@example.com' },
-        { id: 3, email: 'doug@example.com' },
-        { id: 4, email: 'eve@example.com' },
+        {id: 0, email: 'alice@example.com'},
+        {id: 1, email: 'bob@example.com'},
+        {id: 2, email: 'carol@example.com'},
+        {id: 3, email: 'doug@example.com'},
+        {id: 4, email: 'eve@example.com'},
       ]
-    }
+    },
   },
 
   User: {
     email(user) {
       return user.email
-    }
-  }
+    },
+  },
 }
 ```
 
@@ -78,15 +79,16 @@ query {
   }
 }
 ```
+
 ```json
 {
   "data": {
     "users": [
-      { "email": "alice@example.com" },
-      { "email": "bob@example.com" },
-      { "email": "carol@example.com" },
-      { "email": "doug@example.com" },
-      { "email": "eve@example.com" },
+      {"email": "alice@example.com"},
+      {"email": "bob@example.com"},
+      {"email": "carol@example.com"},
+      {"email": "doug@example.com"},
+      {"email": "eve@example.com"}
     ]
   }
 }
@@ -113,11 +115,11 @@ const resolvers = {
   Query: {
     users() {
       return [
-        { id: 0, email: 'alice@example.com' },
-        { id: 1, email: 'bob@example.com' },
-        { id: 2, email: 'carol@example.com' },
-        { id: 3, email: 'doug@example.com' },
-        { id: 4, email: 'eve@example.com' },
+        {id: 0, email: 'alice@example.com'},
+        {id: 1, email: 'bob@example.com'},
+        {id: 2, email: 'carol@example.com'},
+        {id: 3, email: 'doug@example.com'},
+        {id: 4, email: 'eve@example.com'},
       ]
     },
   },

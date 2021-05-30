@@ -1,6 +1,7 @@
 ---
 title: Bug – "parserOptions.project" has been set for @typescript-eslint/parser.
 description: Add the file to the "include" array in your tsconfig.json
+tags: TypeScript, ESLint
 ---
 
 TL:DR: Add the file to the "include" array in your tsconfig.json
@@ -44,13 +45,11 @@ That field is supposed to point at the `tsconfig.json`, so it looks correct, but
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": [
-    ".eslintrc.js",
-    "./app/**/*"
-  ]
+  "include": [".eslintrc.js", "./app/**/*"]
 }
 ```
->The file does not match your project config: babel.config.js.
+
+> The file does not match your project config: babel.config.js.
 > The file must be included in at least one of the projects provided
 
 Since this is the `tsconfig.json` that the `eslintrc.js` `project` field pointed to, I appear to be in the right place and can eliminate all of those words from the error message.

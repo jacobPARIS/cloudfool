@@ -2,12 +2,26 @@ import Link from 'next/link'
 import Markdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import rehypeSanitize from 'rehype-sanitize'
+
+import Tag from './tag'
 export default function CardRow({resource}: any) {
+  const tags = resource.tags
+
   return (
     <section className="col-span-6 p-5 bg-white rounded shadow-sm dark:bg-gray-800 dark:text-gray-200 sm:p-8">
       <div className="flex flex-col items-center space-x-0 space-y-5 text-center sm:flex-row sm:space-x-5 sm:space-y-0 sm:text-left">
         <div className="flex flex-col items-center justify-center text-gray-800 sm:items-start ">
           <header>
+            {tags.length ? (
+              <ul className="flex -mx-2 -mt-6">
+                {tags.map((tag) => (
+                  <li>
+                    <Tag text={tag} slug={tag} />
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+
             <Link href={resource.path}>
               <a className="hover:text-blue-600 dark:hover:text-blue-300">
                 <h2 className="mb-4 leading-tight text-28 font-300">
