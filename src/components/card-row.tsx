@@ -8,7 +8,7 @@ export default function CardRow({resource}: any) {
   const tags = resource.tags || []
 
   return (
-    <section className="col-span-6 p-5 bg-white rounded shadow-sm dark:bg-gray-800 dark:text-gray-200 sm:p-8">
+    <section className="col-span-6 px-5 py-8 bg-white rounded shadow-sm dark:bg-gray-800 dark:text-gray-200 sm:p-8">
       <div className="flex flex-col items-center space-x-0 space-y-5 text-center sm:flex-row sm:space-x-5 sm:space-y-0 sm:text-left">
         <div className="flex flex-col items-center justify-center text-gray-800 sm:items-start ">
           <header>
