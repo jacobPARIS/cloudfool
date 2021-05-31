@@ -23,7 +23,7 @@ export default function Home({posts, tags}: any) {
       <PageHeader />
 
       <main className="px-4 -mb-24 dark:bg-gray-900">
-        <section className="px-8 py-12 mx-auto max-w-7xl ">
+        <section className="px-2 py-12 mx-auto md:px-8 max-w-7xl ">
           <div className="mb-4">
             <h1 className="inline my-10 leading-tight text-gray-800 text-28 font-300">
               Articles
@@ -35,8 +35,8 @@ export default function Home({posts, tags}: any) {
           </p>
         </section>
 
-        <section className="px-8">
-          <ul className="flex mb-8 -mx-3">
+        <section className="px-2 md:px-8">
+          <ul className="flex flex-wrap mb-8 -mx-3">
             <li>
               <Tag text="All posts" highlight={!queryTag} />
             </li>

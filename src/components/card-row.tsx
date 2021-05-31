@@ -13,7 +13,7 @@ export default function CardRow({resource}: any) {
         <div className="flex flex-col items-center justify-center text-gray-800 sm:items-start ">
           <header>
             {tags.length ? (
-              <ul className="flex -mx-2 -mt-6">
+              <ul className="flex flex-wrap -mx-2 -mt-6">
                 {tags.map((tag) => (
                   <li>
                     <Tag text={tag} slug={tag} />
