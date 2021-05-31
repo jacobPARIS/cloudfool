@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npx next dev -p 3050-",
+    "dev": "npx next dev -p 3050",
     "build": "NODE_ENV=production npx next build",
     "postbuild": "NODE_ENV=production npx next-sitemap",
     "start": "npx next start",

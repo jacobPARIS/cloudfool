@@ -31,7 +31,7 @@ export default function Home() {
   const punctuation = ['!', '!!', '', '.', ' 🙏']
 
   return (
-    <div className="bg-gray-50 dark:bg-gray-800">
+    <div className="flex flex-col bg-gray-50 dark:bg-gray-800 min-vh-100">
       <Head>
         <title>Jacob Paris</title>
         <link rel="icon" href="/favicon.ico" />
@@ -39,7 +39,7 @@ export default function Home() {
 
       <PageHeader />
 
-      <main className="px-4 dark:bg-gray-900">
+      <main className="flex-grow px-4 dark:bg-gray-900 ">
         <section className="py-8 mx-auto max-w-7xl px-42 sm:px-6">
           <div className="my-10">
             <span className="leading-tight text-gray-800 text-28 font-300">
@@ -65,19 +65,26 @@ export default function Home() {
           </p>
         </section>
 
-        <section>
+        <section className="mx-auto -mb-24 max-w-7xl">
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-12 lg:gap-6">
             {resources.map((resource) => (
               <CardRow resource={resource} />
             ))}
-          </div>
 
-          <footer className="flex justify-end px-4 py-3 text-lg text-gray-700 hover:text-blue-700">
-            <Link href="blog"> See all articles </Link>
-          </footer>
+            <section
+              style={{zIndex: 1}}
+              className="flex items-center justify-center col-span-6 px-5 py-8 bg-white rounded shadow-sm dark:bg-gray-800 dark:text-gray-200 sm:p-8"
+            >
+              <Link href="/blog">
+                <a className="leading-tight hover:text-blue-600 dark:hover:text-blue-300 text-28 font-300">
+                  See all articles
+                </a>
+              </Link>
+            </section>
+          </div>
         </section>
       </main>
-      <footer className="py-4 text-center bg-blue-950">
+      <footer className="pt-48 pb-8 text-center bg-blue-950">
         <SocialBanner className="my-8" />
 
         <small className="text-white"> Made with ❤️ by Jacob Paris </small>
