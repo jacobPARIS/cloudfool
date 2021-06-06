@@ -111,6 +111,7 @@ function Author({name, image, path}) {
     )
   ) : null
 }
+
 export async function getStaticProps(context) {
   const pageBuffer = fs.readFileSync(
     path.join(ARTICLES_PATH, `${context.params.slug}.mdx`),
@@ -120,8 +121,20 @@ export async function getStaticProps(context) {
     mdxOptions: {
       remarkPlugins: [
         require(`remark-slug`),
-        require(`remark-footnotes`),
-        require(`remark-code-titles`),
+        [
+          require('remark-autolink-headings'),
+          {
+            content: {
+              type: 'element',
+              tagName: 'link-icon',
+              properties: {
+                style:
+                  'display: inline; margin-left: -2rem; margin-right: 0.5rem;',
+              },
+            },
+          },
+        ],
+        require('remark-external-links'),
       ],
       rehypePlugins: [
         [
