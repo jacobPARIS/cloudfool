@@ -50,12 +50,25 @@ export default function Blog({title = 'Missing title', seo = {}, source}: any) {
 
       <article className="max-w-screen-md px-5 mx-auto mt-3 mb-16 lg:mt-14 md:mt-8">
         <header>
-          <h1 className="w-full max-w-screen-md my-10 leading-tight text-gray-800 text-28 font-300">
+          <h1 className="w-full max-w-screen-md mt-10 mb-4 leading-tight text-gray-800 text-28 font-300">
             {title}
           </h1>
         </header>
 
-        <main className="mt-5 leading-relaxed prose text-gray-500 dark:prose-dark sm:prose-lg lg:prose-xl max-w-none text-17">
+        <small className="text-gray-500 text-14">
+          Last updated by
+          <a
+            href="https://twitter.com/intent/follow?screen_name=jacobmparis"
+            className="mx-1 text-blue-700 underline hover:text-purple-700"
+            rel="noopener"
+            target="blank"
+          >
+            Jacob Paris
+          </a>
+        </small>
+        <hr className="mt-2 mb-12" />
+
+        <main className="leading-relaxed prose text-gray-500 dark:prose-dark sm:prose-lg lg:prose-xl max-w-none text-17">
           <MDXRemote {...source} components={mdxComponents} />
         </main>
       </article>
