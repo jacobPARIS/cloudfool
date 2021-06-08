@@ -94,7 +94,7 @@ function ContributionGraph({filename}) {
 }
 export default function Blog({
   title = 'Missing title',
-  description,
+  description = '',
   seo = {},
   lastUpdated,
   source,
@@ -119,7 +119,7 @@ export default function Blog({
     <>
       <NextSeo
         title={title}
-        description={seo.description}
+        description={seo.description || description}
         openGraph={{
           title: seo.ogTitle || title,
           description: seo.ogDescription || description,
@@ -133,8 +133,8 @@ export default function Blog({
         }}
         twitter={{
           cardType: seo.cardType || 'summary_large_image',
-          site: seo.site || 'jacobparis',
-          handle: seo.handle,
+          site: seo.site || 'jacobmparis',
+          handle: 'jacobmparis',
         }}
         canonical={canonicalUrl}
       />
