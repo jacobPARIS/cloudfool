@@ -94,6 +94,7 @@ function ContributionGraph({filename}) {
 }
 export default function Blog({
   title = 'Missing title',
+  description,
   seo = {},
   lastUpdated,
   source,
@@ -121,7 +122,7 @@ export default function Blog({
         description={seo.description}
         openGraph={{
           title: seo.ogTitle || title,
-          description: seo.ogDescription,
+          description: seo.ogDescription || description,
           url,
           images: [
             {
