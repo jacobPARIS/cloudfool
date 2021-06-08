@@ -104,7 +104,9 @@ export default function Blog({
   const url = process.env.NEXT_PUBLIC_DEPLOYMENT_URL + router.asPath
   const canonicalUrl = seo.canonicalUrl ? seo.canonicalUrl : url
 
-  const ogImage = seo.ogImage ? seo.ogImage : `https://placekitten.com/500/300`
+  const ogImage = seo.ogImage
+    ? seo.ogImage
+    : `https://og-image-eta-ivory.vercel.app/${encodeURIComponent(title)}`
 
   const lastUpdatedDate = new Date(lastUpdated).toLocaleDateString('en-US', {
     year: 'numeric',
