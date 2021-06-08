@@ -13,14 +13,104 @@ import Image from 'next/image'
 import {useRouter} from 'next/router'
 import matter from 'gray-matter'
 import Link from 'next/link'
-
+import {useQuery, QueryClient, QueryClientProvider} from 'react-query'
+const queryClient = new QueryClient()
 const ARTICLES_PATH = path.join(process.cwd(), 'src', 'articles')
-export default function Blog({title = 'Missing title', seo = {}, source}: any) {
+
+function ContributionGraph({filename}) {
+  const {isLoading, isError, data} = useQuery('commits', () =>
+    fetch(
+      `https://api.github.com/repos/JacobParis/cloudfool/commits?sha=main&path=src/articles/${filename}`,
+    ).then((response) => response.json()),
+  )
+
+  if (isLoading) return <span> Loading </span>
+  if (isError) return <span> error </span>
+
+  if (!data.length) return <span> Not ready </span>
+  const contributions = {}
+  for (const item of data) {
+    const [date] = item.commit.committer.date.split('T')
+    contributions[date] = (contributions[date] || 0) + 1
+  }
+
+  const [firstWeek] = Object.keys(contributions).reverse()
+  console.log({firstWeek, contributions})
+  const origin = new Date(firstWeek)
+  origin.setDate(origin.getDate() - origin.getDay())
+
+  const numberOfWeeks = Math.round(
+    (new Date().getTime() - new Date(firstWeek).getTime()) /
+      (7 * 24 * 60 * 60 * 1000),
+  )
+
+  function renderCell(week, days) {
+    const datetime = new Date(firstWeek)
+    datetime.setDate(origin.getDate() + week * 7 + days)
+
+    const [date] = datetime.toISOString().split('T')
+
+    const count = contributions[date]
+
+    if (count) {
+      return (
+        <td title={`${count} updates on ${date}`}>
+          <div
+            className={`w-3 h-3 bg-green-${count + 2}00 border-green-${
+              count + 4
+            }00 rounded border`}
+          />
+        </td>
+      )
+    }
+
+    return (
+      <td>
+        <div className="w-3 h-3 bg-white border rounded" />
+      </td>
+    )
+  }
+  return (
+    <table className="border-separate">
+      <tbody>
+        {Array(numberOfWeeks)
+          .fill(0)
+          .map((_, week) => {
+            return (
+              <tr>
+                {renderCell(week, 0)}
+                {renderCell(week, 1)}
+                {renderCell(week, 2)}
+                {renderCell(week, 3)}
+                {renderCell(week, 4)}
+                {renderCell(week, 5)}
+                {renderCell(week, 6)}
+              </tr>
+            )
+          })}
+      </tbody>
+    </table>
+  )
+}
+export default function Blog({
+  title = 'Missing title',
+  seo = {},
+  lastUpdated,
+  source,
+  filename,
+  tags = [],
+}: any) {
   const router = useRouter()
   const url = process.env.NEXT_PUBLIC_DEPLOYMENT_URL + router.asPath
   const canonicalUrl = seo.canonicalUrl ? seo.canonicalUrl : url
 
   const ogImage = seo.ogImage ? seo.ogImage : `https://placekitten.com/500/300`
+
+  const lastUpdatedDate = new Date(lastUpdated).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
 
   return (
     <>
@@ -56,7 +146,7 @@ export default function Blog({title = 'Missing title', seo = {}, source}: any) {
         </header>
 
         <small className="text-gray-500 text-14">
-          Last updated by
+          Last updated {lastUpdatedDate} by
           <a
             href="https://twitter.com/intent/follow?screen_name=jacobmparis"
             className="mx-1 text-blue-700 underline hover:text-purple-700"
@@ -67,6 +157,15 @@ export default function Blog({title = 'Missing title', seo = {}, source}: any) {
           </a>
         </small>
         <hr className="mt-2 mb-12" />
+
+        {tags.includes('Habit') ? (
+          <aside className="float-right px-4 py-2 text-center bg-gray-100 rounded">
+            <p className="mx-auto mb-2 text-gray-500 font-400">Habit tracker</p>
+            <QueryClientProvider client={queryClient}>
+              <ContributionGraph filename={filename} />
+            </QueryClientProvider>
+          </aside>
+        ) : null}
 
         <main className="leading-relaxed prose text-gray-500 dark:prose-dark sm:prose-lg lg:prose-xl max-w-none text-17">
           <MDXRemote {...source} components={mdxComponents} />
@@ -113,9 +212,10 @@ function Author({name, image, path}) {
 }
 
 export async function getStaticProps(context) {
-  const pageBuffer = fs.readFileSync(
-    path.join(ARTICLES_PATH, `${context.params.slug}.mdx`),
-  )
+  const filepath = path.join(ARTICLES_PATH, `${context.params.slug}.mdx`)
+
+  const {mtimeMs} = fs.statSync(filepath)
+  const pageBuffer = fs.readFileSync(filepath)
   const {content, data} = matter(pageBuffer.toString())
   const mdxSource = await serialize(content, {
     mdxOptions: {
@@ -149,7 +249,12 @@ export async function getStaticProps(context) {
   })
 
   return {
-    props: {...data, source: mdxSource},
+    props: {
+      ...data,
+      lastUpdated: mtimeMs,
+      filename: `${context.params.slug}.mdx`,
+      source: mdxSource,
+    },
     revalidate: 1,
   }
 }
