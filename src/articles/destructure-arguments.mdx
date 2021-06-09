@@ -1,0 +1,106 @@
+---
+title: Initializing a destructured argument
+description: This is a common question that came up
+tags: Javascript
+---
+
+## Question
+
+I'm not familiar with this syntax
+
+```js numbered labeled
+function useLocalStorageState(
+  key,
+  defaultValue = '',
+  {serialize = JSON.stringify,
+  deserialize = JSON.parse} = {},
+)
+```
+
+What does this part mean? (the assignment to an empty object in the 3rd argument
+
+```js numbered labeled
+{
+  serialize = JSON.stringify,
+  deserialize = JSON.parse
+} = {},
+```
+
+Why is it not just
+
+```js numbered labeled
+/* prettier-ignore */
+{
+  serialize = JSON.stringify, 
+  deserialize = JSON.parse
+}
+```
+
+## Answer
+
+```js numbered labeled
+function (x) {
+  console.log(x)
+}
+
+x(5) // outputs 5
+x() // outputs undefined
+```
+
+```js numbered labeled
+function (x = 10) {
+  console.log(x)
+}
+
+x(5) // outputs 5
+x() // outputs 10
+```
+
+Do you follow this so far?
+
+Function arguments can have defaults, and that's set with the = sign
+
+```js numbered labeled
+function (key, defaultValue = '', handlers = {}) { }
+```
+
+With this function, if you don't pass in a default value it'll default to an empty string, and if you don't pass in a handlers object it'll default to an empty object
+Assume handlers contains a serialize and a deserialize property, we can optionally set them to the JSON methods
+
+```js numbered labeled
+function (key, defaultValue = '', handlers = {}) {
+  if (!handlers.serialize) {
+    handlers.serialize = JSON.stringify
+  }
+
+  if (!handlers.deserialize) {
+    handlers.deserialize = JSON.parse
+  }
+```
+
+Or we could destructure them right in the argument
+
+```js numbered labeled
+function (key, defaultValue = '', {serialize, deserialize} = {}) {
+  if (!serialize) {
+    serialize = JSON.stringify
+  }
+
+  if (!deserialize) {
+    deserialize = JSON.parse
+  }
+```
+
+But when we're destructuring, we can assign defaults there too, so no need to do it within the function
+And then you're pretty much at what you were seeing
+
+```js
+function (key, defaultValue = '', {serialize = JSON.stringify, deserialize = JSON.parse} = {}) {
+```
+
+If you don't have the = {} for that parameter and you leave it out, it'll be undefined
+
+```js
+// This will throw an error because you can only destructure objects and arrays
+{ serialize, deserialize } = undefined
+```
