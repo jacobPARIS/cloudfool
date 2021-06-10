@@ -154,7 +154,7 @@ export default function Blog({
             href="https://twitter.com/intent/follow?screen_name=jacobmparis"
             className="mx-1 text-blue-700 underline hover:text-purple-700"
             rel="noopener"
-            target="blank"
+            target="twitter"
           >
             Jacob Paris
           </a>
@@ -173,6 +173,32 @@ export default function Blog({
         <main className="leading-relaxed prose text-gray-500 dark:prose-dark sm:prose-lg lg:prose-xl max-w-none text-17">
           <MDXRemote {...source} components={mdxComponents} />
         </main>
+
+        <footer className="text-gray-500">
+          <p className="mb-5">
+            If you enjoyed this post, please{' '}
+            <a
+              href="https://twitter.com/intent/follow?screen_name=jacobmparis"
+              className="text-blue-700 underline hover:text-purple-700"
+              rel="noopener"
+              target="twitter"
+            >
+              let me know on Twitter!
+            </a>
+          </p>
+
+          <p className="mb-5">
+            If you've found any issues or typos, feel free to{' '}
+            <a
+              className="text-blue-700 underline"
+              target="edit"
+              rel="noopener"
+              href={`https://github.com/JacobParis/cloudfool/edit/main/src/articles/${filename}`}
+            >
+              request changes here!
+            </a>
+          </p>
+        </footer>
       </article>
     </>
   )
@@ -238,6 +264,7 @@ export async function getStaticProps(context) {
           },
         ],
         require('remark-external-links'),
+        require('remark-deflist'),
       ],
       rehypePlugins: [
         [
