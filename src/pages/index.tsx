@@ -9,27 +9,24 @@ const resources = [
   {
     title: 'Write a contact form in XState',
     name: 'XState Tutorial',
-    path: 'blog/charting-a-contact-form-in-xstate',
+    path: '/blog/charting-a-contact-form-in-xstate',
     description: 'A series of statecharts representing a contact form.',
   },
   {
     title: 'Add footnotes to your content',
     name: 'HTML Tutorial',
-    path: 'blog/add-footnotes-to-your-html',
+    path: '/blog/add-footnotes-to-your-html',
     description:
       'Use HTML anchor tags to add accessible semantic footnotes to your article or webpage',
   },
   {
     title: "The developer's guide to javascript functions",
     name: 'Javascript Tutorial',
-    path: 'blog/js-functions',
+    path: '/blog/js-functions',
     description: 'An overview of functions and callbacks',
   },
 ]
-export default function Home() {
-  const greetings = ["Hi, I'm ", "Hey, I'm ", "It's ", "Hey there, I'm "]
-  const punctuation = ['!', '!!', '', '.', ' 🙏']
-
+export default function Home({greeting}) {
   return (
     <div className="flex flex-col bg-gray-50 dark:bg-gray-800 min-vh-100">
       <Head>
@@ -41,26 +38,23 @@ export default function Home() {
 
       <main className="flex-grow px-4 dark:bg-gray-900 ">
         <section className="py-8 mx-auto max-w-7xl px-42 sm:px-6">
-          <div className="my-10">
+          <div className="mt-10 mb-4">
             <span className="leading-tight text-gray-800 text-28 font-300">
-              {sample(greetings)}
+              {greeting}
             </span>
 
-            <h1 className="inline leading-tight text-gray-800 text-28 font-300">
+            <h1 className="text-gray-800 leading-11 text-64 font-700">
               Jacob Paris
             </h1>
-
-            <span className="leading-tight text-gray-800 text-28 font-300">
-              {sample(punctuation)}
-            </span>
           </div>
 
-          <p className="max-w-3xl mb-4 text-gray-700 font-400 text-17 dark:text-gray-100">
-            I'm a nomad from Canada 🇨🇦
+          <p className="max-w-3xl mb-6 leading-snug tracking-tight text-gray-600 text-28 font-300">
+            I drink almond lattes while building sales funnels and b2b SaaS for
+            the 🇨🇦 mortgage industry
           </p>
 
-          <p className="max-w-3xl mb-4 text-gray-500 text-17 dark:text-gray-100">
-            When I'm not working, I'm diving all-in on one hobby or another.
+          <p className="max-w-3xl mb-4 text-gray-700 font-400 text-17 dark:text-gray-100">
+            When I'm not working, I'm hyperfocusing on one hobby or another.
             This month I'm <b className="text-blue-800">surfing</b>.
           </p>
         </section>
@@ -68,7 +62,7 @@ export default function Home() {
         <section className="mx-auto -mb-24 max-w-7xl">
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-12 lg:gap-6">
             {resources.map((resource) => (
-              <CardRow resource={resource} />
+              <CardRow resource={resource} key={resource.path} />
             ))}
 
             <section
@@ -93,6 +87,15 @@ export default function Home() {
   )
 }
 
+export async function getStaticProps() {
+  const greetings = ["Hi, I'm ", "Hey, I'm ", "It's ", "Hey there, I'm "]
+
+  return {
+    props: {
+      greeting: sample(greetings),
+    },
+  }
+}
 function sample(array: Array<any>) {
   return array[Math.floor(Math.random() * array.length)]
 }

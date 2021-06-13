@@ -7,6 +7,9 @@ html {
   font-weight: 300;
 }
 
+em {
+  font-style: unset;
+}
 .bg-code {
   background-color: #35435f;
 }
@@ -65,6 +68,14 @@ html {
 
 .text-28 {
   font-size: 1.825rem;
+}
+
+.text-64 {
+  font-size: 4rem;
+}
+
+.leading-11 {
+  line-height: 3rem;
 }
 
 .min-vh-100 {
