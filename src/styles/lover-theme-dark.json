@@ -43,7 +43,7 @@
       "scope": ["comment", "punctuation.definition.comment"],
       "settings": {
         "fontStyle": "italic",
-        "foreground": "#1988d3"
+        "foreground": "#68b8ed"
       }
     },
     {
@@ -96,7 +96,7 @@
         "entity.other.attribute-name.id"
       ],
       "settings": {
-        "foreground": "#F78C6C"
+        "foreground": "#f8997c"
       }
     },
     {
