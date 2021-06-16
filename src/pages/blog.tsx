@@ -14,7 +14,7 @@ export default function Home({posts, tags}: any) {
     return post.tags.includes(queryTag)
   })
   return (
-    <div className="bg-gray-50 dark:bg-gray-800">
+    <div className="dark:bg-gray-800">
       <Head>
         <title>Jacob Paris</title>
         <link rel="icon" href="/favicon.ico" />
@@ -23,14 +23,14 @@ export default function Home({posts, tags}: any) {
       <PageHeader />
 
       <main className="px-4 -mb-24 dark:bg-gray-900">
-        <section className="px-2 py-12 mx-auto md:px-8 max-w-7xl ">
+        <section className="px-2 py-12 mx-auto">
           <div className="mb-4">
-            <h1 className="inline my-10 leading-tight text-gray-800 text-28 font-300">
+            <h1 className="inline my-10 leading-tight text-28 font-300">
               Articles
             </h1>
           </div>
 
-          <p className="max-w-3xl mb-4 text-gray-500 text-17 dark:text-gray-100">
+          <p className="max-w-3xl mb-4 text-17 dark:text-gray-100">
             I've had some things on my mind
           </p>
         </section>
@@ -47,7 +47,7 @@ export default function Home({posts, tags}: any) {
             ))}
           </ul>
 
-          <p className="my-3 text-gray-500 text-17">
+          <p className="my-3 text-17">
             {filterPosts.length} post{filterPosts.length !== 1 && 's'}
             {queryTag && ` about ${queryTag}`}
           </p>

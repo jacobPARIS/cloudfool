@@ -4,7 +4,7 @@ export default function SocialBanner(props: any) {
       <div className="max-w-screen-xl px-4 mx-auto sm:px-6 lg:px-6">
         <div className="grid grid-cols-2 mb-10 text-center sm:mb-0 sm:max-w-3xl sm:mx-auto sm:grid-cols-4 sm:gap-8">
           <a
-            className="flex flex-col items-center mt-10 text-white hover:text-blue-200 sm:mt-0"
+            className="flex flex-col items-center mt-10 sm:mt-0"
             href="https://github.com/JacobParis"
             target="_blank"
           >
@@ -21,7 +21,7 @@ export default function SocialBanner(props: any) {
           </a>
 
           <a
-            className="flex flex-col items-center mt-10 text-white hover:text-blue-200 sm:mt-0"
+            className="flex flex-col items-center mt-10 sm:mt-0"
             href="https://twitter.com/jacobmparis"
             target="_blank"
           >
@@ -38,7 +38,7 @@ export default function SocialBanner(props: any) {
           </a>
 
           <a
-            className="flex flex-col items-center mt-10 text-white hover:text-blue-200 sm:mt-0"
+            className="flex flex-col items-center mt-10 sm:mt-0"
             href="https://instagram.com/jacobmparis"
             target="_blank"
           >
@@ -67,7 +67,7 @@ export default function SocialBanner(props: any) {
           </a>
 
           <a
-            className="flex flex-col items-center mt-10 text-white hover:text-blue-200 sm:mt-0"
+            className="flex flex-col items-center mt-10 sm:mt-0"
             href="https://www.linkedin.com/in/jacobparis/"
             target="_blank"
           >

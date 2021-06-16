@@ -28,7 +28,7 @@ const resources = [
 ]
 export default function Home({greeting}) {
   return (
-    <div className="flex flex-col bg-gray-50 dark:bg-gray-800 min-vh-100">
+    <div className="flex flex-col min-vh-100">
       <Head>
         <title>Jacob Paris</title>
         <link rel="icon" href="/favicon.ico" />
@@ -36,24 +36,20 @@ export default function Home({greeting}) {
 
       <PageHeader />
 
-      <main className="flex-grow px-4 dark:bg-gray-900 ">
+      <main className="flex-grow px-4 ">
         <section className="py-8 mx-auto max-w-7xl px-42 sm:px-6">
           <div className="mt-10 mb-4">
-            <span className="leading-tight text-gray-800 text-28 font-300">
-              {greeting}
-            </span>
+            <span className="leading-snug text-28 font-300">{greeting}</span>
 
-            <h1 className="text-gray-800 leading-11 text-64 font-700">
-              Jacob Paris
-            </h1>
+            <h1 className="leading-11 text-64 font-700">Jacob Paris</h1>
           </div>
 
-          <p className="max-w-3xl mb-6 leading-snug tracking-tight text-gray-600 text-28 font-300">
+          <p className="max-w-3xl mb-6 leading-snug tracking-tight text-28 font-300">
             I drink almond lattes while building sales funnels and b2b SaaS for
             the 🇨🇦 mortgage industry
           </p>
 
-          <p className="max-w-3xl mb-4 text-gray-700 font-400 text-17 dark:text-gray-100">
+          <p className="max-w-3xl mb-4 font-400 text-17 dark:text-gray-100">
             When I'm not working, I'm hyperfocusing on one hobby or another.
             This month I'm <b className="text-blue-800">surfing</b>.
           </p>
@@ -67,10 +63,10 @@ export default function Home({greeting}) {
 
             <section
               style={{zIndex: 1}}
-              className="flex items-center justify-center col-span-6 px-5 py-8 bg-white rounded shadow-sm dark:bg-gray-800 dark:text-gray-200 sm:p-8"
+              className="flex items-center justify-center col-span-6 px-5 py-8 bg-white rounded shadow-sm dark:sm:p-8"
             >
               <Link href="/blog">
-                <a className="leading-tight hover:text-blue-600 dark:hover:text-blue-300 text-28 font-300">
+                <a className="leading-tight hover:text-blue-600 text-28 font-300">
                   See all articles
                 </a>
               </Link>

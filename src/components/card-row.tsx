@@ -4,16 +4,19 @@ import rehypeRaw from 'rehype-raw'
 import rehypeSanitize from 'rehype-sanitize'
 
 import Tag from './tag'
-export default function CardRow({resource}: any) {
+export default function CardRow({
+  resource: {color = 'gray', ...resource},
+  className,
+}: any) {
   const tags = resource.tags || []
 
   return (
     <section
       style={{zIndex: 1}}
-      className="col-span-6 px-5 py-8 bg-white rounded shadow-sm dark:bg-gray-800 dark:text-gray-200 sm:p-8"
+      className={`col-span-6 px-5 py-8 rounded shadow-sm sm:p-8 bg-${color}-50 ${className}`}
     >
       <div className="flex flex-col items-center space-x-0 space-y-5 text-center sm:flex-row sm:space-x-5 sm:space-y-0 sm:text-left">
-        <div className="flex flex-col items-center justify-center text-gray-800 sm:items-start ">
+        <div className="flex flex-col items-center justify-center sm:items-start ">
           <header>
             {tags.length ? (
               <ul className="flex flex-wrap -mx-2 -mt-6">
@@ -26,7 +29,7 @@ export default function CardRow({resource}: any) {
             ) : null}
 
             <Link href={resource.path}>
-              <a className="hover:text-blue-600 dark:hover:text-blue-300">
+              <a>
                 <h2 className="mb-4 leading-tight text-28 font-300">
                   {resource.title}
                 </h2>
@@ -37,14 +40,12 @@ export default function CardRow({resource}: any) {
           <Markdown
             children={resource.description || ''}
             rehypePlugins={[rehypeRaw, rehypeSanitize]}
-            className="leading-relaxed prose text-gray-500 dark:prose-dark dark:prose-dark-sm max-w-none text-17"
+            className="leading-relaxed prose max-w-none text-17"
           />
 
           <footer className="mt-3">
             <Link href={resource.path}>
-              <a className="font-400 hover:text-blue-600 dark:hover:text-blue-300">
-                Read more
-              </a>
+              <a className="font-400">Read more</a>
             </Link>
           </footer>
         </div>

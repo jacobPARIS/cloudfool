@@ -16,23 +16,16 @@ export default {
     </PageComponent>
   ),
   h1: (props: any) => (
-    <h1
-      className="mt-10 mb-4 leading-tight text-gray-800 text-28 font-300"
-      {...props}
-    />
+    <h1 className="mt-10 mb-4 leading-tight text-28 font-300" {...props} />
   ),
-  h2: (props: any) => (
-    <h2 className="mt-10 mb-4 text-gray-500 text-24 font-300" {...props} />
-  ),
-  h3: (props: any) => (
-    <h3 className="mt-10 mb-4 text-gray-500 font-500" {...props} />
-  ),
+  h2: (props: any) => <h2 className="mt-10 mb-4 text-24 font-300" {...props} />,
+  h3: (props: any) => <h3 className="mt-10 mb-4 font-500" {...props} />,
   h4: (props: any) => <s {...props} />,
   h5: (props: any) => <s {...props} />,
   h6: (props: any) => <s {...props} />,
-  a: (props: any) => <a className="text-blue-700 underline" {...props} />,
+  a: (props: any) => <a {...props} />,
   p: (props: any) => <p className="mb-5 " {...props} />,
-  li: (props: any) => <li className="text-gray-600 list-disc" {...props} />,
+  li: (props: any) => <li className="list-disc" {...props} />,
   ul: (props: any) => <ul className="mb-4 ml-5" {...props} />,
   ins: (props: any) => (
     <ins className="block px-4 -mx-4 bg-green-800" {...props} />

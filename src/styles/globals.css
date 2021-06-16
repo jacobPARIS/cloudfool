@@ -2,9 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-bg: #fff;
+  --color-bg-offset: #f7f7f9;
+  --color-text: #373a3c;
+  --color-text-offset: #818a91;
+  --color-border: #eceeef;
+  --color-primary: #ff335f;
+  --color-primary-offset: #ff1447;
+  --color-secondary: #43a9a3;
+  --measure: 60ch;
+}
+
+* {
+  max-width: var(--measure);
+}
+
 html {
   font-family: 'Inter', 'Helvetica', 'Arial', sans-serif;
   font-weight: 300;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+html,
+body,
+div,
+header,
+nav,
+main,
+section,
+footer {
+  max-width: none;
+}
+
+a:focus,
+a:hover {
+  color: var(--color-primary-offset);
+}
+
+a:focus,
+button:focus,
+input:focus,
+textarea:focus {
+  outline: transparent;
+  box-shadow: 0 0 0 3px var(--color-secondary);
 }
 
 em {

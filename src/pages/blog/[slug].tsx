@@ -141,18 +141,17 @@ export default function Blog({
 
       <PageHeader />
 
-      <article className="max-w-screen-md px-5 mx-auto mt-3 mb-16 lg:mt-14 md:mt-8">
+      <article className="px-5 mx-auto">
         <header>
-          <h1 className="w-full max-w-screen-md mt-10 mb-4 leading-tight text-gray-800 text-28 font-300">
+          <h1 className="w-full max-w-screen-md mt-10 mb-4 leading-snug text-28 font-300">
             {title}
           </h1>
         </header>
 
-        <small className="text-gray-500 text-14">
-          Last updated {lastUpdatedDate} by
+        <small className="text-14">
+          Last updated {lastUpdatedDate} by{' '}
           <a
             href="https://twitter.com/intent/follow?screen_name=jacobmparis"
-            className="mx-1 text-blue-700 underline hover:text-purple-700"
             rel="noopener"
             target="twitter"
           >
@@ -163,14 +162,14 @@ export default function Blog({
 
         {tags.includes('Habit') ? (
           <aside className="float-right px-4 py-2 text-center bg-gray-100 rounded">
-            <p className="mx-auto mb-2 text-gray-500 font-400">Habit tracker</p>
+            <p className="mx-auto mb-2 font-400">Habit tracker</p>
             <QueryClientProvider client={queryClient}>
               <ContributionGraph filename={filename} />
             </QueryClientProvider>
           </aside>
         ) : null}
 
-        <main className="leading-relaxed prose text-gray-500 dark:prose-dark sm:prose-lg lg:prose-xl max-w-none text-17">
+        <main className="leading-relaxed prose sm:prose-lg lg:prose-xl max-w-none text-17">
           <MDXRemote {...source} components={mdxComponents} />
         </main>
 
@@ -179,7 +178,6 @@ export default function Blog({
             If you enjoyed this post, please{' '}
             <a
               href="https://twitter.com/intent/follow?screen_name=jacobmparis"
-              className="text-blue-700 underline hover:text-purple-700"
               rel="noopener"
               target="twitter"
             >
@@ -190,7 +188,6 @@ export default function Blog({
           <p className="mb-5">
             If you've found any issues or typos, feel free to{' '}
             <a
-              className="text-blue-700 underline"
               target="edit"
               rel="noopener"
               href={`https://github.com/JacobParis/cloudfool/edit/main/src/articles/${filename}`}
