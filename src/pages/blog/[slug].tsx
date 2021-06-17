@@ -14,6 +14,8 @@ import {useRouter} from 'next/router'
 import matter from 'gray-matter'
 import Link from 'next/link'
 import {useQuery, QueryClient, QueryClientProvider} from 'react-query'
+import ThemeSwitcher from 'components/theme-switcher'
+
 const queryClient = new QueryClient()
 const ARTICLES_PATH = path.join(process.cwd(), 'src', 'articles')
 
@@ -115,6 +117,7 @@ export default function Blog({
     day: 'numeric',
   })
 
+  const [showTheme, setShowTheme] = React.useState(false)
   return (
     <>
       <NextSeo
@@ -139,13 +142,19 @@ export default function Blog({
         canonical={canonicalUrl}
       />
 
-      <PageHeader />
+      <ThemeSwitcher show={showTheme} />
+      <PageHeader>
+        <button
+          aria-pressed={showTheme}
+          onClick={() => setShowTheme((value) => !value)}
+        >
+          Theme
+        </button>
+      </PageHeader>
 
       <article className="px-5 mx-auto">
         <header>
-          <h1 className="w-full max-w-screen-md mt-10 mb-4 leading-snug text-28 font-300">
-            {title}
-          </h1>
+          <h1 className="w-full max-w-screen-md mt-10 mb-4">{title}</h1>
         </header>
 
         <small className="text-14">
@@ -169,7 +178,7 @@ export default function Blog({
           </aside>
         ) : null}
 
-        <main className="leading-relaxed prose sm:prose-lg lg:prose-xl max-w-none text-17">
+        <main className="prose">
           <MDXRemote {...source} components={mdxComponents} />
         </main>
 

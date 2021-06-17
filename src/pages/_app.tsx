@@ -1,6 +1,6 @@
 import React from 'react'
 import {AppProps} from 'next/app'
-import '../styles/globals.css'
+import '../styles/globals.scss'
 import {DefaultSeo} from 'next-seo'
 import SEO from '../../next-seo.json'
 import {ThemeProvider} from 'next-themes'
@@ -10,7 +10,7 @@ function MyApp({Component, pageProps}: AppProps) {
   return (
     <>
       <DefaultSeo {...SEO} />
-      <ThemeProvider attribute="class">
+      <ThemeProvider>
         <MDXProvider components={mdxComponents}>
           <Component {...pageProps} />
         </MDXProvider>

@@ -13,16 +13,16 @@ const DefaultLayout: FunctionComponent<LayoutProps> = ({children, meta}) => {
       <NextSeo
         title={title}
         description={description}
-        titleTemplate={titleAppendSiteName ? undefined : '%s'}
+        titleTemplate={titleAppendSiteName ? '' : '%s'}
         openGraph={{
           title,
           description,
           url,
-          images: ogImage ? [ogImage] : undefined,
+          images: ogImage ? [ogImage] : [],
         }}
         canonical={url}
       />
-      <div className="prose dark:prose-dark md:dark:prose-xl-dark md:prose-xl max-w-screen-md mt-0 mx-auto leading-6">
+      <div className="max-w-screen-md mx-auto mt-0 leading-6 prose md:prose-xl">
         {title && <h1 className="text-xl leading-tight">{title}</h1>}
         {children}
       </div>

@@ -1,8 +1,10 @@
+@use 'sass:math';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
+  --measure: 60ch;
   --color-bg: #fff;
   --color-bg-offset: #f7f7f9;
   --color-text: #373a3c;
@@ -11,7 +13,56 @@
   --color-primary: #ff335f;
   --color-primary-offset: #ff1447;
   --color-secondary: #43a9a3;
-  --measure: 60ch;
+  --font-family: 'Inter', 'Helvetica', 'Arial', sans-serif;
+  --font-weight: 300;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 300;
+}
+
+h2 {
+  font-size: 1.825rem;
+  font-weight: 300;
+}
+
+p {
+  line-height: 1.625rem;
+}
+
+[data-theme='stripe'] {
+  --color-bg: #fff;
+  --color-bg-offset: #000;
+  --color-text: #3c4257;
+  --color-text-offset: #000;
+  --color-border: #000;
+  --color-primary: #5469d4;
+  --color-primary-offset: #000;
+  --color-secondary: #000;
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Helvetica Neue', 'Ubuntu', sans-serif;
+  --font-weight: 400;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  h2 {
+    font-size: 1rem * math.div(21, 16);
+    font-weight: 700;
+  }
+
+  body {
+    font-size: 1rem;
+    background-color: #fff;
+    color: #3c4257;
+  }
+
+  p {
+    line-height: 1rem * math.div(26, 16);
+  }
 }
 
 * {
@@ -19,13 +70,15 @@
 }
 
 html {
-  font-family: 'Inter', 'Helvetica', 'Arial', sans-serif;
-  font-weight: 300;
+  font-family: var(--font-family);
+  font-weight: var(--font-weight);
 }
 
 body {
-  background-color: var(--color-bg);
-  color: var(--color-text);
+  background-color: #fff;
+  color: #373a3c;
+  font-size: 1rem * math.div(17, 16);
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
@@ -47,14 +100,6 @@ footer {
 a:focus,
 a:hover {
   color: var(--color-primary-offset);
-}
-
-a:focus,
-button:focus,
-input:focus,
-textarea:focus {
-  outline: transparent;
-  box-shadow: 0 0 0 3px var(--color-secondary);
 }
 
 em {

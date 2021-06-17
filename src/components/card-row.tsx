@@ -28,19 +28,13 @@ export default function CardRow({
               </ul>
             ) : null}
 
-            <Link href={resource.path}>
-              <a>
-                <h2 className="mb-4 leading-tight text-28 font-300">
-                  {resource.title}
-                </h2>
-              </a>
-            </Link>
+            <h2 className="mb-4 leading-tight">{resource.title}</h2>
           </header>
 
           <Markdown
             children={resource.description || ''}
             rehypePlugins={[rehypeRaw, rehypeSanitize]}
-            className="leading-relaxed prose max-w-none text-17"
+            className="leading-relaxed prose max-w-none"
           />
 
           <footer className="mt-3">

@@ -106,10 +106,10 @@ const CopyToClipboard: React.FunctionComponent<{code: string}> = ({code}) => {
     <button
       onClick={setCopied}
       aria-label="Copy code to clipboard"
-      className="absolute p-2 text-gray-400 transition-all duration-100 ease-in-out top-4 right-3 hover:text-white"
+      className="absolute p-2 transition-all duration-100 ease-in-out top-4 right-3 hover:text-white"
     >
       {isCopied ? (
-        //   prettier-ignore
+        // prettier-ignore
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><g fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></g></svg>
       ) : (
         // prettier-ignore
@@ -163,8 +163,8 @@ export const paramsFromMetastring = (str: string): MetaParams => {
   const filePath = pathMatch
     ? typeof pathMatch[0] === 'string'
       ? pathMatch[0].substr(1, pathMatch[0].length - 2)
-      : undefined
-    : undefined
+      : ''
+    : ''
 
   // eslint-disable-next-line
   return {

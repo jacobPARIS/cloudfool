@@ -4,6 +4,7 @@ import PageHeader from 'components/page-header'
 import CardRow from 'components/card-row'
 import Tag from 'components/tag'
 import {useRouter} from 'next/router'
+import ThemeSwitcher from 'components/theme-switcher'
 export default function Home({posts, tags}: any) {
   const router = useRouter()
   const {tag: queryTag} = router.query
@@ -13,6 +14,8 @@ export default function Home({posts, tags}: any) {
 
     return post.tags.includes(queryTag)
   })
+
+  const [showTheme, setShowTheme] = React.useState(false)
   return (
     <div className="dark:bg-gray-800">
       <Head>
@@ -20,7 +23,15 @@ export default function Home({posts, tags}: any) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <PageHeader />
+      <ThemeSwitcher show={showTheme} />
+      <PageHeader>
+        <button
+          aria-pressed={showTheme}
+          onClick={() => setShowTheme((value) => !value)}
+        >
+          Theme
+        </button>
+      </PageHeader>
 
       <main className="px-4 -mb-24 dark:bg-gray-900">
         <section className="px-2 py-12 mx-auto">
@@ -69,6 +80,7 @@ export default function Home({posts, tags}: any) {
 import matter from 'gray-matter'
 import fs from 'fs'
 import path from 'path'
+import React from 'react'
 
 const ARTICLES_PATH = path.join(process.cwd(), 'src', 'articles')
 export async function getStaticProps() {

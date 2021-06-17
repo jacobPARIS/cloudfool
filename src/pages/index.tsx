@@ -4,6 +4,8 @@ import Link from 'next/link'
 import SocialBanner from 'components/social-banner'
 import PageHeader from 'components/page-header'
 import CardRow from 'components/card-row'
+import React, {SetStateAction} from 'react'
+import ThemeSwitcher from 'components/theme-switcher'
 
 const resources = [
   {
@@ -26,7 +28,10 @@ const resources = [
     description: 'An overview of functions and callbacks',
   },
 ]
+
 export default function Home({greeting}) {
+  const [showTheme, setShowTheme] = React.useState(false)
+
   return (
     <div className="flex flex-col min-vh-100">
       <Head>
@@ -34,7 +39,15 @@ export default function Home({greeting}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <PageHeader />
+      <ThemeSwitcher show={showTheme} />
+      <PageHeader>
+        <button
+          aria-pressed={showTheme}
+          onClick={() => setShowTheme((value) => !value)}
+        >
+          Theme
+        </button>
+      </PageHeader>
 
       <main className="flex-grow px-4 ">
         <section className="py-8 mx-auto max-w-7xl px-42 sm:px-6">
