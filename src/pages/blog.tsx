@@ -65,7 +65,7 @@ export default function Home({posts, tags}: any) {
         </section>
         <section className="grid grid-cols-1 gap-4 lg:grid-cols-12 lg:gap-6">
           {filterPosts.map((post: any) => (
-            <CardRow resource={post} />
+            <CardRow key={post.path} resource={post} />
           ))}
         </section>
       </main>

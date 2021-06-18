@@ -6,7 +6,7 @@ import rehypeSanitize from 'rehype-sanitize'
 import Tag from './tag'
 export default function CardRow({
   resource: {color = 'gray', ...resource},
-  className,
+  className = '',
 }: any) {
   const tags = resource.tags || []
 
