@@ -3,7 +3,7 @@ module.exports = {
   purge: {
     content: ['./src/**/*.js', './src/**/*.mdx', './src/**/*.tsx'],
     options: {
-      safelist: ['dark', 'bg-green-300', 'border-green-500'],
+      safelist: ['dark', 'bg-green-300', 'border-green-500', 'bg-gray-50'],
     },
   },
   theme: {
