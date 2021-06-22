@@ -24,6 +24,13 @@ export default function Assets() {
           description:
             'ToolStache is the latest product from Stache Industries that helps Alberta oilfield companies manage and track their assets to cut down on theft, repurchasing, and missed bill-out opportunities.',
           url: 'https://www.jacobparis.com/toolstache',
+          images: [
+            {
+              url: '/images/toolstache_2021-06-22-20-06-48.png',
+              alt:
+                'ToolStache, SaaS asset management system, Created by Jacob Paris',
+            },
+          ],
         }}
         twitter={{
           cardType: 'summary',
@@ -32,7 +39,6 @@ export default function Assets() {
         }}
         canonical="https://www.jacobparis.com/toolstache"
       />
-
       <header
         className="px-12 py-8 bg-cover text-gray-50"
         style={{backgroundImage: 'url(/images/assets_2021-06-22-16-36-02.png)'}}
@@ -50,7 +56,6 @@ export default function Assets() {
           on theft, repurchasing, and missed bill-out opportunities.
         </p>
       </header>
-
       <section
         className="px-12 py-24 bg-black bg-no-repeat bg-contain text-gray-50"
         style={{backgroundImage: 'url(/images/assets_2021-06-22-16-39-09.png)'}}
@@ -75,7 +80,6 @@ export default function Assets() {
           </div>
         </div>
       </section>
-
       <section className="px-12 py-8 bg-white">
         <h2> Say no to inefficiency </h2>
         <div className="mb-4 font-500"> Bulk processing </div>
@@ -90,7 +94,6 @@ export default function Assets() {
           things that matter.
         </p>
       </section>
-
       <section>
         <NextImage
           src="/images/assets_2021-06-22-16-58-20.png"
@@ -98,7 +101,6 @@ export default function Assets() {
           height="588"
         />
       </section>
-
       <section className="px-12 py-8">
         <h2> Catch theft before it happens </h2>
         <div className="mb-4 font-500"> Flexible tracking, anywhere </div>
@@ -112,7 +114,6 @@ export default function Assets() {
           trucks, or clients—and view a detailed history of every asset.
         </p>
       </section>
-
       <section
         className="px-12 py-24 bg-black bg-no-repeat bg-contain text-gray-50"
         style={{backgroundImage: 'url(/images/assets_2021-06-22-17-03-45.png)'}}
@@ -143,7 +144,6 @@ export default function Assets() {
           </div>
         </div>
       </section>
-
       <section className="px-12 py-8">
         <div className="">
           <h2 className="mb-4"> Track your items </h2>
@@ -209,7 +209,6 @@ export default function Assets() {
           </div>
         </div>
       </section>
-
       <section className="px-12 py-8 bg-black text-gray-50">
         <h2 className="mb-4"> Advanced inventory management </h2>
 
@@ -227,7 +226,6 @@ export default function Assets() {
           tracked individually.
         </p>
       </section>
-
       <section className="px-12 py-8">
         <h2 className="mx-auto mb-4 text-center"> Get notified immediately </h2>
 
@@ -242,7 +240,6 @@ export default function Assets() {
           included on the daily or weekly reports.
         </p>
       </section>
-
       <section
         className="px-12 py-8 text-center bg-cover text-gray-50"
         style={{backgroundImage: 'url(/images/assets_2021-06-22-16-36-02.png)'}}
