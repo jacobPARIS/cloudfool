@@ -49,8 +49,8 @@ export default function Home({greeting}) {
         </button>
       </PageHeader>
 
-      <main className="flex-grow px-4 ">
-        <section className="py-8 mx-auto max-w-7xl px-42 sm:px-6">
+      <main className="flex-grow">
+        <section className="px-4 py-8 mx-auto max-w-7xl px-42 sm:px-6">
           <div className="mt-10 mb-4">
             <span className="leading-snug text-28 font-300">{greeting}</span>
 
@@ -68,7 +68,7 @@ export default function Home({greeting}) {
           </p>
         </section>
 
-        <section className="mx-auto max-w-7xl">
+        <section className="px-4 mx-auto max-w-7xl">
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-12 lg:gap-6">
             {resources.map((resource) => (
               <CardRow resource={resource} key={resource.path} />
@@ -87,21 +87,45 @@ export default function Home({greeting}) {
           </div>
         </section>
 
-        <section className="py-4 mx-auto max-w-7xl">
-          <h2 className="mb-4"> Projects </h2>
+        <section
+          className="px-12 py-12 bg-cover text-gray-50"
+          style={{
+            backgroundImage: 'url(/images/assets_2021-06-22-16-36-02.png)',
+          }}
+        >
+          <Link href="/toolstache">
+            <a className="text-white hover:text-yellow-500">
+              <h1 className="mb-4 text-4xl font-bold md:text-6xl">
+                {' '}
+                ToolStache{' '}
+              </h1>
+            </a>
+          </Link>
 
-          <div className="grid grid-cols-12 gap-4 ">
-            <div
-              style={{zIndex: 1}}
-              className="flex items-center justify-center col-span-6 px-5 py-8 bg-black rounded shadow-sm "
-            >
-              <Link href="/toolstache">
-                <a className="text-6xl leading-tight text-white font-700">
-                  ToolStache
-                </a>
-              </Link>
-            </div>
-          </div>
+          <p className="mb-4 text-2xl md:text-4xl">
+            SaaS asset management system
+          </p>
+
+          <hr className="mb-4 opacity-20" />
+
+          <p className="mb-4 font-500">
+            <Link href="/toolstache">
+              <a className="text-yellow-500 hover:text-white">ToolStache</a>
+            </Link>{' '}
+            was my first commercial product.
+          </p>
+
+          <p className="mb-4 font-500">
+            I built it to help Alberta oilfield companies manage and track their
+            assets to cut down on theft, repurchasing, and missed bill-out
+            opportunities.
+          </p>
+
+          <p className="mb-4 font-500">
+            After maintaining it for close to three years, it became my
+            portfolio project and work experience for entry into the software
+            engineer market.
+          </p>
         </section>
       </main>
       <footer className="pt-48 pb-8 text-center bg-blue-950">

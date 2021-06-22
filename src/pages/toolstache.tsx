@@ -250,7 +250,7 @@ export default function Assets() {
         <p className="my-20 text-4xl">Ready to get started?</p>
 
         <NextLink href="mailto:sales@jacobparis.com">
-          <a className="px-4 py-3 rounded bg-gray-50 hover:bg-yellow-100">
+          <a className="px-4 py-3 bg-yellow-500 rounded hover:bg-yellow-100">
             <div className="inline-block text-gray-800 hover:underline font-500">
               Contact sales
             </div>
@@ -265,6 +265,7 @@ export default function Assets() {
           href="https://twitter.com/intent/follow?screen_name=jacobmparis"
           rel="noopener"
           target="twitter"
+          className="text-yellow-500 hover:text-white"
         >
           Jacob Paris
         </a>{' '}
