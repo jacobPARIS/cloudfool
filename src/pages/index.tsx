@@ -112,7 +112,7 @@ export default function Home({greeting}) {
             <Link href="/toolstache">
               <a className="text-yellow-500 hover:text-white">ToolStache</a>
             </Link>{' '}
-            was my first commercial product.
+            was my first commercial product (2017).
           </p>
 
           <p className="mb-4 font-500">
@@ -122,9 +122,8 @@ export default function Home({greeting}) {
           </p>
 
           <p className="mb-4 font-500">
-            After maintaining it for close to three years, it became my
-            portfolio project and work experience for entry into the software
-            engineer market.
+            After maintaining it for close to three years, I moved on to work
+            full time in SaaS finance.
           </p>
         </section>
       </main>
