@@ -1,12 +1,10 @@
 import Head from 'next/head'
-import Link from 'next/link'
 
-import SocialBanner from 'components/social-banner'
-import PageHeader from 'components/page-header'
-import CardRow from 'components/card-row'
 import NextImage from 'next/image'
 import NextLink from 'next/link'
 import {NextSeo} from 'next-seo'
+
+Assets.theme = 'default'
 export default function Assets() {
   return (
     <div className="bg-gray-50 dark:bg-gray-800">

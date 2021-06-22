@@ -13,7 +13,8 @@
   --color-primary: #ff335f;
   --color-primary-offset: #ff1447;
   --color-secondary: #43a9a3;
-  --font-family: 'Inter', 'Helvetica', 'Arial', sans-serif;
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Helvetica Neue', 'Ubuntu', sans-serif;
   --font-weight: 300;
 }
 
@@ -40,8 +41,6 @@ p {
   --color-primary: #5469d4;
   --color-primary-offset: #000;
   --color-secondary: #000;
-  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-    'Helvetica Neue', 'Ubuntu', sans-serif;
   --font-weight: 400;
 
   h1 {
