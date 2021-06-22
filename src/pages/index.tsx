@@ -68,7 +68,7 @@ export default function Home({greeting}) {
           </p>
         </section>
 
-        <section className="mx-auto -mb-24 max-w-7xl">
+        <section className="mx-auto max-w-7xl">
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-12 lg:gap-6">
             {resources.map((resource) => (
               <CardRow resource={resource} key={resource.path} />
@@ -84,6 +84,23 @@ export default function Home({greeting}) {
                 </a>
               </Link>
             </section>
+          </div>
+        </section>
+
+        <section className="py-4 mx-auto max-w-7xl">
+          <h2 className="mb-4"> Projects </h2>
+
+          <div className="grid grid-cols-12 gap-4 ">
+            <div
+              style={{zIndex: 1}}
+              className="flex items-center justify-center col-span-6 px-5 py-8 bg-black rounded shadow-sm "
+            >
+              <Link href="/toolstache">
+                <a className="text-6xl leading-tight text-white font-700">
+                  ToolStache
+                </a>
+              </Link>
+            </div>
           </div>
         </section>
       </main>
