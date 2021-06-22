@@ -6,6 +6,7 @@ import PageHeader from 'components/page-header'
 import CardRow from 'components/card-row'
 import NextImage from 'next/image'
 import NextLink from 'next/link'
+import {NextSeo} from 'next-seo'
 export default function Assets() {
   return (
     <div className="bg-gray-50 dark:bg-gray-800">
@@ -13,6 +14,24 @@ export default function Assets() {
         <title>Asset management</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <NextSeo
+        title="ToolStache Asset Management Software"
+        description="ToolStache is the latest product from Stache Industries that helps
+        Alberta oilfield companies manage and track their assets to cut down
+        on theft, repurchasing, and missed bill-out opportunities."
+        openGraph={{
+          title: 'ToolStache Asset Management Software',
+          description:
+            'ToolStache is the latest product from Stache Industries that helps Alberta oilfield companies manage and track their assets to cut down on theft, repurchasing, and missed bill-out opportunities.',
+          url: 'https://www.jacobparis.com/toolstache',
+        }}
+        twitter={{
+          cardType: 'summary',
+          site: 'https://www.jacobparis.com',
+          handle: 'jacobmparis',
+        }}
+        canonical="https://www.jacobparis.com/toolstache"
+      />
 
       <header
         className="px-12 py-8 bg-cover text-gray-50"
