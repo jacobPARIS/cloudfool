@@ -1,0 +1,122 @@
+---
+title: HTML for Absolute Beginners
+description: A guide to HTML for the absolute beignner
+tags: HTML, Tutorial, Web
+---
+
+HTML stands for **H**yper**T**ext **M**arkup **L**anguage, and it's the code that browsers have been using to display websites since it was created by Tim Berners-Lee in 1990.
+
+Web developers don't always write the HTML directly anymore. There are a lot of advanced tools and other languages that can be used to compile (transform) different kinds of code into the standard HTML that web browsers expect.
+
+But you **can** write HTML directly, and a healthy knowledge of HTML fundamentals will help you excel with the web platform no matter what technology you're working with.
+
+## What it looks like
+
+Webpages are made of "tags" that tell the browser how to display the page. Most tags can be opened `<html>` and closed `</html>` and their contents are anything between the open and close tags.
+
+In the code below, the `html` tag opens on line 1 and closes on line 5.
+
+```html numbered {1,5}
+<html>
+  <head></head>
+
+  <body></body>
+</html>
+```
+
+Everything between is indented to show that it's **inside** the `html` tag.
+
+<SideNote>
+
+We would describe this relationship by saying that `<head>` and `<body>` are _children_ of `<html>`, and that `<head>` and `<body>` are siblings of each other. It follows that `<html>` would be the parent of each.
+
+</SideNote>
+
+Children can have their own children, so we can put a `<title>` inside `<head>` and we can put regular text inside the `<title>`
+
+```html numbered {3}
+<html>
+  <head>
+    <title>Why I like to travel</title>
+  </head>
+
+  <body></body>
+</html>
+```
+
+Notice how `<head> </head>` has been split into two lines here.
+
+Try to make sure your open and close tags line up either vertically (same indent level) or horizontally (same line)
+
+Spaces and line breaks don't matter much in HTML, so they're usually stripped out during file compression to save bandwidth. That's not something you have to do yourself, but it's easier to read and write HTML if you indent every time you open a tag.
+
+<SideNote>
+
+HTML is based on XML (Extensible Markup Language) and shares a similar format. XML is more strict and more consistent, and for a period of time there was a popular XML compliant version of HTML called XHTML, but modern HTML no longer concerns itself with the rules of XML.
+
+This tag format with pairs of `<tag>` and `</tag>` to open and close, as well as the self-closing format of `<tag />`, comes from XML.
+
+</SideNote>
+
+## The tags
+
+There are lots of different tags that you'll learn soon.
+
+`<html>`
+: Marks the page as an HTML document. This will wrap your entire website, and there is only ever one of these.
+
+`<head>`
+: Contains extra information about your site. Nothing inside here ends up on the page.
+
+`<title>`
+: The title of your page. This is what shows up on the tab in your browser, and will be the title of your website in Google search results too.
+
+`<body>`
+: The contents of your page. Everything you want to show on screen will go in here.
+
+`<h1>`
+: The most important heading on the page. You should only have one of these and it will usually say something similar to the `<title>`. If your page is an article, the article title will be an `<h1>`.
+
+`<p>`
+: A paragraph. Most of your text will go in these.
+
+`<ul>`
+: An unordered list, showing up as bullet points.
+
+`<li>`
+: A list item. These are the only thing that can be inside lists, an in a `<ul>` this will show up as a single bullet item.
+
+## Putting them all together
+
+```html numbered
+<html>
+  <head>
+    <title>Why I like to travel</title>
+  </head>
+
+  <body>
+    <h1>Why I like to travel all year long</h1>
+
+    <p>
+      I love being able to go to new places and see new things. As soon as I
+      don't have somewhere to be for work, you'll find me headed to the airport
+      with my suitcase in hand.
+    </p>
+
+    <p>There are three reasons I like to travel:</p>
+
+    <ul>
+      <li>I can try new foods.</li>
+      <li>I can meet new people.</li>
+      <li>I have a chance to see the world.</li>
+    </ul>
+  </body>
+</html>
+```
+
+Write this code in a text file, like Notepad on Windows or TextEdit on Mac, and save as `mywebsite.html`. Then open it in your web browser
+
+![A screenshot of a website with the below contents](/images/html-101_2021-06-23-21-55-57.png)
+
+Notice the tab has the same text as in our `<title>` tag,
+we have one heading, two paragraphs, and one list with three bullets, exactly like the HTML describes.
