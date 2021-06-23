@@ -24,7 +24,8 @@ export default function Assets() {
           url: 'https://www.jacobparis.com/toolstache',
           images: [
             {
-              url: '/images/toolstache_2021-06-22-20-06-48.png',
+              url:
+                'https://www.jacobparis.com/images/toolstache_2021-06-22-20-06-48.png',
               alt:
                 'ToolStache, SaaS asset management system, Created by Jacob Paris',
             },
