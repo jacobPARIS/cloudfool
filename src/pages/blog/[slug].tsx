@@ -104,7 +104,7 @@ export default function Blog({
   tags = [],
 }: any) {
   const router = useRouter()
-  const url = process.env.NEXT_PUBLIC_DEPLOYMENT_URL + router.asPath
+  const url = 'https://www.jacobparis.com' + router.asPath
   const canonicalUrl = seo.canonicalUrl ? seo.canonicalUrl : url
 
   const ogImage = seo.ogImage
