@@ -31,7 +31,7 @@ export default function Assets() {
           ],
         }}
         twitter={{
-          cardType: 'summary',
+          cardType: 'summary_large_image',
           site: 'https://www.jacobparis.com',
           handle: 'jacobmparis',
         }}
