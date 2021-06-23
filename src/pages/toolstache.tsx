@@ -240,8 +240,12 @@ export default function Assets() {
         </p>
       </section>
       <section
-        className="px-12 py-8 text-center bg-cover text-gray-50"
-        style={{backgroundImage: 'url(/images/assets_2021-06-22-16-36-02.png)'}}
+        className="px-12 py-8 text-center bg-no-repeat bg-cover text-gray-50"
+        style={{
+          backgroundImage: 'url(/images/assets_2021-06-22-16-36-02.png)',
+          backgroundColor: '#333',
+          backgroundPositionY: '4rem',
+        }}
       >
         <p className="my-20 text-4xl">Ready to get started?</p>
 
