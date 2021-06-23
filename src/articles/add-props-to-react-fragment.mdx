@@ -26,7 +26,7 @@ This function uses the `<>` fragment shorthand to return three `<span>` elements
 
 The easy way to add the key is to add it to the parent, but since `<key={id}>` is an obvious syntax error, what can be done? Wrapping it in a `<div key={id}` solves the key issue but breaks the layout.
 
-```js numbered {3, 7}
+```js numbered {4, 8}
 const gridData = data.map(
   ({id, firstName, lastName, team}) => {
     return (
