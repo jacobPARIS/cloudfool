@@ -186,7 +186,7 @@ export default function Blog({
           <p className="mb-5">
             If you enjoyed this post, please{' '}
             <a
-              href="https://twitter.com/intent/follow?screen_name=jacobmparis"
+              href={`https://twitter.com/intent/tweet?url=${canonicalUrl}`}
               rel="noopener"
               target="twitter"
             >
