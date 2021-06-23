@@ -10,8 +10,8 @@
     "test": "jest --watch"
   },
   "dependencies": {
-    "@mdx-js/react": "^1.6.22",
-    "@next/mdx": "^10.0.5",
+    "@mdx-js/mdx": "^1.6.22",
+    "diff": "^5.0.0",
     "dotenv-flow": "^3.2.0",
     "gray-matter": "^4.0.2",
     "mdx-prism": "^0.3.1",
@@ -22,6 +22,7 @@
     "next-themes": "^0.0.10",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "react-flip-toolkit": "^7.0.13",
     "react-markdown": "^6.0.2",
     "react-query": "^3.16.1",
     "react-use-clipboard": "^1.0.7",
@@ -34,13 +35,11 @@
     "remark-code-titles": "^0.1.1",
     "remark-deflist": "^0.3.0",
     "remark-external-links": "^8.0.0",
-    "remark-footnotes": "^3.0.0",
     "remark-slug": "^6.0.0",
     "sass": "^1.35.1"
   },
   "devDependencies": {
     "@babel/plugin-transform-react-jsx": "^7.12.12",
-    "@mdx-js/loader": "^1.6.22",
     "@tailwindcss/typography": "^0.4.0",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
