@@ -10,6 +10,7 @@ export default function Home({posts, tags}: any) {
   const {tag: queryTag} = router.query
 
   const filterPosts = posts.filter((post) => {
+    if (post.hide) return false
     if (!queryTag) return true
 
     return post.tags.includes(queryTag)

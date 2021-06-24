@@ -1,0 +1,50 @@
+---
+title: Optional closing elements
+description: A list of elements with optional closing tags in HTML
+tags: HTML, Web
+---
+
+Several HTML elements do not require closing tags
+
+- `<html>`
+- `<head>`
+- `<body>`
+- `<p>`
+- `<dt>`
+- `<dd>`
+- `<li>`
+- `<option>`
+- `<th>`
+- `<tbody>`
+- `<tr>`
+- `<td>`
+- `<tfoot>`
+- `<colgroup>`
+
+That means that this is valid html
+
+<!-- prettier-ignore-start -->
+```html
+<html>
+  <head> <title> My blog </title>
+  <body>
+    <h1> My blog </h1>
+
+    <p> Welcome to my blog
+    <p> Here are a list of my posts
+
+    <ul>
+      <li> My first post
+      <li> My second post
+      <li> My third post
+    </ul>
+```
+<!-- prettier-ignore-end -->
+
+As a general rule I don't recommend writing html like this, as it can be hard to tell when an element is meant to end or meant to nest, especially when the formatting isn't as clean as possible.
+
+<SideNote>
+
+[There's a dozen or so HTML tags which optional closing tags, so this is legitimate valid HTML markup](https://twitter.com/jacobmparis/status/1366498652169068549?s=20https://twitter.com/jacobmparis/status/1366498652169068549?s=20)
+
+</SideNote>

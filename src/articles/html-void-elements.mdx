@@ -1,0 +1,36 @@
+---
+title: Void elements
+description: A list of void elements in HTML
+tags: HTML, Web
+---
+
+HTML has several **void** elements.
+
+- `<br>`
+- `<hr>`
+- `<img>`
+- `<input>`
+- `<link>`
+- `<meta>`
+- `<area>`
+- `<base>`
+- `<col>`
+- `<embed>`
+- `<param>`
+- `<source>`
+- `<track>`
+
+These cannot have any content, and cannot have separate closing tags. Closing a void element like this is invalid html.
+
+```html
+<img alt></img>
+```
+
+Void elements can optionally be self-closing, so these are both correct.
+
+```html
+<!-- prettier-ignore -->
+<img alt>
+
+<img alt />
+```

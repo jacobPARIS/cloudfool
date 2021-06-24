@@ -1,0 +1,85 @@
+---
+title: Writing tags - HTML for Absolute Beginners
+description: A guide to HTML for the absolute beignner
+tags: HTML, Tutorial, Web
+hide: true
+---
+
+There are a few different ways to write tags. Most of them are relics of an older time that work in certain places because if we stopped supporting them, older websites would break.
+
+I will cover them anyway so that you recognize them when you see them, but you can safely avoid writing them in your own code if you want to keep it simple.
+
+## Opening, closing, and self-closing
+
+The first rule is that tags that have contents should open with `<tag>` and close with `</tag>` and the contents go inside.
+
+The second rule is to use `<tag />` to self-close tags without contents
+
+Those three types of tags: opening, closing, and self-closing, **are the only ones you need to write**, and those rules will cover you in all circumstances.
+
+A `<p>` tag, marking a paragraph, isn't very useful without text inside, so you will almost always see that open and close.
+
+An `<img>` tag however, marks an image, and it won't have contents so you can make it self-closing.
+
+```html
+<p>This is my cat</p>
+<img
+  src="https://placekitten.com/240/240"
+  alt="cat"
+/>
+```
+
+<div className="border rounded p-4">
+  <p>This is my cat</p>
+  <img
+    src="https://placekitten.com/240/240"
+    alt="cat"
+  />
+</div>
+
+## Case sensitivity
+
+HTML is not case sensitive, so `<BODY>` and `<body>` are equally valid. Uppercase tags were popular historically, but almost everyone sticks to lowercase these days.
+
+## Void elements
+
+The `<img>` element is in fact called a [void element](./html-void-elements) and cannot have children
+
+These cannot have any content, and cannot have separate closing tags. Closing a void element like this is invalid html.
+
+```html
+<!-- this is invalid and bad  -->
+<img alt></img>
+
+
+<!-- these are both ok -->
+<img alt>
+<img alt />
+```
+
+In the past, the only way to write an img tag was to use `<img>` with no closing tag. Now, it's ok to make it self closing for consistency
+
+## Optional closing tags
+
+The `<head>` element and the `<p>` element and a few others actually have [optional closing tags](./html-optional-closing-elements). They are only allowed specific contents, so the browsers can intuit on their own where the closing tag should be.
+
+<!-- prettier-ignore-start -->
+```html
+<!-- this is valid but bad  -->
+<p> Welcome to my blog
+<p> Here are a list of my posts
+
+<ul>
+  <li> My first post
+  <li> My second post
+  <li> My third post
+</ul>
+```
+<!-- prettier-ignore-end -->
+
+In my life I have never seen anyone write code like this professionally. Most people have never heard of this, and many whom I tell about it say that they were happier not knowing it was a thing.
+
+Consider this to be HTML trivia and leave it at that
+
+[Page 1](./html-for-beginners-01)
+[Page 3](./html-for-beginners-03)

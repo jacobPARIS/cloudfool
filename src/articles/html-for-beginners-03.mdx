@@ -1,0 +1,76 @@
+---
+title: Your First Webpage - HTML for Absolute Beginners
+description: A guide to HTML for the absolute beignner
+tags: HTML, Tutorial, Web
+hide: true
+---
+
+Create a new `page.html` file in a text editor (TextEdit on Mac, Notepad on Windows, or whichever you prefer) and open it in your browser. Every time you update the file and save, you can see the changes by refreshing your browser.
+
+```html numbered labeled filename[page.html]
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cheeto</title>
+  </head>
+
+  <body>
+    <h1>Cheeto</h1>
+  </body>
+</html>
+```
+
+<SideNote>
+
+The line `<!DOCTYPE html>` tells the browser this is a modern HTML document and that's how it should be read. There are other doc types for XML or older versions of HTML, but this is the only one you'll need to know now.
+
+It always goes on the first line before the `<html>` tag.
+
+</SideNote>
+
+![](/images/html-for-beginners-03_2021-06-24-17-10-50.png)
+
+## Changing the font
+
+Inside the `<head>`, add a `<style>` tag to change the font.
+
+```html labeled filename[page.html]
+<head>
+  <title>Cheeto</title>
+
+  <style>
+    html {
+      font-family: sans-serif;
+    }
+  </style>
+</head>
+```
+
+![](/images/html-for-beginners-03_2021-06-24-17-17-12.png)
+
+The `<style>` tag is for including CSS (Cascading Style Sheets) in your website.
+
+CSS is a different language from HTML and makes up one of the three pillars of web development (along with Javascript). With CSS you can set rules for how your site should look.
+
+A CSS rule is written this way
+
+```css
+tag {
+  property: value;
+}
+```
+
+The CSS we wrote above can be read as "The `<html>` tag should choose its `font-family` from the default sans-serif font."
+
+You can be more specific.
+
+```css
+html {
+  font-family: Helvetica, Arial, sans-serif;
+}
+```
+
+This rule will choose Helvetica if it's available, otherwise Arial, and falling back to the default sans-serif otherwise.
+
+[Page 2](./html-for-beginners-02)
+[Page 4](./html-for-beginners-04)

@@ -1,0 +1,68 @@
+---
+title: Your First Webpage - HTML for Absolute Beginners
+description: A guide to HTML for the absolute beignner
+tags: HTML, Tutorial, Web
+hide: true
+---
+
+Add an `<img>` tag to your `<body>` just after the heading
+
+```html labeled filename[page.html]
+<body>
+  <h1>Cheeto</h1>
+
+  <img
+    src="https://placekitten.com/200/200"
+    alt="cat"
+    width="200"
+    height="200"
+  />
+</body>
+```
+
+<SideNote>
+
+[PlaceKitten](https://placekitten.com/) is one of many placeholder image services. You can use any link to any image here.
+
+</SideNote>
+
+![](/images/html-for-beginners-04_2021-06-24-17-59-13.png)
+
+## The img tag
+
+This `<img>` tag has two **attributes**, one named `src` and one named `alt`.
+
+src
+: The source of the image, usually written as a URL.
+
+alt
+: The alternative text to display if the image cannot load or if the user is viewing your site in a way that doesn't support images, like old mobile browsers, poor internet connections, screen readers, Siri type assistants, and so on. **The alt attribute is mandatory**, and should be left blank (`alt=""`) for decorative images.
+
+width/height
+: The width and height of the image, in display pixels. Before the image loads, the page will reserve this much space for it, so the layout doesn't jitter around as the images load.
+
+## Attributes
+
+Attributes are a way of supplying additional information to an element. Almost everyone writes them with double quotes, but single is also valid. **I recommend sticking to double quotes**, if only to avoid having to listen to loud incorrect people tell you you're wrong.
+
+<!-- prettier-ignore-start  -->
+```html
+<span class='icon' id="close"> X </span>
+```
+<!-- prettier-ignore-end  -->
+
+To tell the browser that your website is in English, which helps assistive software make assumptions and helps search results rank you for English searches (both good things), add the `lang` attribute to your `<html>` tag.
+
+<!-- prettier-ignore-start  -->
+```html numbered labeled filename[page.html] {2}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Cheeto</title>
+```
+<!-- prettier-ignore-end  -->
+
+[Page 3](./html-for-beginners-03)
+Page 5 coming soon
+
+<!-- [Page 5](./html-for-beginners-05 -->
