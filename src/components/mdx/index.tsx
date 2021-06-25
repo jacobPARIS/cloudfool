@@ -25,6 +25,7 @@ export default {
   h4: (props: any) => <s {...props} />,
   h5: (props: any) => <s {...props} />,
   h6: (props: any) => <s {...props} />,
+  em: (props: any) => <em className="p-1 bg-yellow-100" {...props} />,
   a: (props: any) => <a {...props} />,
   p: (props: any) => <p className="mb-5 " {...props} />,
   li: (props: any) => <li className="list-disc" {...props} />,
