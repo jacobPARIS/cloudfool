@@ -178,3 +178,42 @@ type Token = {
 
 function login(auth: Auth): Promise<Token>
 ```
+
+## Importing type from external TS file
+
+```js labeled[@/app/login.d.ts]
+export type Auth = {
+  username: string
+  password: string
+}
+```
+
+### Aliased for reusability
+
+```js
+/**
+ * @typedef { import('@/app/login').Auth } Auth
+ */
+
+/**
+ * @param {Auth} auth
+ *
+ * @returns {Promise<Token>}
+ */
+function login(auth) {
+  return authenticateWithThirdPartyService(auth)
+}
+```
+
+### Inline for single use
+
+```js
+/**
+ * @param {import('@/app/login').Auth} auth
+ *
+ * @returns {Promise<Token>}
+ */
+function login(auth) {
+  return authenticateWithThirdPartyService(auth)
+}
+```
