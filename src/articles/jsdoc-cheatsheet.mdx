@@ -4,6 +4,8 @@ description: Samples of JSDoc typing different kinds of functions
 tags: Javascript
 ---
 
+## Arguments and return type
+
 ```js
 /**
  * @param {number} a
@@ -15,6 +17,12 @@ function sum(a, b) {
   return a + b
 }
 ```
+
+```ts
+function sum(a: number, b: number): number
+```
+
+## Async function with return value
 
 ```js
 /**
@@ -28,13 +36,22 @@ async function sum(a, b) {
 }
 ```
 
+```ts
+function sum(
+  a: number,
+  b: number,
+): Promise<number>
+```
+
+## Async function with no return value
+
 ```js
 /**
  * @param {String} environment
  *
  * @returns {Promise}
  */
-function startLogger(environment) {
+async function startLogger(environment) {
   if (environment === 'production') {
     await startProductionLogger()
   } else {
@@ -43,13 +60,21 @@ function startLogger(environment) {
 }
 ```
 
+```ts
+function startLogger(
+  environment: string,
+): Promise<any>
+```
+
+## String union argument
+
 ```js
 /**
  * @param {'production' | 'development'} environment
  *
  * @returns {Promise}
  */
-function startLogger(environment) {
+async function startLogger(environment) {
   if (environment === 'production') {
     await startProductionLogger()
   } else {
@@ -57,6 +82,14 @@ function startLogger(environment) {
   }
 }
 ```
+
+```ts
+function startLogger(
+  environment: 'production' | 'development',
+): Promise<any>
+```
+
+## Destructured argument
 
 ```js
 /**
@@ -70,6 +103,18 @@ function sum({a, b}) {
   return a + b
 }
 ```
+
+```ts
+function sum({
+  a,
+  b,
+}: {
+  a: number
+  b: number
+}): number
+```
+
+## Declaring a typedef for reusable types
 
 ```js
 /**
@@ -87,6 +132,17 @@ function sum({a, b}) {
   return a + b
 }
 ```
+
+```ts
+type Pair = {
+  a: number
+  b: number
+}
+
+function sum({a, b}: Pair): number
+```
+
+## Typedefs in argument and return type
 
 ```js
 /**
@@ -108,4 +164,17 @@ function sum({a, b}) {
 function login(auth) {
   return authenticateWithThirdPartyService(auth)
 }
+```
+
+```ts
+type Auth = {
+  username: string
+  password: string
+}
+
+type Token = {
+  access_token: string
+}
+
+function login(auth: Auth): Promise<Token>
 ```
