@@ -1,0 +1,111 @@
+---
+title: JSDoc Cheatsheet
+description: Samples of JSDoc typing different kinds of functions
+tags: Javascript
+---
+
+```js
+/**
+ * @param {number} a
+ * @param {number} b
+ *
+ * @returns {number}
+ */
+function sum(a, b) {
+  return a + b
+}
+```
+
+```js
+/**
+ * @param {number} a
+ * @param {number} b
+ *
+ * @returns {Promise<number>}
+ */
+async function sum(a, b) {
+  return a + b
+}
+```
+
+```js
+/**
+ * @param {String} environment
+ *
+ * @returns {Promise}
+ */
+function startLogger(environment) {
+  if (environment === 'production') {
+    await startProductionLogger()
+  } else {
+    await startDevelopmentLogger()
+  }
+}
+```
+
+```js
+/**
+ * @param {'production' | 'development'} environment
+ *
+ * @returns {Promise}
+ */
+function startLogger(environment) {
+  if (environment === 'production') {
+    await startProductionLogger()
+  } else {
+    await startDevelopmentLogger()
+  }
+}
+```
+
+```js
+/**
+ * @param {Object} obj
+ * @param {number} obj.a
+ * @param {number} obj.b
+ *
+ * @returns {number}
+ */
+function sum({a, b}) {
+  return a + b
+}
+```
+
+```js
+/**
+ * @typedef Pair
+ * @property {number} a
+ * @property {number} b
+ */
+
+/**
+ * @param {Pair} obj
+ *
+ * @returns {number}
+ */
+function sum({a, b}) {
+  return a + b
+}
+```
+
+```js
+/**
+ * @typedef Auth
+ * @property {string} username
+ * @property {string} password
+ */
+
+/**
+ * @typedef Token
+ * @property {String} access_token
+ */
+
+/**
+ * @param {Auth} auth
+ *
+ * @returns {Promise<Token>}
+ */
+function login(auth) {
+  return authenticateWithThirdPartyService(auth)
+}
+```
