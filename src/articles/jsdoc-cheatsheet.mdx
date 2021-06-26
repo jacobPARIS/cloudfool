@@ -217,3 +217,15 @@ function login(auth) {
   return authenticateWithThirdPartyService(auth)
 }
 ```
+
+
+## Typing React hooks
+
+Equivalent to `const [user, setUser] = useState<User>(null)`
+
+```js
+export default function Component(props) {
+  /** @type [User, React.Dispatch<User>] */
+  const [user, setUser] = useState(null)
+}
+```
