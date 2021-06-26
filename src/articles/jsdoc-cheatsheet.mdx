@@ -221,11 +221,12 @@ function login(auth) {
 
 ## Typing React hooks
 
-Equivalent to `const [user, setUser] = useState<User>(null)`
+Declaring the type of the initial value is equivalent to specifying the generic type as `const [user, setUser] = useState<User>(null)`
 
 ```js
 export default function Component(props) {
-  /** @type [User, React.Dispatch<User>] */
-  const [user, setUser] = useState(null)
+  /** @type {User} */
+  const initialState = null;
+  const [user, setUser] = useState(initialState)
 }
 ```
