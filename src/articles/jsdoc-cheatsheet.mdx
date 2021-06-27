@@ -217,16 +217,3 @@ function login(auth) {
   return authenticateWithThirdPartyService(auth)
 }
 ```
-
-
-## Typing React hooks
-
-Declaring the type of the initial value is equivalent to specifying the generic type as `const [user, setUser] = useState<User>(null)`
-
-```js
-export default function Component(props) {
-  /** @type {User} */
-  const initialState = null;
-  const [user, setUser] = useState(initialState)
-}
-```
