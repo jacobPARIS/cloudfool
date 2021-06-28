@@ -1,9 +1,10 @@
 import DefaultLayout from '../../layouts'
 import CodeBlock from './code-block'
-import TestTextInput from './test-text-input'
-import TestTextInputAsync from './test-text-input-async'
 import PageComponent from './page-component'
 import SideNote from './side-note'
+import TestTextInput from './test-text-input'
+import TestTextInputAsync from './test-text-input-async'
+
 export default {
   DefaultLayout,
   SideNote,
@@ -25,7 +26,13 @@ export default {
   h4: (props: any) => <s {...props} />,
   h5: (props: any) => <s {...props} />,
   h6: (props: any) => <s {...props} />,
-  em: (props: any) => <em className="p-1 bg-yellow-100" {...props} />,
+  em: (props: any) => (
+    <em
+      className="p-1 bg-yellow-100"
+      style={{outline: '0.25rem solid #fdeaa099;'}}
+      {...props}
+    />
+  ),
   a: (props: any) => <a {...props} />,
   p: (props: any) => <p className="mb-5 " {...props} />,
   li: (props: any) => <li className="list-disc" {...props} />,
