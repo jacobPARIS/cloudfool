@@ -217,3 +217,54 @@ function login(auth) {
   return authenticateWithThirdPartyService(auth)
 }
 ```
+
+## Type parameters
+
+```js
+/**
+ * @template T
+ * @template U
+ *
+ * @param {Record<T, U>} input
+ * @returns {Record<U, T>}
+ */
+function reverseRecord(input) {
+  const entries = Object.entries(
+    input,
+  ).map(([key, value]) => [value, key])
+
+  return Object.fromEntries(entries)
+}
+```
+
+```ts
+function reverseRecord<T, U>(
+  input: Record<T, U>,
+): Record<U, T>
+```
+
+## Type parameters with constraints
+
+```js
+/**
+ * @template {PropertyKey} T
+ * @template {PropertyKey} U
+ *
+ * @param {Record<T, U>} input
+ * @returns {Record<U, T>}
+ */
+function reverseRecord(input) {
+  const entries = Object.entries(
+    input,
+  ).map(([key, value]) => [value, key])
+
+  return Object.fromEntries(entries)
+}
+```
+
+```ts
+function reverseRecord<
+  T extends PropertyKey,
+  U extends PropertyKey
+>(input: Record<T, U>): Record<U, T>
+```
