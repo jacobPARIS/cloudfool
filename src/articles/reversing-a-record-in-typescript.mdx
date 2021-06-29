@@ -11,6 +11,7 @@ type CountryName =
   | 'Canada'
   | 'United States'
   | 'Mexico'
+
 type CountryCode = 'CA' | 'US' | 'MX'
 
 const countryNameToCode: Record<
@@ -76,6 +77,12 @@ function reverseRecord<
   ) as Record<U, T>
 }
 ```
+
+<SideNote>
+
+Thanks to <a href="https://twitter.com/intent/follow?screen_name=fildon_dev" rel="noopener" target="twitter"> Rupert </a> for this solution
+
+</SideNote>
 
 ### JSDoc
 
