@@ -1,11 +1,11 @@
+import React from 'react'
+
+import CardRow from 'components/card-row'
+import PageHeader from 'components/page-header'
+import SocialBanner from 'components/social-banner'
+import ThemeSwitcher from 'components/theme-switcher'
 import Head from 'next/head'
 import Link from 'next/link'
-
-import SocialBanner from 'components/social-banner'
-import PageHeader from 'components/page-header'
-import CardRow from 'components/card-row'
-import React, {SetStateAction} from 'react'
-import ThemeSwitcher from 'components/theme-switcher'
 
 const resources = [
   {
@@ -58,13 +58,37 @@ export default function Home({greeting}) {
           </div>
 
           <p className="max-w-3xl mb-6 leading-snug tracking-tight text-28 font-300">
-            I drink almond lattes while building sales funnels and b2b SaaS for
-            the 🇨🇦 mortgage industry
+            I design systems and software to help companies save time and make
+            money
+          </p>
+        </section>
+
+        <section
+          className="px-12 py-12 bg-cover text-gray-50"
+          style={{
+            backgroundImage: 'url(/images/assets_2021-06-22-16-36-02.png)',
+          }}
+        >
+          <Link href="/toolstache">
+            <a className="text-white hover:text-yellow-500">
+              <h1 className="mb-4 text-4xl font-bold md:text-6xl">
+                ToolStache
+              </h1>
+            </a>
+          </Link>
+
+          <p className="mb-4 text-2xl md:text-4xl">
+            The easiest inventory management system ever made
           </p>
 
-          <p className="max-w-3xl mb-4 font-400 text-17 dark:text-gray-100">
-            When I'm not working, I'm hyperfocusing on one hobby or another.
-            This month I'm <b className="text-blue-800">surfing</b>.
+          <hr className="mb-4 opacity-20" />
+
+          <p className="mb-4 font-500">
+            <Link href="/toolstache">
+              <a className="text-yellow-500 hover:text-white">ToolStache</a>
+            </Link>{' '}
+            helps construction companies manage and track their assets to cut
+            down on theft, repurchasing, and missed bill-out opportunities.
           </p>
         </section>
 
@@ -85,46 +109,6 @@ export default function Home({greeting}) {
               </Link>
             </section>
           </div>
-        </section>
-
-        <section
-          className="px-12 py-12 bg-cover text-gray-50"
-          style={{
-            backgroundImage: 'url(/images/assets_2021-06-22-16-36-02.png)',
-          }}
-        >
-          <Link href="/toolstache">
-            <a className="text-white hover:text-yellow-500">
-              <h1 className="mb-4 text-4xl font-bold md:text-6xl">
-                {' '}
-                ToolStache{' '}
-              </h1>
-            </a>
-          </Link>
-
-          <p className="mb-4 text-2xl md:text-4xl">
-            SaaS asset management system
-          </p>
-
-          <hr className="mb-4 opacity-20" />
-
-          <p className="mb-4 font-500">
-            <Link href="/toolstache">
-              <a className="text-yellow-500 hover:text-white">ToolStache</a>
-            </Link>{' '}
-            was my first commercial product (2017).
-          </p>
-
-          <p className="mb-4 font-500">
-            I built it to help Alberta oilfield companies manage and track their
-            assets to cut down on theft, repurchasing, and missed bill-out
-            opportunities.
-          </p>
-
-          <p className="mb-4 font-500">
-            After maintaining it for close to three years, I moved on to work
-            full time in SaaS finance.
-          </p>
         </section>
       </main>
       <footer className="pt-48 pb-8 text-center bg-blue-950">
