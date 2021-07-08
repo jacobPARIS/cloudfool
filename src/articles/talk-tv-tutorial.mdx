@@ -1,7 +1,7 @@
 ---
 title: Watch Youtube Streams and Chat with React
 description: In this tutorial I'm going to show you how to bootstrap a React project from scratch using NPM and Webpack, integrate Google Login, grab data from the Youtube API, and deploy your code to Netlify
-tags: React
+tags: React, Tutorial, Javascript
 ---
 
 In this tutorial I'm going to show you how to bootstrap a React project from scratch using NPM and Webpack, integrate Google Login, grab data from the Youtube API, and deploy your code to Netlify
@@ -128,7 +128,10 @@ function App() {
   return <h1> 📺 Talk TV</h1>
 }
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(
+  <App />,
+  document.getElementById('root'),
+)
 ```
 
 Head back to our `package.json` file and add a new build script. We'll be able to build our app with the command `npm run build` no matter what we change this script to be later. Right now it's not very important if you'd prefer to type `npx webpack` instead, but some of our later scripts are going to be more complicated and I prefer consistency across the board.
@@ -248,7 +251,11 @@ import LoginScene from './scenes/login'
 function App() {
   const isSignedIn = false
 
-  return isSignedIn ? <h1> 📺 Talk TV</h1> : <LoginScene />
+  return isSignedIn ? (
+    <h1> 📺 Talk TV</h1>
+  ) : (
+    <LoginScene />
+  )
 }
 ```
 
@@ -363,7 +370,11 @@ export const Icon = styled.p`
 Go back to our `login.js` and replace our `please log in` plea with our new components.
 
 ```jsx numbered
-import {Card, Divider, Icon} from '../../components/cards'
+import {
+  Card,
+  Divider,
+  Icon,
+} from '../../components/cards'
 
 export default function () {
   return (
@@ -538,12 +549,22 @@ In our `index.js` make a new function called `Preloader` and change the `ReactDO
 
 ```js numbered
 function Preloader() {
-  const [isGoogleReady, setGoogleReady] = React.useState(false)
+  const [
+    isGoogleReady,
+    setGoogleReady,
+  ] = React.useState(false)
 
-  return isGoogleReady ? <App /> : <div>Loading...</div>
+  return isGoogleReady ? (
+    <App />
+  ) : (
+    <div>Loading...</div>
+  )
 }
 
-ReactDOM.render(<Preloader />, document.getElementById('root'))
+ReactDOM.render(
+  <Preloader />,
+  document.getElementById('root'),
+)
 ```
 
 By switching `isGoogleReady` from true to false you will see either the app or the loading screen.
@@ -561,7 +582,11 @@ React.useEffect(() => {
   })
 }, [])
 
-return isGoogleReady ? <App /> : <div>Loading...</div>
+return isGoogleReady ? (
+  <App />
+) : (
+  <div>Loading...</div>
+)
 ```
 
 If you run this now, you should see the Loading screen appear briefly before the main app does. If so, great! But there are still two issues with our code.
@@ -572,7 +597,10 @@ We can test for this by the presence of the `auth2` field in the `gapi` object. 
 
 ```js numbered
 const wasGoogleReady = !!gapi.auth2
-const [isGoogleReady, setGoogleReady] = React.useState(wasGoogleReady)
+const [
+  isGoogleReady,
+  setGoogleReady,
+] = React.useState(wasGoogleReady)
 ```
 
 The second issue is that by the time we finish initializing, our component might have re-rendered already. When a component re-renders, it's a completely new function in a new context that can't use our old state variables, so trying to set them will cause an error. React has very descriptive errors that will let you know exactly when this is the case, we can solve it now anyway.
@@ -611,7 +639,10 @@ We'll now make a callback to trigger a sign in attempt and pass it down to our b
 
 ```jsx numbered
 export default function () {
-  const onLogin = React.useCallback(() => useAuth().signIn(), [])
+  const onLogin = React.useCallback(
+    () => useAuth().signIn(),
+    [],
+  )
 
   return (
     <Container>
@@ -787,7 +818,12 @@ import Theme from '../theme'
 export function Loading() {
   return (
     <Container>
-      <Loader type="Bars" color={Theme.primary} height={100} width={100} />
+      <Loader
+        type="Bars"
+        color={Theme.primary}
+        height={100}
+        width={100}
+      />
     </Container>
   )
 }
@@ -812,7 +848,8 @@ Our authentication flow is complete, which means our next step is to start pulli
 Near the top of your `login.js` file add a constant declaring which scope we want to use. This is a set of permissions that we'll let the user consent to on sign-in.
 
 ```js numbered
-const YOUTUBE_SCOPE = 'https://www.googleapis.com/auth/youtube.readonly'
+const YOUTUBE_SCOPE =
+  'https://www.googleapis.com/auth/youtube.readonly'
 ```
 
 and then update the sign in function to use it
@@ -920,7 +957,8 @@ Each thumbnail will need an image
 const Thumbnail = styled.img`
   width: 100%;
   border-radius: ${(props) => Theme.baseRadius};
-  border: ${(props) => `1px solid ${Theme.primary}33`};
+  border: ${(props) =>
+    `1px solid ${Theme.primary}33`};
 `
 ```
 
@@ -949,7 +987,11 @@ const Action = styled(Button)`
 Then we put them together in a component
 
 ```jsx numbered
-function YoutubeThumbnail({id, thumbnail, title}) {
+function YoutubeThumbnail({
+  id,
+  thumbnail,
+  title,
+}) {
   return (
     <Container to={`/watch/${id}`}>
       <Thumbnail src={thumbnail.url} />
@@ -974,7 +1016,9 @@ export function YoutubeGallery({videos}) {
     videos.map((video) => (
       <YoutubeThumbnail
         id={video.id.videoId}
-        thumbnail={video.snippet.thumbnails.medium}
+        thumbnail={
+          video.snippet.thumbnails.medium
+        }
         title={video.snippet.channelTitle}
       />
     ))
@@ -987,7 +1031,10 @@ export function YoutubeGallery({videos}) {
 In our Home scene, we'll import these components and update our effect to put the API data into state
 
 ```jsx numbered
-import {BoxGrid, YoutubeGallery} from '../../components/youtube'
+import {
+  BoxGrid,
+  YoutubeGallery,
+} from '../../components/youtube'
 
 export default function () {
   const [videos, setVideos] = React.useState([])
@@ -1041,7 +1088,10 @@ import WatchScene from './scenes/watch'
 
 ```jsx numbered
 <Switch>
-  <Route path="/watch/:id" component={WatchScene} />
+  <Route
+    path="/watch/:id"
+    component={WatchScene}
+  />
   <Route path="/watch" component={HomeScene} />
   <Redirect from="/" to="/watch" />
 </Switch>
@@ -1054,15 +1104,18 @@ Clicking on any of our thumbnails should give us this now
 Lets give our `components/youtube.js` file one more export
 
 ```js numbered
-export const VideoFrame = styled.iframe.attrs(({id}) => ({
-  width: 560,
-  height: 349,
-  frameborder: '0',
-  allowFullScreen: true,
-  src: getEmbedURL(id),
-}))`
+export const VideoFrame = styled.iframe.attrs(
+  ({id}) => ({
+    width: 560,
+    height: 349,
+    frameborder: '0',
+    allowFullScreen: true,
+    src: getEmbedURL(id),
+  }),
+)`
   border-radius: ${(props) => Theme.baseRadius};
-  border: ${(props) => `1px solid ${Theme.primary}33`};
+  border: ${(props) =>
+    `1px solid ${Theme.primary}33`};
 `
 
 function getEmbedURL(channelId) {
@@ -1078,7 +1131,9 @@ import {Container} from '../../components/containers'
 import {VideoFrame} from '../../components/youtube'
 
 export default function () {
-  const channelId = document.location.pathname.split('/').pop()
+  const channelId = document.location.pathname
+    .split('/')
+    .pop()
 
   return (
     <div>
