@@ -64,7 +64,7 @@ export default function Home({greeting}) {
         </section>
 
         <section
-          className="px-12 py-12 bg-cover text-gray-50"
+          className="px-12 py-12 bg-gray-900 bg-cover text-gray-50"
           style={{
             backgroundImage: 'url(/images/assets_2021-06-22-16-36-02.png)',
           }}
@@ -89,6 +89,31 @@ export default function Home({greeting}) {
             </Link>{' '}
             helps construction companies manage and track their assets to cut
             down on theft, repurchasing, and missed bill-out opportunities.
+          </p>
+        </section>
+
+        <section className="px-12 py-12 ">
+          <Link href="/blog/html-for-beginners-01">
+            <a>
+              <h1 className="mb-4 text-4xl font-bold md:text-6xl">
+                HTML for Absolute Beginners
+              </h1>
+            </a>
+          </Link>
+
+          <p className="mb-4 text-2xl md:text-4xl">
+            An entry level guide to HTML fundamentals
+          </p>
+
+          <hr className="mb-4 opacity-20" />
+
+          <p className="mb-4 font-500">
+            In this{' '}
+            <Link href="/blog/html-for-beginners-01">
+              <a>7 part guide</a>
+            </Link>{' '}
+            you'll learn how HTML works while building a small site with images,
+            links, lists, and tables.
           </p>
         </section>
 
