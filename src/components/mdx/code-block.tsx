@@ -59,7 +59,7 @@ export default function CodeBlock({language, metastring, children}: any) {
   }
 
   return (
-    <div className="relative mb-5 -mx-5 overflow-hidden rounded-none bg-code sm:mx-0 sm:rounded-md">
+    <div className="relative clear-both mb-5 -mx-5 overflow-hidden rounded-none bg-code sm:mx-0 sm:rounded-md">
       {labeled && (
         <>
           <div className="px-10 pt-3 pb-0 text-white pointer-events-none select-none sm:px-5 sm:pb-3">

@@ -1,10 +1,15 @@
-import Head from 'next/head'
+import React from 'react'
 
-import PageHeader from 'components/page-header'
 import CardRow from 'components/card-row'
+import PageHeader from 'components/page-header'
 import Tag from 'components/tag'
-import {useRouter} from 'next/router'
 import ThemeSwitcher from 'components/theme-switcher'
+import fs from 'fs'
+import matter from 'gray-matter'
+import Head from 'next/head'
+import {useRouter} from 'next/router'
+import path from 'path'
+
 export default function Home({posts, tags}: any) {
   const router = useRouter()
   const {tag: queryTag} = router.query
@@ -53,7 +58,7 @@ export default function Home({posts, tags}: any) {
               <Tag text="All posts" highlight={!queryTag} />
             </li>
             {tags.map((tag) => (
-              <li>
+              <li key={tag}>
                 <Tag text={tag} slug={tag} highlight={tag === queryTag} />
               </li>
             ))}
@@ -77,11 +82,6 @@ export default function Home({posts, tags}: any) {
     </div>
   )
 }
-
-import matter from 'gray-matter'
-import fs from 'fs'
-import path from 'path'
-import React from 'react'
 
 const ARTICLES_PATH = path.join(process.cwd(), 'src', 'articles')
 export async function getStaticProps() {

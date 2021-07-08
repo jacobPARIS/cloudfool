@@ -1,0 +1,214 @@
+---
+title: Your First Webpage - HTML for Absolute Beginners
+description: A guide to HTML for the absolute beignner
+tags: HTML, Tutorial, Web
+hide: true
+---
+
+The web wouldn't be a web if you couldn't get from one page to another. We do that with links.
+
+```js numbered {9-14}
+<body>
+  <h1>Cheeto</h1>
+
+  <img
+    src="https://placekitten.com/200/200"
+    alt="cat"
+  />
+
+  <p>
+    Cheeto is a
+    <a href="https://en.wikipedia.org/wiki/Cat">
+      cat
+    </a>
+  </p>
+</body>
+```
+
+![Screenshot of website rendering above code, where text "Cheeto is a cat" has the word "cat" underlined and blue, while a tooltip suggests it's a link to the Wikipedia entry for Cat](/images/html-for-beginners-05_2021-07-08-11-11-23.png)
+
+## The anchor tag
+
+`<a>`
+: The **anchor** tag links content to somewhere else. That can be another part of the same page, a different page on the same website, a different website, an app, an email client, a phone number, or one of many more places.
+
+<SideNote>
+
+If you've ever clicked an email address link and then had to wait a minute while your computer finished loading your email client so you could then close the email client, copy the address, and manually navigate to Gmail to paste it into the `to` field, you have witnessed an anchor tag linking to `mailto:email@example.com`.
+
+Websites are often written by developers who will never use them and paid for by executives who won't either, and only this fact explains why anyone could think a `mailto` link is a good idea.
+
+</SideNote>
+
+You set the destination for your link with the `href` attribute, and the content you're trying to make linkable goes between the `<a>` tags.
+
+## Image links
+
+Links don't have to be just text. Images and other elements are perfectly valid children of `<a>` tags. Just as we made the text `cat` clickable in the last example, the same could be done with the image.
+
+```html numbered {4,9}
+<body>
+  <h1>Cheeto</h1>
+
+  <a href="https://en.wikipedia.org/wiki/Cat">
+    <img
+      src="https://placekitten.com/200/200"
+      alt="cat"
+    />
+  </a>
+
+  <p>Cheeto is a cat</p>
+</body>
+```
+
+Now, clicking on the image will take you to the Wikipedia page.
+
+![](/images/html-for-beginners-05_2021-07-08-13-39-47.png)
+
+## Opening links in new tabs
+
+You can open a link in a specific tab by using the `target` attribute.
+
+<SideNote>
+
+Leaving out the target attribute means a link will open in the current tab. That's usually a good thing, as it means the user can return using the back button.
+
+If you don't have strong opinions on the matter, consider using new tabs for new websites. Links within your site should open in the current tab (with no `target` attribute) and links to external websites should open in new tabs (with a target attribute).
+
+</SideNote>
+
+The `target` attribute specifies the name of the tab to open. Both of the links below have `target="_blank"`, which means clicking one will open in a new tab.
+
+```html {5,15}
+<ul>
+  <li>
+    <a
+      href="https://en.wikipedia.org/wiki/Cat"
+      target="_blank"
+      rel="noopener"
+    >
+      Cat
+    </a>
+  </li>
+
+  <li>
+    <a
+      href="https://en.wikipedia.org/wiki/Dog"
+      target="_blank"
+      rel="noopener"
+    >
+      Dog
+    </a>
+  </li>
+</ul>
+```
+
+<ul>
+  <li>
+    <a
+      href="https://en.wikipedia.org/wiki/Cat"
+      target="_blank"
+      rel="noopener"
+    >
+      Cat
+    </a>
+  </li>
+
+  <li>
+    <a
+      href="https://en.wikipedia.org/wiki/Dog"
+      target="_blank"
+      rel="noopener"
+    >
+      Dog
+    </a>
+  </li>
+</ul>
+
+<SideNote>
+
+You may have noticed the additional attribute `rel="noopener"`. It's important for security to this on any link with a target. If you link to a site without it, that site can open the link from the other end to run arbitrary code on your site. This is an old vulnerability that has existed for a long time.
+
+Even if you trust the site you're linking to, there's always the possibility someone malicious could compromise that site in the future, and then you're vulnerable too.
+
+</SideNote>
+
+## Internal links
+
+Links with no protocol (the `https://` bit) are **relative links** and are great for linking to different pages within your own website.
+
+```html numbered
+<p>
+  You can
+  <a href="contact.html"> contact Cheeto here </a>
+</p>
+```
+
+If you try to follow that link it will look for a `contact.html` file in the same directory as your current webpage. Right now there isn't one, and the browser will waste no time telling you. Let's fix that.
+
+Make a new file named `contact.html` and paste the following html.
+
+```html numbered {27}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Contact Cheeto</title>
+
+    <style>
+      html {
+        font-family: sans-serif;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Get in touch</h1>
+
+    <p>
+      There are several ways to contact Cheeto
+    </p>
+
+    <ol>
+      <li>Shouting his name</li>
+      <li>Shaking a bag of treats</li>
+      <li>Running an electric can opener</li>
+    </ol>
+
+    <p>
+      <a href="index.html"> Return to home </a>
+    </p>
+  </body>
+</html>
+```
+
+If you named the other html file something other than `index.html`, use that name instead in the **Return to home** link. You should be able to open this file and switch between the two pages by clicking the link.
+
+![](/images/html-for-beginners-05_2021-07-08-14-21-02.png)
+
+<SideNote>
+
+**Footnote for pedants:** If calling this a "website" instead of a "webpage" was bothering you during the period in history where it was only one page, it is now two pages and you can go home.
+
+</SideNote>
+
+## Hash links
+
+You can link to [specific headings on a page](#internal-links) by specifying the `id` of the heading after the `#` portion of the link.
+
+Every heading on the articles on this site has an id attached, to make it easy for people to share links to specific sections.
+
+```html numbered {1,5}
+<h2 id="internal-links">Internal links</h2>
+
+<p>
+  You can link to
+  <a href="#internal-links">
+    specific headings on a page
+  </a>
+  by specifying the `id` of the heading after the
+  `#` portion of the link.
+</p>
+```
+
+[Page 4](./html-for-beginners-04)
+[Page 6](./html-for-beginners-06)

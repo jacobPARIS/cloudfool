@@ -1,0 +1,119 @@
+---
+title: Your First Webpage - HTML for Absolute Beginners
+description: A guide to HTML for the absolute beignner
+tags: HTML, Tutorial, Web
+hide: true
+---
+
+Tabular data belongs in tables. Anything that could go in a spreadsheet should probably belong in a table.
+
+Add this table to your homepage.
+
+```html numbered
+<h2>Daily complaints</h2>
+
+<table>
+  <thead>
+    <th>Time</th>
+    <th>Complaint</th>
+    <th>Resolution</th>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>05:45</td>
+      <td>Bedroom door was closed</td>
+      <td>None, meowing continues</td>
+    </tr>
+
+    <tr>
+      <td>06:00</td>
+      <td>Bedroom door was closed</td>
+      <td>None, meowing continues</td>
+    </tr>
+
+    <tr>
+      <td>06:15</td>
+      <td>Bedroom door was closed</td>
+      <td>Door opened</td>
+    </tr>
+
+    <tr>
+      <td>06:20</td>
+      <td>Hungry</td>
+      <td>Food dish was filled</td>
+    </tr>
+
+    <tr>
+      <td>06:25</td>
+      <td>Bottom of food dish visible</td>
+      <td>Stopped eating, meowing continues</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+![](/images/html-for-beginners-06_2021-07-08-15-21-38.png)
+
+<SideNote>
+
+Ages ago it was common to use tables for the
+entire layout of a site because the grid
+structure was convenient. Ages ago it was common
+for websites to support one specific resolution
+on one specific device.
+
+These stopped being
+common at the same time for the same reason.
+
+</SideNote>
+
+## The `<thead>` and `<th>` tags
+
+The **table head** tag is the first row on the table and is used to label the columns. Each column heading is a **table heading** element, and you'll have one for each column.
+
+```html numbered
+<thead>
+  <th>Time</th>
+  <th>Complaint</th>
+  <th>Resolution</th>
+</thead>
+```
+
+## The `<tr>` and `<td>` tags
+
+The **table row** tag is for every other row on the table, and that's where your data goes. Each cell is a **table definition** element, and they must be in the same order as the heading columns.
+
+The `<th>` tag is just the heading version of the `<td>` tag.
+
+```html numbered
+<tr>
+  <td>05:45</td>
+  <td>Bedroom door was closed</td>
+  <td>None, meowing continues</td>
+</tr>
+```
+
+## The table structure
+
+All table tags must be children of a `<table>` element. After the `<thead>` is the `<tbody>`, and all of the non-heading rows must be inside the `<tbody>`.
+
+```html numbered
+<table>
+  <thead>
+    <th>Column 1</th>
+    <!-- Repeat for more columns  -->
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>Column 1</td>
+      <!-- Repeat for more columns -->
+    </tr>
+    <!-- Repeat for more rows  -->
+  </tbody>
+</table>
+```
+
+[Page 5](./html-for-beginners-05)
+[Page 7](./html-for-beginners-07)

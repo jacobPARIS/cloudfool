@@ -29,7 +29,7 @@ export default {
   em: (props: any) => (
     <em
       className="p-1 bg-yellow-100"
-      style={{outline: '0.25rem solid #fdeaa099;'}}
+      style={{outline: '0.25rem solid #fdeaa099'}}
       {...props}
     />
   ),
@@ -61,7 +61,6 @@ export default {
       />
     </svg>
   ),
-  code: (props: any) => <code className="bg-blue-600 text-16" {...props} />,
   blockquote: (props: any) => <blockquote className="italic" {...props} />,
   pre: (props: any) => (
     <CodeBlock
