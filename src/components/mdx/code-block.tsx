@@ -1,4 +1,5 @@
 import * as React from 'react'
+
 import useClipboard from 'react-use-clipboard'
 
 export default function CodeBlock({language, metastring, children}: any) {
@@ -70,7 +71,7 @@ export default function CodeBlock({language, metastring, children}: any) {
         </>
       )}
       <div className="p-3">
-        <pre className="px-5 py-0 -mx-5 text-white sm:mx-0 sm:px-3 text-14 font-400">
+        <pre className="px-5 py-0 -mx-5 text-white sm:mx-0 sm:px-3 font-400">
           <code>{linesNodes}</code>
         </pre>
       </div>

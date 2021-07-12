@@ -71,9 +71,9 @@ export default function Home({greeting}) {
         >
           <Link href="/toolstache">
             <a className="text-white hover:text-yellow-500">
-              <h1 className="mb-4 text-4xl font-bold md:text-6xl">
+              <h2 className="mb-4 text-4xl font-bold md:text-6xl">
                 ToolStache
-              </h1>
+              </h2>
             </a>
           </Link>
 
@@ -95,9 +95,9 @@ export default function Home({greeting}) {
         <section className="px-12 py-12 ">
           <Link href="/blog/html-for-beginners-01">
             <a>
-              <h1 className="mb-4 text-4xl font-bold md:text-6xl">
+              <h2 className="mb-4 text-4xl font-bold md:text-6xl">
                 HTML for Absolute Beginners
-              </h1>
+              </h2>
             </a>
           </Link>
 
@@ -114,6 +114,26 @@ export default function Home({greeting}) {
             </Link>{' '}
             you'll learn how HTML works while building a small site with images,
             links, lists, and tables.
+          </p>
+        </section>
+
+        <section className="px-12 py-8 bg-gray-900 text-gray-50">
+          <h2 className="mb-4 text-4xl font-bold md:text-6xl">
+            VS Code Themes
+          </h2>
+          <p className="mb-4 font-500">
+            Here is a list of VS Code themes I've published, such as{' '}
+            <Link href="/themes#from-paris-with-love">
+              <a>From Paris with Love</a>
+            </Link>
+            , the{' '}
+            <Link href="/themes#stripe-docs-blue">
+              <a>Stripe Documentation Blue Theme</a>
+            </Link>
+            , and{' '}
+            <Link href="/themes#stripe-docs-gray">
+              <a>Stripe Docs Gray</a>
+            </Link>
           </p>
         </section>
 

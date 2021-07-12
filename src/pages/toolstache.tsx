@@ -1,8 +1,7 @@
+import {NextSeo} from 'next-seo'
 import Head from 'next/head'
-
 import NextImage from 'next/image'
 import NextLink from 'next/link'
-import {NextSeo} from 'next-seo'
 
 Assets.theme = 'default'
 export default function Assets() {

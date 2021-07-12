@@ -1,20 +1,19 @@
-import fs from 'fs'
-import path from 'path'
 import * as React from 'react'
-import {NextSeo} from 'next-seo'
 
 import mdxComponents from 'components/mdx'
 import PageHeader from 'components/page-header'
-
-import {serialize} from 'next-mdx-remote/serialize'
+import ThemeSwitcher from 'components/theme-switcher'
+import fs from 'fs'
+import matter from 'gray-matter'
 // @ts-ignore
 import {MDXRemote} from 'next-mdx-remote'
+import {serialize} from 'next-mdx-remote/serialize'
+import {NextSeo} from 'next-seo'
 import Image from 'next/image'
-import {useRouter} from 'next/router'
-import matter from 'gray-matter'
 import Link from 'next/link'
-import {useQuery, QueryClient, QueryClientProvider} from 'react-query'
-import ThemeSwitcher from 'components/theme-switcher'
+import {useRouter} from 'next/router'
+import path from 'path'
+import {QueryClient, QueryClientProvider, useQuery} from 'react-query'
 
 const queryClient = new QueryClient()
 const ARTICLES_PATH = path.join(process.cwd(), 'src', 'articles')
@@ -277,7 +276,7 @@ export async function getStaticProps(context) {
           require(`rehype-shiki`),
           {
             theme: `./src/styles/lover-theme-dark.json`,
-            useBackground: false,
+            useBackground: true,
           },
         ],
       ],
