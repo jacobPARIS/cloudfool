@@ -14,17 +14,19 @@ export default function Resume() {
       <PageHeader className="print:hidden" />
 
       <main className="px-4 mx-auto screen:max-w-2xl screen:-mb-48 dark:bg-gray-900 ">
-        <section className="screen:py-8 print:pb-4">
+        <section className="pb-4 screen:pt-4">
           <div>
             <h1 className="leading-11 screen:text-64 print:text-48 font-700">
               Jacob<span className="print:hidden">&nbsp;</span>Paris
               <span className="text-gray-300 screen:hidden">.com</span>
             </h1>
-            <p>Canadian citizen, working remotely worldwide.</p>
+            <p>
+              Canadian citizen, working remotely worldwide (open to relocation)
+            </p>
           </div>
         </section>
 
-        <SocialBanner className="screen:mb-12 print:mb-4" />
+        <SocialBanner className="screen:mb-8 print:mb-4" />
 
         <p className="mb-4">
           Skilled in React, Typescript, GraphQL, Vue, and HTML/CSS with a focus
