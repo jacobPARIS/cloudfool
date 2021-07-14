@@ -16,7 +16,7 @@ export default function Resume() {
       <main className="px-4 mx-auto screen:max-w-2xl screen:-mb-48 dark:bg-gray-900 ">
         <section className="pb-4 screen:pt-4">
           <div>
-            <h1 className="leading-11 screen:text-64 print:text-48 font-700">
+            <h1 className="leading-11 screen:text-6xl print:text-48 font-700">
               Jacob<span className="print:hidden">&nbsp;</span>Paris
               <span className="text-gray-300 screen:hidden">.com</span>
             </h1>
@@ -38,7 +38,7 @@ export default function Resume() {
           className="mx-auto screen:px-4 screen:py-3 screen:mb-8 screen:max-w-2xl screen:bg-white screen:rounded screen:shadow-sm"
           style={{transform: 'translate(0,0)'}}
         >
-          <h3 className="leading-tight screen:text-28 print:text-lg screen:font-light print:font-bold">
+          <h3 className="leading-tight screen:text-3xl print:text-lg screen:font-light print:font-bold">
             Cannect Invest
           </h3>
           <div className="mb-4 text-14">
@@ -85,7 +85,7 @@ export default function Resume() {
           className="mx-auto screen:px-4 screen:py-3 screen:mb-8 screen:max-w-2xl screen:bg-white screen:rounded screen:shadow-sm"
           style={{transform: 'translate(0,0)'}}
         >
-          <h3 className="leading-tight screen:text-28 print:text-lg screen:font-light print:font-bold">
+          <h3 className="leading-tight screen:text-3xl print:text-lg screen:font-light print:font-bold">
             ToolStache
           </h3>
           <div className="mb-4 text-14">
