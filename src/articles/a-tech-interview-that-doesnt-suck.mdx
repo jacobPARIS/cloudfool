@@ -92,7 +92,9 @@ The usual solution here is to replace the list of tasks with a new array that co
 An easy way to make the new array is using Javascript's native array filter
 
 ```js
-const incompleteTasks = tasks.filter((task) => !task.completed)
+const incompleteTasks = tasks.filter(
+  (task) => !task.completed,
+)
 ```
 
 The candidate might prefer stepping through the list of tasks in a loop to build the new array manually.
@@ -173,8 +175,12 @@ The ideal implementation is also the simplest: keep one main array of tasks, and
 That might look something like this
 
 ```js
-const completeTasks = tasks.filter((task) => task.complete)
-const incompleteTasks = tasks.filter((task) => !task.complete)
+const completeTasks = tasks.filter(
+  (task) => task.complete,
+)
+const incompleteTasks = tasks.filter(
+  (task) => !task.complete,
+)
 ```
 
 The more challenging implementation, which I've seen several candidates attempt but never complete within the time allowed, is to maintain two separate lists of tasks and move items from one to the other when marking as complete or incomplete. If they start to run out of time, I would suggest the simpler solution, but give them time to come to that conclusion on their own. The ability to realize when they're going down the wrong path and re-evaluate their chosen solution is a good skill to have, and this is a good place to watch for it.

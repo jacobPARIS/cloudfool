@@ -9,23 +9,25 @@ import Link from 'next/link'
 
 const resources = [
   {
-    title: 'Write a contact form in XState',
-    name: 'XState Tutorial',
-    path: '/blog/charting-a-contact-form-in-xstate',
-    description: 'A series of statecharts representing a contact form.',
+    title: 'Animate a Stripe Checkout with Framer and React',
+    name: 'Stripe',
+    path: '/blog/animating-stripe-checkout-framer-react',
+    description:
+      'An animated stripe checkout using XState and React. This uses the Stripe API and the Stripe Elements tools to create an actual payment.',
   },
   {
     title: 'Add footnotes to your content',
-    name: 'HTML Tutorial',
+    name: 'HTML',
     path: '/blog/add-footnotes-to-your-html',
     description:
       'Use HTML anchor tags to add accessible semantic footnotes to your article or webpage',
   },
   {
-    title: "The developer's guide to javascript functions",
-    name: 'Javascript Tutorial',
-    path: '/blog/js-functions',
-    description: 'An overview of functions and callbacks',
+    title: "A tech interview that doesn't suck",
+    name: 'Career',
+    path: '/blog/a-tech-interview-that-doesnt-suck',
+    description:
+      'No other profession has so many candidates who are good at interviews and bad at the job they are interviewing for',
   },
 ]
 
