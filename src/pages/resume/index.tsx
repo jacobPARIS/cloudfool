@@ -5,26 +5,29 @@ import Link from 'next/link'
 
 export default function Resume() {
   return (
-    <div className="bg-gray-50 dark:bg-gray-800">
+    <div className="screen:bg-gray-50 dark:bg-gray-800">
       <Head>
         <title>Jacob Paris</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <PageHeader />
+      <PageHeader className="print:hidden" />
 
-      <main className="max-w-2xl px-4 mx-auto -mb-48 dark:bg-gray-900 ">
-        <section className="py-8 ">
+      <main className="px-4 mx-auto screen:max-w-2xl screen:-mb-48 dark:bg-gray-900 ">
+        <section className="screen:py-8 print:py-4">
           <div>
-            <h1 className="leading-11 text-64 font-700">Jacob Paris</h1>
+            <h1 className="leading-11 screen:text-64 print:text-48 font-700">
+              Jacob Paris
+            </h1>
+            <p>Canadian citizen, working remotely worldwide.</p>
           </div>
         </section>
 
-        <SocialBanner className="mb-12" />
+        <SocialBanner className="screen:mb-12 print:mb-8" />
 
-        <h2 className="mb-4 text-16 font-500"> Projects </h2>
+        <h2 className="screen:mb-4 text-16 font-500"> Projects </h2>
         <section
-          className="max-w-2xl px-4 py-3 mx-auto mb-8 bg-white rounded shadow-sm"
+          className="px-4 py-3 mx-auto screen:mb-8 screen:max-w-2xl screen:bg-white screen:rounded screen:shadow-sm"
           style={{transform: 'translate(0,0)'}}
         >
           <h3 className="leading-tight text-28 font-300">Cannect Invest</h3>
@@ -36,7 +39,6 @@ export default function Resume() {
           <p className="mb-5 text-gray-500">
             <a
               href="https://www.cannect.ca/"
-              className="text-blue-500 underline"
               target="blank"
               rel="noopener noreferrer"
             >
@@ -44,16 +46,33 @@ export default function Resume() {
             </a>{' '}
             had been using an internal CRM they built to streamline the mortgage
             application process, and they brought me on early in the process of
-            building a second scalable version that could become its own product
-            to licence to other brokerages.
-            <Link href="resume/cannect">
-              <a> I built a lot of things there…</a>
-            </Link>
+            building a second scalable version using Vue/GraphQL that could
+            become its own product to licence to other brokerages.
           </p>
+
+          <p className="mb-5 text-gray-500">
+            Each project had a lead, and
+            <Link href="resume/cannect">
+              <a> I led many of them. </a>
+            </Link>
+            Some highlights:
+          </p>
+
+          <ul className="mb-5 ml-8 text-gray-500 list-disc">
+            <li>
+              Built three single-page applications for agents, borrowers, and
+              affiliates.
+            </li>
+            <li>
+              Integrated the CRM with lead-gen forms and email drip campaigns.
+            </li>
+            <li> Worked closely with customers and a product design team. </li>
+            <li> Designed CI/CD pipeline and local docker dev environment. </li>
+          </ul>
         </section>
 
         <section
-          className="max-w-2xl px-4 py-3 mx-auto mb-8 bg-white rounded shadow-sm"
+          className="px-4 py-3 mx-auto screen:mb-8 screen:max-w-2xl screen:bg-white screen:rounded screen:shadow-sm"
           style={{transform: 'translate(0,0)'}}
         >
           <h3 className="leading-tight text-28 font-300">ToolStache</h3>
@@ -73,70 +92,83 @@ export default function Resume() {
             opportunities, which amounted to{' '}
             <strong> over $10K in savings each month. </strong>
           </p>
-        </section>
 
-        <h2 className="mb-4 text-16 font-500"> Other </h2>
-
-        <section
-          className="max-w-2xl px-4 py-3 mx-auto mb-8 bg-white rounded shadow-sm"
-          style={{transform: 'translate(0,0)'}}
-        >
-          <h3 className="leading-tight text-28 font-300">
-            Interview with No CS Degree
-          </h3>
-          <div className="mb-4 text-14">
-            <a
-              href="https://www.nocsdegree.com/self-taught-developer-digital-nomad/"
-              className="text-blue-500 underline"
-              target="blank"
-              rel="noopener noreferrer"
-            >
-              Read the interview
-            </a>
-            , May 2021{' '}
-          </div>
-        </section>
-
-        <section
-          className="max-w-2xl px-4 py-3 mx-auto mb-8 bg-white rounded shadow-sm"
-          style={{transform: 'translate(0,0)'}}
-        >
-          <h3 className="mb-4 leading-tight text-28 font-300">Articles</h3>
-          <ul className="ml-4 list-disc">
+          <ul className="mb-5 ml-8 text-gray-500 list-disc">
             <li>
-              <Link href="blog?tag=React">
-                <a>React</a>
-              </Link>
+              Worked directly with the tool-crib, accounting, and dispatch teams
+              to design + improve each flow.
             </li>
             <li>
-              <Link href="blog?tag=Javascript">
-                <a>Vue</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="blog?tag=GraphQL">
-                <a>Apollo GraphQL</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="blog?tag=Typescript">
-                <a>Typescript</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="blog?tag=CSS">
-                <a>CSS</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="blog?tag=HTML">
-                <a>HTML</a>
-              </Link>
+              {' '}
+              Automated an email billing system to charge subcontractors.
             </li>
           </ul>
         </section>
+
+        <div className="print:hidden ">
+          <h2 className="screen:mb-4 text-16 font-500"> Other </h2>
+
+          <section
+            className="px-4 py-3 mx-auto mb-8 screen:max-w-2xl screen:bg-white screen:rounded screen:shadow-sm"
+            style={{transform: 'translate(0,0)'}}
+          >
+            <h3 className="leading-tight text-28 font-300">
+              Interview with No CS Degree
+            </h3>
+            <div className="mb-4 text-14">
+              <a
+                href="https://www.nocsdegree.com/self-taught-developer-digital-nomad/"
+                className="text-blue-500 underline"
+                target="blank"
+                rel="noopener noreferrer"
+              >
+                Read the interview
+              </a>
+              , May 2021{' '}
+            </div>
+          </section>
+
+          <section
+            className="px-4 py-3 mx-auto mb-8 screen:max-w-2xl screen:bg-white screen:rounded screen:shadow-sm"
+            style={{transform: 'translate(0,0)'}}
+          >
+            <h3 className="mb-4 leading-tight text-28 font-300">Articles</h3>
+            <ul className="ml-8 list-disc">
+              <li>
+                <Link href="blog?tag=React">
+                  <a>React</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="blog?tag=Javascript">
+                  <a>Vue</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="blog?tag=GraphQL">
+                  <a>Apollo GraphQL</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="blog?tag=Typescript">
+                  <a>Typescript</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="blog?tag=CSS">
+                  <a>CSS</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="blog?tag=HTML">
+                  <a>HTML</a>
+                </Link>
+              </li>
+            </ul>
+          </section>
+        </div>
       </main>
-      <footer className="pt-48 pb-8 text-center bg-blue-950">
+      <footer className="pt-48 pb-8 text-center bg-blue-950 print:hidden">
         <small className="text-white"> Made with ❤️ by Jacob Paris </small>
       </footer>
     </div>

@@ -83,11 +83,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-a {
-  color: var(--color-primary);
-  text-decoration: none;
-}
-
 html,
 body,
 div,
@@ -99,9 +94,16 @@ footer {
   max-width: none;
 }
 
-a:focus,
-a:hover {
-  color: var(--color-primary-offset);
+@media screen {
+  a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  a:focus,
+  a:hover {
+    color: var(--color-primary-offset);
+  }
 }
 
 em {
@@ -182,7 +184,6 @@ em {
 
 .prose code {
   font-size: 80%;
-  // prettier-ignore
   background-color: var(--color-primary-transparent);
   box-shadow: 0 0 0 2px var(--color-primary-transparent);
   border-radius: 2px;

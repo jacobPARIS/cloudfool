@@ -9,6 +9,10 @@ module.exports = {
   theme: {
     typography: (theme) => ({}),
     extend: {
+      screens: {
+        print: {raw: 'print'},
+        screen: {raw: 'screen'},
+      },
       colors: {
         blue: {
           950: '#242C42',
