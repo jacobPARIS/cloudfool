@@ -14,10 +14,11 @@ export default function Resume() {
       <PageHeader className="print:hidden" />
 
       <main className="px-4 mx-auto screen:max-w-2xl screen:-mb-48 dark:bg-gray-900 ">
-        <section className="screen:py-8 print:py-4">
+        <section className="screen:py-8 print:pb-4">
           <div>
             <h1 className="leading-11 screen:text-64 print:text-48 font-700">
-              Jacob Paris
+              Jacob<span className="print:hidden">&nbsp;</span>Paris
+              <span className="text-gray-300 screen:hidden">.com</span>
             </h1>
             <p>Canadian citizen, working remotely worldwide.</p>
           </div>
@@ -25,9 +26,9 @@ export default function Resume() {
 
         <SocialBanner className="screen:mb-12 print:mb-8" />
 
-        <h2 className="screen:mb-4 text-16 font-500"> Projects </h2>
+        <h2 className="screen:mb-4 text-16 font-500"> History </h2>
         <section
-          className="px-4 py-3 mx-auto screen:mb-8 screen:max-w-2xl screen:bg-white screen:rounded screen:shadow-sm"
+          className="px-4 mx-auto screen:py-3 screen:mb-8 screen:max-w-2xl screen:bg-white screen:rounded screen:shadow-sm"
           style={{transform: 'translate(0,0)'}}
         >
           <h3 className="leading-tight text-28 font-300">Cannect Invest</h3>
@@ -72,7 +73,7 @@ export default function Resume() {
         </section>
 
         <section
-          className="px-4 py-3 mx-auto screen:mb-8 screen:max-w-2xl screen:bg-white screen:rounded screen:shadow-sm"
+          className="px-4 mx-auto screen:py-3 screen:mb-8 screen:max-w-2xl screen:bg-white screen:rounded screen:shadow-sm"
           style={{transform: 'translate(0,0)'}}
         >
           <h3 className="leading-tight text-28 font-300">ToolStache</h3>
