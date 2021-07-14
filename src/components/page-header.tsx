@@ -1,11 +1,13 @@
-import Link from 'next/link'
 import React from 'react'
+
+import Link from 'next/link'
 
 export default function PageHeader({
   children = null,
+  ...props
 }: React.PropsWithChildren<any>) {
   return (
-    <div>
+    <div {...props}>
       <header className="flex justify-between ">
         <div className="px-4 pt-3 text-lg">
           <Link href="/">
