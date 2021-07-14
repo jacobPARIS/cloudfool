@@ -50,7 +50,7 @@ export default function SocialBanner(props: any) {
           </a>
         </li>
 
-        <li>
+        <li className="print:hidden">
           <a
             className="flex flex-row items-center"
             href="https://instagram.com/jacobmparis"
@@ -86,7 +86,7 @@ export default function SocialBanner(props: any) {
           </a>
         </li>
 
-        <li>
+        <li className="print:hidden">
           <a
             className="flex flex-row items-center"
             href="https://www.linkedin.com/in/jacobparis/"

@@ -24,14 +24,21 @@ export default function Resume() {
           </div>
         </section>
 
-        <SocialBanner className="screen:mb-12 print:mb-8" />
+        <SocialBanner className="screen:mb-12 print:mb-4" />
 
-        <h2 className="screen:mb-4 text-16 font-500"> History </h2>
+        <p className="mb-4">
+          Skilled in React, Typescript, GraphQL, Vue, and HTML/CSS with a focus
+          on accessibility
+        </p>
+
+        <h2 className="mb-4 print:hidden text-16 font-500"> History </h2>
         <section
-          className="px-4 mx-auto screen:py-3 screen:mb-8 screen:max-w-2xl screen:bg-white screen:rounded screen:shadow-sm"
+          className="mx-auto screen:px-4 screen:py-3 screen:mb-8 screen:max-w-2xl screen:bg-white screen:rounded screen:shadow-sm"
           style={{transform: 'translate(0,0)'}}
         >
-          <h3 className="leading-tight text-28 font-300">Cannect Invest</h3>
+          <h3 className="leading-tight screen:text-28 print:text-lg screen:font-light print:font-bold">
+            Cannect Invest
+          </h3>
           <div className="mb-4 text-14">
             <strong>Mortgage software developer</strong>, October 2019 to
             present
@@ -73,10 +80,12 @@ export default function Resume() {
         </section>
 
         <section
-          className="px-4 mx-auto screen:py-3 screen:mb-8 screen:max-w-2xl screen:bg-white screen:rounded screen:shadow-sm"
+          className="mx-auto screen:px-4 screen:py-3 screen:mb-8 screen:max-w-2xl screen:bg-white screen:rounded screen:shadow-sm"
           style={{transform: 'translate(0,0)'}}
         >
-          <h3 className="leading-tight text-28 font-300">ToolStache</h3>
+          <h3 className="leading-tight screen:text-28 print:text-lg screen:font-light print:font-bold">
+            ToolStache
+          </h3>
           <div className="mb-4 text-14">
             <strong>Founder</strong>, February 2017 to 2020
           </div>
@@ -99,10 +108,7 @@ export default function Resume() {
               Worked directly with the tool-crib, accounting, and dispatch teams
               to design + improve each flow.
             </li>
-            <li>
-              {' '}
-              Automated an email billing system to charge subcontractors.
-            </li>
+            <li>Automated an email billing system to charge subcontractors.</li>
           </ul>
         </section>
 
@@ -125,7 +131,7 @@ export default function Resume() {
               >
                 Read the interview
               </a>
-              , May 2021{' '}
+              , May 2021
             </div>
           </section>
 
