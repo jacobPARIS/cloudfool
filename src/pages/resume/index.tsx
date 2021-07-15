@@ -61,9 +61,8 @@ export default function Resume() {
           </p>
 
           <p className="mb-5 text-gray-500">
-            Each project had a lead, and
             <Link href="resume/cannect">
-              <a> I led many of them. </a>
+              <a> I led many projects at Cannect. </a>
             </Link>
             Some highlights:
           </p>
@@ -95,7 +94,7 @@ export default function Resume() {
             <Link href="toolstache">
               <a>ToolStache</a>
             </Link>{' '}
-            was a side project that found itself some customers.
+            was a side project that grew into a small business.
           </p>
 
           <p className="mb-5 text-gray-500">
@@ -114,7 +113,7 @@ export default function Resume() {
           </ul>
         </section>
 
-        <div className="print:hidden ">
+        <div className="print:hidden">
           <h2 className="screen:mb-4 text-16 font-500"> Other </h2>
 
           <section
