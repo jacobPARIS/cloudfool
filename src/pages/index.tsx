@@ -3,6 +3,7 @@ import React from 'react'
 import CardRow from 'components/card-row'
 import PageHeader from 'components/page-header'
 import SocialBanner from 'components/social-banner'
+import SocialBannerSmall from 'components/social-banner-small'
 import ThemeSwitcher from 'components/theme-switcher'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -58,89 +59,95 @@ export default function Home({greeting}) {
 
             <h1 className="leading-11 text-64 font-700">Jacob Paris</h1>
           </div>
-
           <p className="max-w-3xl mb-6 leading-snug tracking-tight text-28 font-300">
             I design systems and software to help companies save time and make
             money
           </p>
+          <SocialBannerSmall />
         </section>
 
         <section
-          className="px-12 py-12 bg-gray-900 bg-cover text-gray-50"
+          className="py-12 bg-gray-900 bg-cover text-gray-50 "
           style={{
             backgroundImage: 'url(/images/assets_2021-06-22-16-36-02.png)',
           }}
         >
-          <Link href="/toolstache">
-            <a className="text-white hover:text-yellow-500">
-              <h2 className="mb-4 text-4xl font-bold md:text-6xl">
-                ToolStache
-              </h2>
-            </a>
-          </Link>
-
-          <p className="mb-4 text-2xl md:text-4xl">
-            The easiest inventory management system ever made
-          </p>
-
-          <hr className="mb-4 opacity-20" />
-
-          <p className="mb-4 font-500">
+          <div className="px-4 mx-auto max-w-7xl ">
             <Link href="/toolstache">
-              <a className="text-yellow-500 hover:text-white">ToolStache</a>
-            </Link>{' '}
-            helps construction companies manage and track their assets to cut
-            down on theft, repurchasing, and missed bill-out opportunities.
-          </p>
+              <a className="text-white hover:text-yellow-500">
+                <h2 className="mb-4 text-4xl font-bold md:text-6xl">
+                  ToolStache
+                </h2>
+              </a>
+            </Link>
+
+            <p className="mb-4 text-2xl md:text-4xl">
+              The easiest inventory management system ever made
+            </p>
+
+            <hr className="mb-4 opacity-20" />
+
+            <p className="mb-4 font-500">
+              <Link href="/toolstache">
+                <a className="text-yellow-500 hover:text-white">ToolStache</a>
+              </Link>{' '}
+              helps construction companies manage and track their assets to cut
+              down on theft, repurchasing, and missed bill-out opportunities.
+            </p>
+          </div>
         </section>
 
-        <section className="px-12 py-12 ">
-          <Link href="/blog/html-for-beginners-01">
-            <a>
-              <h2 className="mb-4 text-4xl font-bold md:text-6xl">
-                HTML for Absolute Beginners
-              </h2>
-            </a>
-          </Link>
-
-          <p className="mb-4 text-2xl md:text-4xl">
-            An entry level guide to HTML fundamentals
-          </p>
-
-          <hr className="mb-4 opacity-20" />
-
-          <p className="mb-4 font-500">
-            In this{' '}
+        <section className="py-12 ">
+          <div className="px-4 mx-auto max-w-7xl">
             <Link href="/blog/html-for-beginners-01">
-              <a>7 part guide</a>
-            </Link>{' '}
-            you'll learn how HTML works while building a small site with images,
-            links, lists, and tables.
-          </p>
+              <a>
+                <h2 className="mb-4 text-4xl font-bold md:text-6xl">
+                  HTML for Absolute Beginners
+                </h2>
+              </a>
+            </Link>
+
+            <p className="mb-4 text-2xl md:text-4xl">
+              An entry level guide to HTML fundamentals
+            </p>
+
+            <hr className="mb-4 opacity-20" />
+
+            <p className="mb-4 font-500">
+              In this{' '}
+              <Link href="/blog/html-for-beginners-01">
+                <a>7 part guide</a>
+              </Link>{' '}
+              you'll learn how HTML works while building a small site with
+              images, links, lists, and tables.
+            </p>
+          </div>
         </section>
 
-        <section className="px-12 py-8 bg-gray-900 text-gray-50">
-          <h2 className="mb-4 text-4xl font-bold md:text-6xl">
-            VS Code Themes
-          </h2>
-          <p className="mb-4 font-500">
-            Here is a list of VS Code themes I've published, such as{' '}
-            <Link href="/themes#from-paris-with-love">
-              <a>From Paris with Love</a>
-            </Link>
-            , the{' '}
-            <Link href="/themes#stripe-docs-blue">
-              <a>Stripe Documentation Blue Theme</a>
-            </Link>
-            , and{' '}
-            <Link href="/themes#stripe-docs-gray">
-              <a>Stripe Docs Gray</a>
-            </Link>
-          </p>
+        <section className="py-8 bg-gray-900 text-gray-50">
+          <div className="px-4 mx-auto max-w-7xl">
+            <h2 className="mb-4 text-4xl font-bold md:text-6xl">
+              VS Code Themes
+            </h2>
+            <p className="mb-4 font-500">
+              Here is a list of VS Code themes I've published, such as{' '}
+              <Link href="/themes#from-paris-with-love">
+                <a>From Paris with Love</a>
+              </Link>
+              , the{' '}
+              <Link href="/themes#stripe-docs-blue">
+                <a>Stripe Documentation Blue Theme</a>
+              </Link>
+              , and{' '}
+              <Link href="/themes#stripe-docs-gray">
+                <a>Stripe Docs Gray</a>
+              </Link>
+            </p>
+          </div>
         </section>
 
-        <section className="px-4 mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 gap-4 lg:grid-cols-12 lg:gap-6">
+        <section className="py-4 mx-auto max-w-7xl">
+          <div className="grid grid-cols-1 gap-4 -mx-4 lg:grid-cols-12 lg:gap-6">
             {resources.map((resource) => (
               <CardRow resource={resource} key={resource.path} />
             ))}
