@@ -1,0 +1,76 @@
+---
+title: Using Prettier and ESLint in harmony
+description:
+tags: Prettier, VS Code
+---
+
+ESLint is for catching bugs.
+
+Prettier is for formatting code.
+
+Manually formatting your code tricks you into thinking you're improving the codebase while providing zero business value.
+
+When properly configured, ESLint will audit your code for potential bugs. Anything that doesn't match the way **Prettier** wants to format your code is also flagged as an error, and then triggers Prettier as part of the autofix step.
+
+## Installation
+
+You'll need to install these four modules.
+
+```
+npm i --save-dev /
+  eslint /
+  prettier /
+  eslint-config-prettier /
+  eslint-plugin-prettier
+```
+
+## Configuration
+
+```json numbered labeled filename[.eslintrc]
+{
+  "extends": ["plugin:prettier/recommended"]
+}
+```
+
+```json numbered labeled filename[.prettierrc]
+{
+  // These are optional, but you can configure your opinions here
+  "semi": false,
+  "arrowParens": "always",
+  "singleQuote": true,
+  "endOfLine": "auto",
+  "trailingComma": "all",
+  "bracketSpacing": true
+}
+```
+
+```json numbered labeled filename[.vscode/settings.json]
+{
+  "eslint.validate": ["javascript"],
+  "eslint.run": "onType"
+}
+```
+
+## Deployment
+
+Since ESLint flags formatting issues as errors, a CI process that checks the lint status can fail. That might seem like a feature, but in a team environment, a small code suggestion in a PR can trigger prettier to expect some code to drop down to the next line. That blocks deployment until it's resolved.
+
+To resolve this, I like to make a second eslint file called `.eslintrc.ci` that disables Prettier
+
+```json numbered labeled filename[.eslintrc.ci]
+{
+  "rules": {
+    "prettier/prettier": "off"
+  }
+}
+```
+
+Configure a script to load that config instead, and use that script in your CI workflow
+
+```json numbered labeled filename[package.json]
+{
+  "scripts": {
+    "lint:ci": "eslint -c .eslintrc.ci.js"
+  }
+}
+```
