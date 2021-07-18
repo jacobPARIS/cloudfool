@@ -77,7 +77,8 @@ html {
 }
 
 body {
-  background-color: #fff;
+  background-image: linear-gradient(to right, #fafafa, #f5f5fa);
+
   color: #373a3c;
   font-size: 1rem * math.div(17, 16);
   -webkit-font-smoothing: antialiased;

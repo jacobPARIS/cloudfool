@@ -4,10 +4,12 @@ import PageComponent from './page-component'
 import SideNote from './side-note'
 import TestTextInput from './test-text-input'
 import TestTextInputAsync from './test-text-input-async'
+import Tweet from './tweet'
 
 export default {
   DefaultLayout,
   SideNote,
+  Tweet,
   TestTextInput: (props: any) => (
     <PageComponent>
       <TestTextInput {...props} />
