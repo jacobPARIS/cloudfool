@@ -1,7 +1,7 @@
-export default function SocialBanner(props: any) {
+export default function SocialBannerSmall(props: any) {
   return (
     <div {...props}>
-      <ul className="flex flex-row screen:gap-8 print:gap-2 print:flex-col">
+      <ul className="flex flex-row flex-wrap screen:gap-8 print:gap-2 print:flex-col">
         <li>
           <a
             className="flex flex-row items-center"

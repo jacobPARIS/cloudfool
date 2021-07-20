@@ -147,7 +147,7 @@ export default function Home({greeting}) {
         </section>
 
         <section className="py-4 mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 gap-4 -mx-4 lg:grid-cols-12 lg:gap-6">
+          <div className="grid max-w-full grid-cols-1 gap-4 -mx-4 lg:grid-cols-12 lg:gap-6">
             {resources.map((resource) => (
               <CardRow resource={resource} key={resource.path} />
             ))}

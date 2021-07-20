@@ -1,5 +1,5 @@
 import PageHeader from 'components/page-header'
-import SocialBanner from 'components/social-banner-small'
+import SocialBannerSmall from 'components/social-banner-small'
 import Head from 'next/head'
 import Link from 'next/link'
 
@@ -26,7 +26,7 @@ export default function Resume() {
           </div>
         </section>
 
-        <SocialBanner className="screen:mb-8 print:mb-4" />
+        <SocialBannerSmall className="screen:mb-8 print:mb-4" />
 
         <p className="mb-4">
           Skilled in React, Typescript, GraphQL, Vue, and HTML/CSS with a focus
