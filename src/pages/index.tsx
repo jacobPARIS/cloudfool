@@ -60,8 +60,7 @@ export default function Home({greeting}) {
             <h1 className="leading-11 text-64 font-700">Jacob Paris</h1>
           </div>
           <p className="max-w-3xl mb-6 leading-snug tracking-tight text-28 font-300">
-            I design systems and software to help companies save time and make
-            money
+            I help companies save time and make money by improving the quality of their software
           </p>
           <SocialBannerSmall />
         </section>
