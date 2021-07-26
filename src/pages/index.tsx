@@ -60,7 +60,7 @@ export default function Home({greeting}) {
             alt="Professional headshot"
             title="From afar this macbook is often mistaken for a graduation cap, so I get all the prestige of a CS degree while only needing to learn that anything I put on my head is a hat."
           />
-          <div>
+          <div className="flex-grow" style={{flexBasis: '25rem'}}>
             <div className="mb-4">
               <span className="leading-snug text-28 font-300">{greeting}</span>
 
@@ -105,29 +105,31 @@ export default function Home({greeting}) {
           </div>
         </section>
 
-        <section className="py-12 ">
-          <div className="px-4 mx-auto max-w-7xl">
-            <Link href="/blog/html-for-beginners-01">
-              <a>
-                <h2 className="mb-4 text-4xl font-bold md:text-6xl">
-                  HTML for Absolute Beginners
-                </h2>
-              </a>
-            </Link>
-
-            <p className="mb-4 text-2xl md:text-4xl">
-              An entry level guide to HTML fundamentals
+        <section className="flex flex-wrap px-4 py-3 mx-auto sm:py-4 max-w-7xl">
+          <figure className="text-center">
+            <img
+              src="/images/index_2021-07-26-14-11-48.png"
+              className="rounded-lg shadow"
+            />
+            <figcaption>
+              Snowboarding in the Pirin mountains of Bulgaria, March 2021
+            </figcaption>
+          </figure>
+          <div className="flex-grow px-4 py-3" style={{flexBasis: '0px'}}>
+            <p className="mb-8 text-2xl md:text-4xl">
+              During the winter season you can find me on the slopes every
+              morning.
             </p>
 
-            <hr className="mb-4 opacity-20" />
+            <p className="mb-8 text-2xl md:text-4xl">
+              Working for North American companies from European timezones means
+              I can wake up slowly with time for coffee, food, errands, and
+              sports.
+            </p>
 
-            <p className="mb-4 font-500">
-              In this{' '}
-              <Link href="/blog/html-for-beginners-01">
-                <a>7 part guide</a>
-              </Link>{' '}
-              you'll learn how HTML works while building a small site with
-              images, links, lists, and tables.
+            <p className="mb-8 text-2xl md:text-4xl">
+              And then I'm focused and ready to settle into work from the early
+              afternoon straight on until the evening.
             </p>
           </div>
         </section>
@@ -154,31 +156,29 @@ export default function Home({greeting}) {
           </div>
         </section>
 
-        <section className="flex flex-wrap px-4 py-3 mx-auto sm:py-4 max-w-7xl">
-          <figure className="text-center">
-            <img
-              src="/images/index_2021-07-26-14-11-48.png"
-              className="rounded-lg shadow"
-            />
-            <figcaption>
-              Snowboarding in the Pirin mountains of Bulgaria, March 2021
-            </figcaption>
-          </figure>
-          <div className="flex-grow px-4 py-3" style={{flexBasis: '0px'}}>
-            <p className="mb-8 text-2xl md:text-4xl">
-              During the winter season you can find me on the slopes every
-              morning.
+        <section className="py-12 ">
+          <div className="px-4 mx-auto max-w-7xl">
+            <Link href="/blog/html-for-beginners-01">
+              <a>
+                <h2 className="mb-4 text-4xl font-bold md:text-6xl">
+                  HTML for Absolute Beginners
+                </h2>
+              </a>
+            </Link>
+
+            <p className="mb-4 text-2xl md:text-4xl">
+              An entry level guide to HTML fundamentals
             </p>
 
-            <p className="mb-8 text-2xl md:text-4xl">
-              Working for North American companies from European timezones means
-              I can wake up slowly with time for coffee, food, errands, and
-              sports.
-            </p>
+            <hr className="mb-4 opacity-20" />
 
-            <p className="mb-8 text-2xl md:text-4xl">
-              And then I'm focused and ready to settle into work from the early
-              afternoon straight on until the evening.
+            <p className="mb-4 font-500">
+              In this{' '}
+              <Link href="/blog/html-for-beginners-01">
+                <a>7 part guide</a>
+              </Link>{' '}
+              you'll learn how HTML works while building a small site with
+              images, links, lists, and tables.
             </p>
           </div>
         </section>
