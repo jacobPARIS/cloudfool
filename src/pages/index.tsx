@@ -53,16 +53,25 @@ export default function Home({greeting}) {
       </PageHeader>
 
       <main className="flex-grow">
-        <section className="px-4 py-8 mx-auto max-w-7xl px-42 sm:px-6">
-          <div className="mt-10 mb-4">
-            <span className="leading-snug text-28 font-300">{greeting}</span>
+        <section className="flex flex-wrap gap-8 px-4 py-8 mx-auto mt-10 max-w-7xl px-42 sm:px-6">
+          <img
+            src="images/jacob.png"
+            className="w-48 h-48 rounded-lg shadow"
+            alt="Professional headshot"
+            title="From afar this macbook is often mistaken for a graduation cap, so I get all the prestige of a CS degree while only needing to learn that anything I put on my head is a hat."
+          />
+          <div>
+            <div className="mb-4">
+              <span className="leading-snug text-28 font-300">{greeting}</span>
 
-            <h1 className="leading-11 text-64 font-700">Jacob Paris</h1>
+              <h1 className="leading-11 text-64 font-700">Jacob Paris</h1>
+            </div>
+            <p className="max-w-3xl mb-6 leading-snug tracking-tight text-28 font-300">
+              I help companies save time and make money by improving the quality
+              of their software
+            </p>
+            <SocialBannerSmall />
           </div>
-          <p className="max-w-3xl mb-6 leading-snug tracking-tight text-28 font-300">
-            I help companies save time and make money by improving the quality of their software
-          </p>
-          <SocialBannerSmall />
         </section>
 
         <section
@@ -145,8 +154,37 @@ export default function Home({greeting}) {
           </div>
         </section>
 
-        <section className="py-4 mx-auto max-w-7xl">
-          <div className="grid max-w-full grid-cols-1 gap-4 -mx-4 lg:grid-cols-12 lg:gap-6">
+        <section className="flex flex-wrap px-4 py-3 mx-auto sm:py-4 max-w-7xl">
+          <figure className="text-center">
+            <img
+              src="/images/index_2021-07-26-14-11-48.png"
+              className="rounded-lg shadow"
+            />
+            <figcaption>
+              Snowboarding in the Pirin mountains of Bulgaria, March 2021
+            </figcaption>
+          </figure>
+          <div className="flex-grow px-4 py-3" style={{flexBasis: '0px'}}>
+            <p className="mb-8 text-2xl md:text-4xl">
+              During the winter season you can find me on the slopes every
+              morning.
+            </p>
+
+            <p className="mb-8 text-2xl md:text-4xl">
+              Working for North American companies from European timezones means
+              I can wake up slowly with time for coffee, food, errands, and
+              sports.
+            </p>
+
+            <p className="mb-8 text-2xl md:text-4xl">
+              And then I'm focused and ready to settle into work from the early
+              afternoon straight on until the evening.
+            </p>
+          </div>
+        </section>
+
+        <section className="py-3 mx-auto sm:py-4 max-w-7xl">
+          <div className="grid max-w-full grid-cols-1 gap-4 px-4 sm:px-6 lg:grid-cols-12 lg:gap-6">
             {resources.map((resource) => (
               <CardRow resource={resource} key={resource.path} />
             ))}
