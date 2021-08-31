@@ -113,6 +113,26 @@ export default function Resume() {
           </ul>
         </section>
 
+        <section
+          className="mx-auto screen:px-4 screen:py-3 screen:mb-8 screen:max-w-2xl screen:bg-white screen:rounded screen:shadow-sm"
+          style={{transform: 'translate(0,0)'}}
+        >
+          <h3 className="leading-tight screen:text-3xl print:text-lg screen:font-light print:font-bold">
+            3Q Project Dashboard
+          </h3>
+          <div className="mb-4 text-14">
+            <strong>Founder</strong>, July 2021 to present
+          </div>
+          <p className="mb-5 text-gray-500">
+            <Link href="toolstache">
+              <a>3Q (three questions)</a>
+            </Link>{' '}
+            is a dashboard for standup meetings that uses JIRA APIs to show your
+            team and everything they're working on in one place, so everyone
+            knows what to discuss and nothing is overlooked.
+          </p>
+        </section>
+
         <div className="print:hidden">
           <h2 className="screen:mb-4 text-16 font-500"> Other </h2>
 

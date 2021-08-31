@@ -159,6 +159,33 @@ export default function Home({greeting}) {
         <section className="py-12 ">
           <div className="px-4 mx-auto max-w-7xl">
             <Link href="/blog/html-for-beginners-01">
+              <a className="text-gray-700 hover:text-gray-500">
+                <h2 className="mb-4 text-4xl font-bold md:text-6xl">
+                  3Q
+                  <span className="text-3xl font-normal">
+                    (three questions)
+                  </span>
+                </h2>
+              </a>
+            </Link>
+
+            <hr className="mb-4 opacity-20" />
+
+            <p className="mb-4 font-500">
+              A{' '}
+              <a href="https://www.threeq.app/" target="_blank" rel="noopener">
+                dashboard for standup meetings
+              </a>
+              , so you can your team and everything they're working on in one
+              place, and everyone knows what to discuss and nothing is
+              overlooked.
+            </p>
+          </div>
+        </section>
+
+        <section className="py-12 ">
+          <div className="px-4 mx-auto max-w-7xl">
+            <Link href="/blog/html-for-beginners-01">
               <a>
                 <h2 className="mb-4 text-4xl font-bold md:text-6xl">
                   HTML for Absolute Beginners
