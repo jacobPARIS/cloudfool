@@ -3,7 +3,13 @@ module.exports = {
   purge: {
     content: ['./src/**/*.js', './src/**/*.mdx', './src/**/*.tsx'],
     options: {
-      safelist: ['dark', 'bg-green-300', 'border-green-500', 'bg-gray-50'],
+      safelist: [
+        'dark',
+        'bg-green-300',
+        'border-green-500',
+        'bg-gray-50',
+        'form-input',
+      ],
     },
   },
   theme: {
@@ -29,6 +35,9 @@ module.exports = {
   },
   variants: {
     typography: ['dark'],
+    extend: {
+      translate: ['group-hover'],
+    },
   },
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')],
 }
