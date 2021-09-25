@@ -227,20 +227,34 @@ export default function Home({greeting, sources}) {
               </a>
             </a>
 
-            <p className="mb-4 text-2xl">
-              A{' '}
-              <a
-                href="https://www.threeq.app/"
-                className="text-red-300 hover:text-white hover:underline"
-                target="_blank"
-                rel="noopener"
-              >
-                dashboard for standup meetings
-              </a>
-              , so you can see your team and everything they're working on in
-              one place, and everyone knows what to discuss and nothing is
-              overlooked.
-            </p>
+            <div className="flex flex-wrap">
+              <p className="flex-1 mb-4 text-2xl" style={{flexBasis: '20ch'}}>
+                A{' '}
+                <a
+                  href="https://www.threeq.app/"
+                  className="text-red-300 hover:text-white hover:underline"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  dashboard for standup meetings
+                </a>
+                , so you can see your team and everything they're working on in
+                one place, and everyone knows what to discuss and nothing is
+                overlooked.
+              </p>
+
+              <div className="flex-1 px-8" style={{flexBasis: '30rem'}}>
+                <div className="overflow-hidden rounded">
+                  <a
+                    href="https://www.threeq.app/"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    <img src="/images/index_2021-09-25-22-45-24.png" />
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
 
           <svg
