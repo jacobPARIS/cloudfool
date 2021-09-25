@@ -2,8 +2,8 @@ import React from 'react'
 
 export default function Tweet({
   text,
-  imageUrl,
-  tweetUrl,
+  imageUrl = '',
+  tweetUrl = '',
   className = '',
   ...props
 }) {
