@@ -8,11 +8,13 @@ During local development, I store secrets in a `.env` file on my local disk. The
 
 But when I want to develop in a cloud environment like GitPod, there is no stateful disk to store the `.env` file. The easy solution would be to commit it into the repository, but that would risk exposing the secrets to anyone who ever has access in the future.
 
+This is especially important for docker-in-docker, docker compose, or other microservice environments where you may have _many_ `.env` files to orchestrate in GitPod.
+
 In April 2021, 1Password acquired SecretHub, which means there is now a way to securely store and download text files from a 1Password vault. This is perfect for `.env` files, as vaults can be shared between team members and now also to cloudy development environments.
 
 Follow the directions in the [1Password documentation](https://support.1password.com/connect-deploy-docker/#step-1-set-up-a-secrets-automation-workflow) to set up a secret automation workflow.
 
-![](/images/gitpod-env-1pass_2021-10-01-20-02-52.png)
+![1Password Secrets Automation flow, with one Access Token named GitPod](/images/gitpod-env-1pass_2021-10-01-20-02-52.png)
 
 Open the [GitPod variables dashboard](https://gitpod.io/variables) and create two environment variables using information from the 1Password secret automation workflow.
 
@@ -20,7 +22,7 @@ Save the access token as an environment variable named `PASSWORD_TOKEN`.
 
 Save the contents of the `1password-credentials.json` file as an environment variable named `PASSWORD_CREDENTIALS`. This allows us to securely pass in the credentials without committing them into the git repository.
 
-![](/images/gitpod-env-1pass_2021-10-01-20-00-38.png)
+![GitPod environment variables dashboard, contains 2 items. Item 1: name PASSWORD_CREDENTIALS with scope jacobparis. Item 2: name PASSWORD_TOKEN with scope jacobparis](/images/gitpod-env-1pass_2021-10-01-20-00-38.png)
 
 ## Loading the 1Password Connect API
 
@@ -97,10 +99,12 @@ curl http://0.0.0.0:8080/v1/vaults/VAULT_ID/items/ITEM_ID \
 The response is a JSON object with an array of `fields` containing one object with a value property. The value property contains the contents of the file, so amend the `jq` command to target that value specifically and then dump the value to a `.env` file
 
 ```sh
+
 curl http://0.0.0.0:8080/v1/vaults/VAULT_ID/items/ITEM_ID \
   -H "Authorization: Bearer $PASSWORD_TOKEN" \
   | jq -r .fields[0].value \
   > .env
+
 ```
 
 If you run that script, you should see a `.env` file with all the variables from your Shared Note appear.
