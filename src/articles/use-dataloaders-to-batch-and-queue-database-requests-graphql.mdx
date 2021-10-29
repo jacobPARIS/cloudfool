@@ -1,0 +1,548 @@
+---
+title: Use DataLoaders to batch and queue database requests with GraphQL
+hide: true
+---
+
+This is a common pattern in GraphQL. We have a table of posts, and a table of users, and we're trying to get a list of all posts along with the names of their authors.
+
+```graphql
+query {
+  posts {
+    id
+    title
+    author {
+      id
+      name
+    }
+  }
+}
+```
+
+```js numbered
+const resolvers = {
+  Query: {
+    posts() {
+      // Executes once per query
+      return sql.select('*').from('posts')
+    },
+  },
+
+  Post: {
+    author(post) {
+      // Executes once per post per query
+      return sql
+        .select('*')
+        .from('users')
+        .where('id', post.author_id)
+    },
+  },
+}
+```
+
+If there are 10 items in the `posts` table, the `users` resolvers will end up making 10 individual requests to the `users` table. As the number of posts grows, the number of requests will increase linearly. This is called the N+1 problem.
+
+```sql
+SELECT * FROM posts
+
+SELECT * FROM users WHERE id = 1
+SELECT * FROM users WHERE id = 1
+SELECT * FROM users WHERE id = 2
+SELECT * FROM users WHERE id = 2
+SELECT * FROM users WHERE id = 4
+SELECT * FROM users WHERE id = 4
+SELECT * FROM users WHERE id = 5
+SELECT * FROM users WHERE id = 6
+SELECT * FROM users WHERE id = 10
+SELECT * FROM users WHERE id = 18
+```
+
+## Caching database requests
+
+The first optimization we can make is to make sure we never query the same user more than once. We can do this by moving the database query behind a cache.
+
+```js numbered
+const cache = {
+  promises: {},
+  load(key) {
+    if (this.promises[key]) {
+      // We've queried this before, return the cached promise
+      return this.promises[key]
+    }
+
+    // Otherwise, run the query and cache the result
+    // Now only executes on unique users
+    this.promises[key] = sql
+      .select('*')
+      .from('users')
+      .where('id', key)
+
+    return this.promises[key]
+  },
+}
+```
+
+```js numbered {6}
+const resolvers = {
+  Query: { … },
+
+  Post: {
+    author(post) { // Executes once per post per query
+      return cache.load(post.author_id)
+    },
+  },
+}
+```
+
+That cuts this example from 10 requests to 7, but it still increases linearly with the number of posts.
+
+```sql
+SELECT * FROM posts
+
+SELECT * FROM users WHERE id = 1
+SELECT * FROM users WHERE id = 2
+SELECT * FROM users WHERE id = 4
+SELECT * FROM users WHERE id = 5
+SELECT * FROM users WHERE id = 6
+SELECT * FROM users WHERE id = 10
+SELECT * FROM users WHERE id = 18
+```
+
+## Batching database requests
+
+The next optimization is to pause for a moment to collect all the database operations into a single batch. Databases are really good at returning multiple documents at a time, so all we have to do is collect a list of IDs we're looking for, and then we can fetch them all at once.
+
+```js numbered {3,9}
+const cache = {
+  promises: {},
+  activeQuery: null,
+  async load(id) {
+    if (this.promises[key]) {
+      return this.promises[key]
+    } else {
+      // Just a placeholder until the batch is ready to go
+      this.promises[id] = new Promise()
+    }
+
+    return new Promise((resolve) => {
+      // Wait until the batch is ready
+      // Increase the timeout to make larger, slower batches
+      setTimeout(() => {
+        if (!this.activeQuery) {
+          // Query all IDs at once
+          const ids = Object.keys(this.promises)
+          this.activeQuery = sql
+            .select('*')
+            .from('users')
+            .whereIn('id', ids)
+        }
+
+        // Cache a promise that waits on the active query
+        // And selects the item with this id
+        this.promises[
+          id
+        ] = this.activeQuery.then((items) =>
+          items.find((item) => item.id === id),
+        )
+
+        resolve(this.promises[id])
+      }, 1)
+    })
+  },
+}
+```
+
+Now, the same graphql query as before only triggers two total database requests.
+
+```sql
+SELECT * FROM posts
+
+SELECT * FROM users WHERE id IN (1,2,4,5,6,10,18)
+```
+
+That's as good as we're going to get with this approach. In a perfect world, we could reduce this into a single request with a JOIN, but GraphQL treats resolvers independently. We would have to parse the whole request ourselves to guess which tables and fields might be needed by downstream resolvers, which isn't a scalable solution.
+
+This Data Loader approach is much more flexible and still keeps the number of requests down to a minimum.
+
+## Making this loader reusable
+
+We can improve this code by abstracting the database operation into a batch function and the timeout into a scheduling function, which could later be modified to behave differently for different queries.
+
+```js numbered {5,12,29,33}
+const cache = {
+  promises: {},
+  activeQuery: null,
+
+  batchFn(keys) {
+    return sql
+      .select('*')
+      .from('users')
+      .whereIn('id', keys)
+  },
+
+  schedulingFn() {
+    // Wait until the batch is ready
+    // Increase the timeout to make larger, slower batches
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve()
+      })
+    })
+  },
+
+  async load(id) {
+    if (this.promises[id]) {
+      return this.promises[id]
+    } else {
+      this.promises[id] = new Promise()
+    }
+
+    await this.schedulingFn()
+
+    if (!this.activeQuery) {
+      const ids = Object.keys(this.promises)
+      this.activeQuery = this.batchFn(ids)
+    }
+
+    // Cache a promise that waits on the active query
+    // And selects the item with this id
+    this.promises[
+      id
+    ] = this.activeQuery.then((items) =>
+      items.find((item) => item.id === id),
+    )
+
+    return this.promises[id]
+  },
+}
+```
+
+Lets refactor our code into a class so we can create a new instance of the loader for each use-case. We'll pass in the batch function as the first required argument, and the second argument can be an options object containing our scheduling function and any other configuration we may want in the future.
+
+```js numbered
+const userLoader = new DataLoader(keys => sql
+  .select('*')
+  .from('users')
+  .whereIn('id', keys)
+)
+
+const postLoader = new DataLoader(keys => sql
+  .select('*')
+  .from('posts')
+  .whereIn('id', keys),
+  {
+    schedulingFn() {
+      // Set minimum latency to 1 second
+      // but batch all requests together
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve()
+        }, 1000))
+      }
+    }
+  }
+)
+```
+
+```js numbered
+class DataLoader {
+  constructor(batchFn, options = {}}) {
+    this.batchFn = batchFn
+
+    if (options.schedulingFn) {
+      this.schedulingFn = options.schedulingFn
+    }
+
+    this.cachedPromises = {}
+    this.query = null
+  }
+
+  batchFn(keys) {
+    throw new Error('Not implemented')
+  }
+
+  schedulingFn() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve()
+      })
+    })
+  }
+
+  async load(id) {
+    if (this.cachedPromises[id]) {
+      return this.cachedPromises[id]
+    } else {
+      this.cachedPromises[id] = null
+    }
+
+    await this.schedulingFn()
+
+    if (!this.query) {
+      const keys = Object.keys(this.cachedPromises)
+
+      this.query = this.batchFn(keys)
+    }
+
+    this.promises[id] = this.query
+      .then((items) => items.find((item) => item.id === id))
+
+    return this.cachedPromises[id]
+  }
+}
+```
+
+## Create a new DataLoader on each request
+
+The DataLoader cache is very light and only meant to be used to batch keys on a single request. We could clear the cache after each request, but simultaneous requests could still end up using the same cache, which is an issue if one request comes from an authenticated user and caches data that another user shouldn't have access to.
+
+The safest option is to create a new DataLoader for each request. In Apollo, the easiest way to do this is to create the loaders in the context function, which is called for each request.
+
+```js numbered
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  async context({ req }) {
+    return {
+      userLoader: new DataLoader(keys => sql
+        .select('*')
+        .from('users')
+        .whereIn('id', keys)
+      ),
+      postLoader: new DataLoader(keys => sql
+        .select('*')
+        .from('posts')
+        .whereIn('id', keys),
+        {
+          schedulingFn() {
+            // Set minimum latency to 1 second
+            // but batch all requests together
+            return new Promise((resolve) => {
+              setTimeout(() => {
+                resolve()
+              }, 1000))
+            }
+          })
+        }
+      )
+    }
+  }
+})
+```
+
+Context is the third argument to each resolver, so we'll modify our resolvers use the loaders from context.
+
+```js numbered
+const resolvers = {
+  Query: {
+    posts() {
+      return sql.select('*').from('posts')
+    },
+
+    post(root, {id}, {postLoader}) {
+      return postLoader.load(id)
+    },
+  },
+
+  Post: {
+    author(post, args, {userLoader}) {
+      return userLoader.load(post.author_id)
+    },
+  },
+}
+```
+
+## Using the DataLoader package
+
+This API we've built so far is very similar to the one provided by the [dataloader package](https://github.com/graphql/dataloader). Since that package is much more robust and feature-rich than what we've built here, we'll use that instead.
+
+```sh
+npm install --save dataloader
+```
+
+Delete our DataLoader class to avoid a conflict and import their package instead
+
+```js
+const DataLoader = require('dataloader')
+```
+
+Since the API is the same, our code so far should work out of the box
+
+## Nested queries
+
+As we extend the schema, the Data Loaders scale with it. Each post gets an array of comments, and each comment will have its own author. The userLoader will continue to batch user requests with no extra work.
+
+```graphql
+query {
+  posts {
+    id
+    title
+    author {
+      id
+      name
+    }
+    comments {
+      id
+      text
+      author {
+        id
+        name
+      }
+    }
+  }
+}
+```
+
+```js numbered
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  async context({ req }) {
+    return {
+      userLoader,
+      postLoader: new DataLoader(keys => sql
+        .select('*')
+        .from('posts')
+        .whereIn('id', keys)
+      ),
+      commentsByPostIdLoader: new DataLoader(postId => sql
+        .select('*')
+        .from('comments')
+        .where('post_id', postId)
+      ),
+  }
+})
+```
+
+```js numbered
+const resolvers = {
+  Query: { … },
+
+  Post: {
+    author(post, args, { userLoader }) {
+      return userLoader.load(post.author_id)
+    },
+
+    comments(post, args, { commentsLoader }) {
+      return commentsByPostLoader.load(post.id)
+    },
+  },
+
+  Comment: {
+    author(comment, args, { userLoader }) {
+      return userLoader.load(comment.author_id)
+    },
+  },
+}
+```
+
+## Counting items
+
+If you are always going to call this at the same time as you request the full list of comments, then the easiest way is to get the length of the array in javascript.
+
+The DataLoader ensures we're only hitting the database once, so commentCount doesn't need to do another request to get the length.
+
+```js numbered
+const resolvers = {
+  Query: { … },
+
+  Post: {
+    author,
+
+    commentCount(post, args, { commentsByPostIdLoader }) {
+      return commentsByPostIdLoader
+        .load(post.id)
+        .then(comments => comments.length)
+    },
+
+    comments(post, args, { commentsByPostIdLoader }) {
+      return commentsByPostIdLoader.load(post.id)
+    },
+  },
+
+  Comment: { … },
+}
+```
+
+However, any time the commentCount is called on its own, the data loader will still pull the full list of comments into RAM even though all it needs is to count them. If this will happen often, you should consider giving it its own data loader.
+
+```js numbered
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  async context({ req }) {
+    return {
+      userLoader,
+      postLoader,
+      commentsByPostIdLoader,
+      commentsByPostIdCountLoader: new DataLoader(postId => sql('comments')
+        .where('post_id', postId)
+        .count("id")
+        .first()
+        .then(total => total.count)),
+  }
+})
+```
+
+```js numbered
+const resolvers = {
+  Query: { … },
+
+  Post: {
+    author,
+    comments,
+
+    commentCount(post, args, { commentsByPostIdLoader }) {
+      return commentsByPostIdCountLoader.load(post.id)
+    },
+  },
+
+  Comment: { … },
+}
+```
+
+## Paginated results
+
+You may not want to return every comment in a post, but rather only the first page of comments.
+
+Add a limit parameter to the field and pass it through the load method into the database query.
+
+```js numbered
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  async context({ req }) {
+    return {
+      userLoader,
+      postLoader,
+      commentsByPostIdCountLoader,
+      commentsByPostIdLoader: new DataLoader(({
+        postId,
+        limit = 0
+      }) => sql
+        .select('*')
+        .from('comments')
+        .where('post_id', postId)
+        .limit(limit)),
+  }
+})
+```
+
+```js numbered
+const resolvers = {
+  Query: { … },
+
+  Post: {
+    author,
+    commentCount,
+
+    comments(post, { limit }, { commentsByPostIdLoader }) {
+      return commentsByPostIdLoader.load({
+        postId: post.id,
+        limit
+      })
+    },
+  },
+
+  Comment: { … },
+}
+```
