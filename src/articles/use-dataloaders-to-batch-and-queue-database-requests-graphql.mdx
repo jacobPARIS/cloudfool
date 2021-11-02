@@ -119,7 +119,7 @@ SELECT * FROM users WHERE id = 18
 
 The next optimization is to pause for a moment to collect all the database operations into a single batch. Databases are really good at returning multiple documents at a time, so all we have to do is collect a list of IDs we're looking for, and then we can fetch them all at once.
 
-```js numbered {3,9}
+```js numbered {3,10}
 const cache = {
   promises: {},
   activeQuery: null,
