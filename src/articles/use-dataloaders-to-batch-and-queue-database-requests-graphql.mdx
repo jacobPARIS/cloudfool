@@ -123,12 +123,13 @@ The next optimization is to pause for a moment to collect all the database opera
 const cache = {
   promises: {},
   activeQuery: null,
-  async load(id) {
+  load(key) {
     if (this.promises[key]) {
+      // We've queried this before, return the cached promise
       return this.promises[key]
     } else {
       // Just a placeholder until the batch is ready to go
-      this.promises[id] = new Promise()
+      this.promises[key] = null
     }
 
     return new Promise((resolve) => {
@@ -138,6 +139,8 @@ const cache = {
         if (!this.activeQuery) {
           // Query all IDs at once
           const ids = Object.keys(this.promises)
+          console.log(`SELECT * from users WHERE id in (${ids.join(',')})`)
+
           this.activeQuery = sql
             .select('*')
             .from('users')
@@ -145,14 +148,14 @@ const cache = {
         }
 
         // Cache a promise that waits on the active query
-        // And selects the item with this id
         this.promises[
-          id
-        ] = this.activeQuery.then((items) =>
-          items.find((item) => item.id === id),
-        )
+          key
+        ] = this.activeQuery.then((items) => {
+          // And selects the item with this id
+          return items.find((item) => item.id === Number(key))
+        })
 
-        resolve(this.promises[id])
+        resolve(this.promises[key])
       }, 1)
     })
   },
