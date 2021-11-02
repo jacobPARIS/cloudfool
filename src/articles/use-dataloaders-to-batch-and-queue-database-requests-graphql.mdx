@@ -80,6 +80,9 @@ const cache = {
       .select('*')
       .from('users')
       .where('id', key)
+      .first()
+
+    console.log('SELECT * from users WHERE id =', key)
 
     return this.promises[key]
   },
