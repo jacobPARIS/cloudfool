@@ -23,6 +23,8 @@ const resolvers = {
   Query: {
     posts() {
       // Executes once per query
+      console.log('SELECT * from posts')
+
       return sql.select('*').from('posts')
     },
   },
@@ -30,10 +32,13 @@ const resolvers = {
   Post: {
     author(post) {
       // Executes once per post per query
+      console.log('SELECT * from users WHERE id =', post.author_id)
+
       return sql
         .select('*')
         .from('users')
         .where('id', post.author_id)
+        .first()
     },
   },
 }
