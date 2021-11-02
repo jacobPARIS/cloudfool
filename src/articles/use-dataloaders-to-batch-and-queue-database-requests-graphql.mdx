@@ -261,22 +261,24 @@ const postLoader = new DataLoader(keys => sql
 
 ```js numbered
 class DataLoader {
-  constructor(batchFn, options = {}}) {
+  constructor(batchFn, options = {}) {
     this.batchFn = batchFn
 
-    if (options.schedulingFn) {
+    if(options.schedulingFn) {
       this.schedulingFn = options.schedulingFn
     }
 
-    this.cachedPromises = {}
-    this.query = null
+    this.promises = {}
+    this.activeQuery = null
   }
 
-  batchFn(keys) {
+  batchFn() {
     throw new Error('Not implemented')
   }
 
   schedulingFn() {
+    // Wait until the batch is ready
+    // Increase the timeout to make larger, slower batches
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve()
@@ -284,25 +286,34 @@ class DataLoader {
     })
   }
 
-  async load(id) {
-    if (this.cachedPromises[id]) {
-      return this.cachedPromises[id]
+  async load(key) {
+    if (this.promises[key]) {
+      // We've queried this before, return the cached promise
+      return this.promises[key]
     } else {
-      this.cachedPromises[id] = null
+      // Just a placeholder until the batch is ready to go
+      this.promises[key] = null
     }
 
     await this.schedulingFn()
 
-    if (!this.query) {
-      const keys = Object.keys(this.cachedPromises)
+    if (!this.activeQuery) {
+      // Query all IDs at once
+      const ids = Object.keys(this.promises)
+      console.log(`SELECT * from users WHERE id in (${ids.join(',')})`)
 
-      this.query = this.batchFn(keys)
+      this.activeQuery = this.batchFn(ids)
     }
 
-    this.promises[id] = this.query
-      .then((items) => items.find((item) => item.id === id))
+    // Cache a promise that waits on the active query
+    this.promises[
+      key
+    ] = this.activeQuery.then((items) => {
+      // And selects the item with this id
+      return items.find((item) => item.id === Number(key))
+    })
 
-    return this.cachedPromises[id]
+    return this.promises[key]
   }
 }
 ```
