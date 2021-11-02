@@ -200,29 +200,34 @@ const cache = {
     })
   },
 
-  async load(id) {
-    if (this.promises[id]) {
-      return this.promises[id]
+  async load(key) {
+    if (this.promises[key]) {
+      // We've queried this before, return the cached promise
+      return this.promises[key]
     } else {
-      this.promises[id] = new Promise()
+      // Just a placeholder until the batch is ready to go
+      this.promises[key] = null
     }
 
     await this.schedulingFn()
 
     if (!this.activeQuery) {
+      // Query all IDs at once
       const ids = Object.keys(this.promises)
+      console.log(`SELECT * from users WHERE id in (${ids.join(',')})`)
+
       this.activeQuery = this.batchFn(ids)
     }
 
     // Cache a promise that waits on the active query
-    // And selects the item with this id
     this.promises[
-      id
-    ] = this.activeQuery.then((items) =>
-      items.find((item) => item.id === id),
-    )
+      key
+    ] = this.activeQuery.then((items) => {
+      // And selects the item with this id
+      return items.find((item) => item.id === Number(key))
+    })
 
-    return this.promises[id]
+    return this.promises[key]
   },
 }
 ```
