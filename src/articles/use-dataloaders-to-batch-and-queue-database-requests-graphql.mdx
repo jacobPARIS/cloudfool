@@ -449,8 +449,8 @@ const resolvers = {
       return userLoader.load(post.author_id)
     },
 
-    comments(post, args, { commentsLoader }) {
-      return commentsByPostLoader.load(post.id)
+    comments(post, args, { commentsByPostIdLoader }) {
+      return commentsByPostIdLoader.load(post.id)
     },
   },
 
