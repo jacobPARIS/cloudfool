@@ -435,6 +435,7 @@ const server = new ApolloServer({
         .select('*')
         .from('comments')
         .where('post_id', postId)
+        .then(comments => [comments])
       ),
   }
 })
