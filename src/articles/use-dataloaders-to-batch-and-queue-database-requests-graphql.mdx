@@ -519,7 +519,7 @@ const resolvers = {
     author,
     comments,
 
-    commentCount(post, args, { commentsByPostIdLoader }) {
+    commentCount(post, args, { commentsByPostIdCountLoader }) {
       return commentsByPostIdCountLoader.load(post.id)
     },
   },
