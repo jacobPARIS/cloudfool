@@ -1,0 +1,45 @@
+---
+title: Bash Cheatsheet
+description: Here is a bunch of different things you can do with bash
+tags: Linux, Bash, Cheatsheet
+---
+
+Run *a* then *b*
+```sh
+a; b
+```
+
+Run *a*, and if it succeeds run *b*
+```sh
+a && b
+```
+
+Run *a* if a directory exists
+```sh
+[[ -d node_modules ]] && a
+```
+
+Run *npm i* if a *node_modules* doesn't exist
+```sh
+[[ ! -d node_modules ]] && npm i
+```
+
+Run *npm start* in a directory *src*
+```sh
+(cd src; npm start)
+```
+
+Output text
+```sh
+echo "Text"
+```
+
+Output text to a file
+```sh
+echo "Text" > file.txt
+```
+
+Append text to a file
+```sh
+echo "Text" >> file.txt
+```
