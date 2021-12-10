@@ -1,4 +1,5 @@
 import DefaultLayout from '../../layouts'
+import AnimationMap from './animation-map'
 import CodeBlock from './code-block'
 import PageComponent from './page-component'
 import SideNote from './side-note'
@@ -8,6 +9,7 @@ import Tweet from './tweet'
 
 export default {
   DefaultLayout,
+  AnimationMap,
   SideNote,
   Tweet,
   TestTextInput: (props: any) => (

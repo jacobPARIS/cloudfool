@@ -1,20 +1,22 @@
-import React from 'react'
-import {AppProps} from 'next/app'
 import '../styles/globals.scss'
-import {DefaultSeo} from 'next-seo'
-import SEO from '../../next-seo.json'
-import {ThemeProvider} from 'next-themes'
+
+import React from 'react'
+
 import mdxComponents from 'components/mdx'
+import {DefaultSeo} from 'next-seo'
+import {AppProps} from 'next/app'
+
 import {MDXProvider} from '@mdx-js/react'
+
+import SEO from '../../next-seo.json'
+
 function MyApp({Component, pageProps}: AppProps) {
   return (
     <>
       <DefaultSeo {...SEO} />
-      <ThemeProvider forcedTheme={Component['theme'] || null}>
-        <MDXProvider components={mdxComponents}>
-          <Component {...pageProps} />
-        </MDXProvider>
-      </ThemeProvider>
+      <MDXProvider components={mdxComponents}>
+        <Component {...pageProps} />
+      </MDXProvider>
     </>
   )
 }

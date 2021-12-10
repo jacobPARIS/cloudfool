@@ -2,15 +2,12 @@ import * as React from 'react'
 
 import mdxComponents from 'components/mdx'
 import PageHeader from 'components/page-header'
-import ThemeSwitcher from 'components/theme-switcher'
 import fs from 'fs'
 import matter from 'gray-matter'
 // @ts-ignore
 import {MDXRemote} from 'next-mdx-remote'
 import {serialize} from 'next-mdx-remote/serialize'
 import {NextSeo} from 'next-seo'
-import Image from 'next/image'
-import Link from 'next/link'
 import {useRouter} from 'next/router'
 import path from 'path'
 import {QueryClient, QueryClientProvider, useQuery} from 'react-query'
@@ -141,15 +138,7 @@ export default function Blog({
         canonical={canonicalUrl}
       />
 
-      <ThemeSwitcher show={showTheme} />
-      <PageHeader>
-        <button
-          aria-pressed={showTheme}
-          onClick={() => setShowTheme((value) => !value)}
-        >
-          Theme
-        </button>
-      </PageHeader>
+      <PageHeader></PageHeader>
 
       <article className="px-5 mx-auto">
         <header>
@@ -207,42 +196,6 @@ export default function Blog({
       </article>
     </>
   )
-}
-
-function Author({name, image, path}) {
-  function Profile() {
-    return (
-      <>
-        {image && (
-          <Image
-            src={image.url}
-            width={48}
-            height={48}
-            alt={name}
-            className="rounded-full"
-          />
-        )}
-        <div className="leading-tighter">
-          <span className="text-xs uppercase">author</span>
-          <div className="font-semibold">{name}</div>
-        </div>
-      </>
-    )
-  }
-
-  return name ? (
-    path ? (
-      <Link href={path}>
-        <a className="inline-flex items-center space-x-2">
-          <Profile />
-        </a>
-      </Link>
-    ) : (
-      <div className="inline-flex items-center space-x-2">
-        <Profile />
-      </div>
-    )
-  ) : null
 }
 
 export async function getStaticProps(context) {
