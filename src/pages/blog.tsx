@@ -3,7 +3,6 @@ import React from 'react'
 import CardRow from 'components/card-row'
 import PageHeader from 'components/page-header'
 import Tag from 'components/tag'
-import ThemeSwitcher from 'components/theme-switcher'
 import fs from 'fs'
 import matter from 'gray-matter'
 import Head from 'next/head'
@@ -21,7 +20,6 @@ export default function Home({posts, tags}: any) {
     return post.tags.includes(queryTag)
   })
 
-  const [showTheme, setShowTheme] = React.useState(false)
   return (
     <div className="dark:bg-gray-800">
       <Head>
@@ -29,15 +27,7 @@ export default function Home({posts, tags}: any) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <ThemeSwitcher show={showTheme} />
-      <PageHeader>
-        <button
-          aria-pressed={showTheme}
-          onClick={() => setShowTheme((value) => !value)}
-        >
-          Theme
-        </button>
-      </PageHeader>
+      <PageHeader></PageHeader>
 
       <main className="px-4 -mb-24 dark:bg-gray-900">
         <section className="px-2 py-12 mx-auto">
