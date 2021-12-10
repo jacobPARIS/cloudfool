@@ -43,6 +43,7 @@ export default function Map({formattedToken}) {
       converter.convert(html).replace(/ {4,}/g, "{'$&'}").replace(/  /g, ' '),
     )
   }, [
+    // @ts-ignore
     windowContainer.current && windowContainer.current.innerHTML,
     HTMLtoJSX,
     process.browser,
