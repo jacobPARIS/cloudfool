@@ -1,5 +1,14 @@
 import DefaultLayout from '../../layouts'
+import AnimationFilterBoolean from './animation-filter-boolean'
+import AnimationFilterGte from './animation-filter-gte'
+import AnimationFilterLt from './animation-filter-lt'
+import AnimationFilterMod from './animation-filter-mod'
 import AnimationMap from './animation-map'
+import AnimationMapLowercase from './animation-map-lowercase'
+import AnimationMapReactList from './animation-map-react-list'
+import AnimationMapReactListIndex from './animation-map-react-list-index'
+import AnimationReduceGt from './animation-reduce-gt'
+import AnimationReduceSum from './animation-reduce-sum'
 import CodeBlock from './code-block'
 import PageComponent from './page-component'
 import SideNote from './side-note'
@@ -10,6 +19,15 @@ import Tweet from './tweet'
 export default {
   DefaultLayout,
   AnimationMap,
+  AnimationMapLowercase,
+  AnimationMapReactList,
+  AnimationMapReactListIndex,
+  AnimationReduceSum,
+  AnimationReduceGt,
+  AnimationFilterLt,
+  AnimationFilterGte,
+  AnimationFilterMod,
+  AnimationFilterBoolean,
   SideNote,
   Tweet,
   TestTextInput: (props: any) => (

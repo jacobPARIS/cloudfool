@@ -23,8 +23,7 @@ function Highlight() {
     />
   )
 }
-
-export default function Map() {
+export default function MapLowercase() {
   const {colors} = LoverDark
 
   const timer = useTimer(2000)
@@ -37,7 +36,7 @@ export default function Map() {
         <Window
           colors={colors}
           titleElement={() =>
-            animationTitle({step, length, title: 'Map a string to an object'})
+            animationTitle({step, length, title: 'Map a string to lowercase'})
           }
           footerElement={animationFooter}
         >
@@ -70,55 +69,61 @@ export default function Map() {
               {' '}
             </div>
 
-            <div style={{backgroundColor: ''}} className="whitespace-pre-wrap">
-              <span style={{color: '#EEFFFF'}}>names.</span>
-              <span style={{color: '#F8E38D'}}>map</span>
-              <span style={{color: '#EEFFFF'}}>(</span>
-              <span style={{color: '#F6B1D0'}}>function</span>
-              <span style={{color: '#EEFFFF'}}> (name) {'{'}</span>
-            </div>
-            <div style={{backgroundColor: ''}} className="whitespace-pre-wrap">
-              <span style={{color: '#EEFFFF'}}> </span>
-              <span style={{color: '#F8997C'}}> return</span>
-              <span style={{color: '#EEFFFF'}}> {'{'}</span>
-            </div>
-            <div style={{backgroundColor: ''}} className="whitespace-pre-wrap">
-              <span style={{color: '#EEFFFF'}}>{'   '}</span>
-              <span style={{color: '#AFE8FF'}}> name</span>
-              <span style={{color: '#EEFFFF'}}>: </span>
-
-              <span className="relative">
-                {step === 0 ? (
-                  <span
-                    style={{color: '#EEFFFF', top: '-1px'}}
-                    className="relative"
-                  >
-                    name <Highlight />
+            <div>
+              <div
+                style={{backgroundColor: ''}}
+                className="whitespace-pre-wrap"
+              >
+                <span style={{color: '#EEFFFF'}}>names.</span>
+                <span style={{color: '#F8E38D'}}>map</span>
+                <span style={{color: '#EEFFFF'}}>(</span>
+                <span style={{color: '#F6B1D0'}}>function</span>
+                <span style={{color: '#EEFFFF'}}> (name) {'{'}</span>
+              </div>
+              <div
+                style={{backgroundColor: ''}}
+                className="whitespace-pre-wrap"
+              >
+                <span style={{color: '#EEFFFF'}}> </span>
+                <span style={{color: '#F8997C'}}>return </span>
+                <span className="relative">
+                  <span className="">
+                    {step === 0 ? (
+                      <span style={{color: '#EEFFFF'}}>
+                        name.
+                        <Highlight />
+                      </span>
+                    ) : step === 1 ? (
+                      <span style={{color: '#9EE9A7'}}>
+                        'Alice'<span style={{color: '#EEFFFF'}}>.</span>
+                      </span>
+                    ) : step === 2 ? (
+                      <span style={{color: '#9EE9A7'}}>
+                        'Betty'<span style={{color: '#EEFFFF'}}>.</span>
+                      </span>
+                    ) : step === 3 ? (
+                      <span style={{color: '#9EE9A7'}}>
+                        'Carol'<span style={{color: '#EEFFFF'}}>.</span>
+                      </span>
+                    ) : (
+                      ''
+                    )}
                   </span>
-                ) : step === 1 ? (
-                  <span style={{color: '#9EE9A7'}}>'Alice'</span>
-                ) : step === 2 ? (
-                  <span style={{color: '#9EE9A7'}}>'Betty'</span>
-                ) : step === 3 ? (
-                  <span style={{color: '#9EE9A7'}}>'Carol'</span>
-                ) : (
-                  ''
-                )}
-              </span>
+                </span>
+                <span style={{color: '#F8E38D'}}>toLowerCase</span>
+                <span style={{color: '#EEFFFF'}}>()</span>
+              </div>
+              <div
+                style={{backgroundColor: ''}}
+                className="whitespace-pre-wrap"
+              >
+                <span style={{color: '#EEFFFF'}}>{'}'}</span>
+              </div>
+              <div
+                style={{backgroundColor: ''}}
+                className="whitespace-pre-wrap"
+              />
             </div>
-            <div style={{backgroundColor: ''}} className="whitespace-pre-wrap">
-              <span style={{color: '#EEFFFF'}}>
-                {'  '}
-                {'}'}
-              </span>
-            </div>
-            <div style={{backgroundColor: ''}} className="whitespace-pre-wrap">
-              <span style={{color: '#EEFFFF'}}>{'}'}</span>
-            </div>
-            <div
-              style={{backgroundColor: ''}}
-              className="whitespace-pre-wrap"
-            />
           </div>
 
           <div className="absolute bottom-0 right-0 p-4">
@@ -141,14 +146,8 @@ export default function Map() {
                   style={{backgroundColor: ''}}
                   className="whitespace-pre-wrap"
                 >
-                  <span style={{color: '#EEFFFF'}}>
-                    {'  '}
-                    {'{'}
-                  </span>
-                  <span style={{color: '#AFE8FF'}}> name</span>
-                  <span style={{color: '#EEFFFF'}}>: </span>
-                  <span style={{color: '#9EE9A7'}}>'Alice'</span>
-                  <span style={{color: '#EEFFFF'}}> {'}'},</span>
+                  <span style={{color: '#9EE9A7'}}>{'  '}'alice'</span>
+                  <span style={{color: '#EEFFFF'}}>, </span>
                 </div>
               ) : null}
               {step >= 2 ? (
@@ -156,14 +155,8 @@ export default function Map() {
                   style={{backgroundColor: ''}}
                   className="whitespace-pre-wrap"
                 >
-                  <span style={{color: '#EEFFFF'}}>
-                    {'  '}
-                    {'{'}
-                  </span>
-                  <span style={{color: '#AFE8FF'}}> name</span>
-                  <span style={{color: '#EEFFFF'}}>: </span>
-                  <span style={{color: '#9EE9A7'}}>'Betty'</span>
-                  <span style={{color: '#EEFFFF'}}> {'}'},</span>
+                  <span style={{color: '#9EE9A7'}}>{'  '}'betty'</span>
+                  <span style={{color: '#EEFFFF'}}>, </span>
                 </div>
               ) : null}
               {step >= 3 ? (
@@ -171,14 +164,8 @@ export default function Map() {
                   style={{backgroundColor: ''}}
                   className="whitespace-pre-wrap"
                 >
-                  <span style={{color: '#EEFFFF'}}>
-                    {'  '}
-                    {'{'}
-                  </span>
-                  <span style={{color: '#AFE8FF'}}> name</span>
-                  <span style={{color: '#EEFFFF'}}>: </span>
-                  <span style={{color: '#9EE9A7'}}>'Carol'</span>
-                  <span style={{color: '#EEFFFF'}}> {'}'},</span>
+                  <span style={{color: '#9EE9A7'}}>{'  '}'carol'</span>
+                  <span style={{color: '#EEFFFF'}}>, </span>
                 </div>
               ) : null}
               <div
