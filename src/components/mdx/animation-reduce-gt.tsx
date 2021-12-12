@@ -1,3 +1,5 @@
+import React from 'react'
+
 import {motion} from 'framer-motion'
 
 import LoverDark from '../../styles/lover-theme-dark.json'
@@ -16,7 +18,7 @@ function Highlight({value, layoutId = 'outline'}) {
   return (
     <motion.div
       layoutId={layoutId}
-      className="absolute inset-0 px-2 py-1 -mx-2 -my-1 text-center bg-blue-500 rounded"
+      className="absolute inset-0 flex items-center justify-center px-2 py-1 -mx-2 -my-1 text-center bg-blue-500 rounded"
       // style={{zIndex: -1}}
       initial={false}
       transition={spring}
@@ -26,14 +28,35 @@ function Highlight({value, layoutId = 'outline'}) {
   )
 }
 
+const generateNumbers = () =>
+  Array(6)
+    .fill(undefined)
+    .map(() => Math.floor(Math.random() * 20))
+
 export default function AnimationReduceSum() {
   const {colors} = LoverDark
+  const [numbers, setNumbers] = React.useState(generateNumbers)
 
+  /** Number of steps after the animation completes before it restarts */
   const RELEASE_TIME = 5
+  /** Number of frames between steps */
+  const FRAMES = 4
   const timer = useTimer(400)
-  const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-  const length = numbers.length * 3
+  // const numbers = [1, 2, 3, 7, 4, 5, 6, 8, 9]
+  const length = numbers.length * FRAMES
   const step = timer % (length + RELEASE_TIME)
+
+  React.useEffect(() => {
+    if (step === 0) {
+      setNumbers(generateNumbers)
+    }
+  }, [step])
+
+  function keyframeAt(frame) {
+    return Math.floor((step + frame) / FRAMES)
+  }
+  const frame = step % FRAMES
+  const keyframe = keyframeAt(0)
 
   return (
     <div className="flex place-items-center">
@@ -42,9 +65,9 @@ export default function AnimationReduceSum() {
           colors={colors}
           titleElement={() =>
             animationTitle({
-              step: Math.floor(step / 3),
-              length: Math.floor(length / 3) + 1,
-              title: 'Sum an array with Reduce',
+              step: keyframeAt(0),
+              length: Math.floor(length / FRAMES) + 1,
+              title: 'Find the greatest value with reduce',
             })
           }
           footerElement={animationFooter}
@@ -67,10 +90,10 @@ export default function AnimationReduceSum() {
                       className="relative "
                     >
                       {number}
-                      {step === i * 3 ? (
+                      {step === i * FRAMES ? (
                         <Highlight
                           value={number}
-                          layoutId={String(Math.floor((step + 0) / 3))}
+                          layoutId={String(keyframeAt(0))}
                         />
                       ) : null}
                     </span>
@@ -92,7 +115,7 @@ export default function AnimationReduceSum() {
                 <span style={{color: '#EEFFFF'}}>numbers.</span>
                 <span style={{color: '#F8E38D'}}>reduce</span>
                 <span style={{color: '#EEFFFF'}}>(</span>
-                <span style={{color: '#EEFFFF'}}>(sum, number)</span>
+                <span style={{color: '#EEFFFF'}}>(max, number)</span>
                 <span style={{color: 'rgb(246, 177, 208)'}}> ={'>'} </span>
                 <span style={{color: '#EEFFFF'}}>{'{'}</span>
               </div>
@@ -106,7 +129,7 @@ export default function AnimationReduceSum() {
                   <span className="">
                     {step <= 1 || step > length ? (
                       <span style={{color: '#EEFFFF'}}>
-                        sum
+                        max
                         {step !== 0 && step <= length ? (
                           <Highlight layoutId="abcdefg" value="0" />
                         ) : null}
@@ -114,39 +137,81 @@ export default function AnimationReduceSum() {
                     ) : (
                       <span style={{color: 'rgb(246, 177, 208)'}}>
                         {numbers
-                          .slice(0, Math.floor((step + 1) / 3))
-                          .reduce((sum, number) => sum + number, 0)}
-
-                        {step % 3 === 2 ? (
+                          .slice(0, keyframeAt(0))
+                          .reduce((max, number) => Math.max(max, number), 0)}
+                        {frame === 3 ? (
                           <Highlight
-                            layoutId={String(Math.floor((step + 0) / 3))}
+                            layoutId={String(keyframeAt(0))}
                             value={numbers
-                              .slice(0, Math.floor(step / 3) + 1)
-                              .reduce((sum, number) => sum + number, 0)}
+                              .slice(0, keyframeAt(2))
+                              .reduce(
+                                (max, number) => Math.max(max, number),
+                                0,
+                              )}
                           />
                         ) : null}
                       </span>
                     )}
                   </span>
                 </span>
-                <span style={{color: '#F8997C'}}> + </span>
+                <span style={{color: '#F8997C'}}> &gt; </span>
                 <span className="relative">
                   <span className="">
                     {step === 0 || step > length ? (
                       <span style={{color: '#EEFFFF'}}>number</span>
                     ) : (
                       <span style={{color: 'rgb(246, 177, 208)'}}>
-                        {numbers[Math.floor((step + 1) / 3) - 1] || 0}
-                        {step % 3 === 0 || step > length ? null : (
+                        {numbers[keyframeAt(2) - 1] || 0}
+                        {frame === 0 || step > length ? null : (
                           <Highlight
-                            layoutId={String(Math.floor((step + 0) / 3))}
-                            value={numbers[Math.floor((step + 1) / 3)]}
+                            layoutId={String(keyframeAt(0))}
+                            value={numbers[Math.floor((step + 1) / FRAMES)]}
                           />
                         )}
                       </span>
                     )}
                   </span>
                 </span>
+                <div
+                  style={{backgroundColor: ''}}
+                  className="whitespace-pre-wrap"
+                >
+                  <span style={{color: '#F8997C'}}>{'    '}? </span>
+                  <span style={{color: '#EEFFFF'}} className="relative">
+                    max
+                    {frame === 2 &&
+                    numbers
+                      .slice(0, keyframeAt(0))
+                      .reduce((max, number) => Math.max(max, number), 0) >=
+                      numbers[keyframeAt(2) - 1] ? (
+                      <Highlight
+                        layoutId={String(keyframeAt(0))}
+                        value={numbers
+                          .slice(0, keyframeAt(0))
+                          .reduce((max, number) => Math.max(max, number), 0)}
+                      />
+                    ) : null}
+                  </span>
+                </div>
+                <div
+                  style={{backgroundColor: ''}}
+                  className="whitespace-pre-wrap"
+                >
+                  <span style={{color: '#F8997C'}}>{'    '}: </span>
+                  <span style={{color: '#EEFFFF'}} className="relative">
+                    number
+                    {frame === 2 &&
+                    numbers
+                      .slice(0, keyframeAt(0))
+                      .reduce((max, number) => Math.max(max, number), 0) <
+                      numbers[keyframeAt(2) - 1] ? (
+                      <Highlight
+                        layoutId={String(keyframeAt(0))}
+                        value={numbers[keyframeAt(2) - 1] || 0}
+                      />
+                    ) : null}
+                  </span>
+                </div>
               </div>
               <div
                 style={{backgroundColor: ''}}
@@ -185,7 +250,7 @@ export default function AnimationReduceSum() {
                 >
                   <span style={{color: '#F8997C'}}>return </span>
                   <span style={{color: 'rgb(246, 177, 208)'}}>
-                    {numbers.reduce((sum, number) => sum + number, 0)}
+                    {numbers.reduce((max, number) => Math.max(max, number, 0))}
                   </span>
                 </div>
                 <div
