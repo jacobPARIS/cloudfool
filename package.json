@@ -21,7 +21,7 @@
     "next-mdx-remote": "^3.0.2",
     "next-seo": "^4.17.0",
     "next-sitemap": "^1.4.5",
-    "react": "17.0.1",
+    "react": "^17.0.2",
     "react-dom": "^17.0.1",
     "react-dom-core": "^0.1.2",
     "react-flip-toolkit": "^7.0.13",
