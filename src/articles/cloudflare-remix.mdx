@@ -1,0 +1,355 @@
+---
+title: Cloudflare in Remix
+tags: Remix
+---
+
+[Wrangler](https://github.com/cloudflare/wrangler) is the CLI for working with Cloudflare Workers.
+
+`wrangler@pages` is a special alpha version of wrangler co-designed by the CloudFlare and the Remix teams,
+
+The hard part about Cloudflare is that it runs in a service-worker environment — that is, everything is ESM and not Node
+
+## Opening browser
+
+Gitpod workspaces (and presumably some other environments) do not support `xdg-open` to open the browser window. If the dev server tries to open the browser, it will throw an error and fail.
+
+Miniflare does not open the browser by default. You have to opt-in by passing the `--open` flag, so you can just avoid doing that and then there's no issue.
+
+Wrangler **does** open the browser, and you can only opt out by setting an environment variable `BROWSER=none`
+
+## Pages vs Workers.
+
+Cloudflare workers are serverless functions running ESM, like AWS Lambda but V8 instead of Node.js
+
+Workers Sites is a platform that combines static site hosting with Cloudflare workers as a backend
+
+Cloudflare Pages will be the successor to Cloudflare Workers Sites and aims to be a vercel/netlify competitor. Pages Functions will provide the dynamic parts that you could previously do with Workers Sites, on Pages
+
+Matters with workers, but not with pages:
+
+- wrangler.toml
+- env.\_\_STATIC_CONTENT
+- workers.js
+- ASSET_MANIFEST
+- ASSET_NAMESPACE
+
+Matters with pages, but not with workers:
+
+- functions/[[path]].js
+- \_worker.js
+
+## Workers: New format
+
+The old worker format involved event listeners
+
+```js
+import {createEventHandler} from '@remix-run/cloudflare-workers'
+import * as build from '../build/index.js'
+
+addEventListener(
+  'fetch',
+  createEventHandler({build}),
+)
+```
+
+The new one is an ES module
+
+```js
+export default {
+  async fetch(request, environment, context) {
+    return new Response('I’m a module!')
+  },
+  async scheduled(
+    controller,
+    environment,
+    context,
+  ) {
+    // await doATask();
+  },
+}
+```
+
+https://blog.cloudflare.com/workers-javascript-modules/
+
+## Workers: Environment variables
+
+Environment variables are globals, not stored under process.env. You can polyfill this by creating a new global for the process environment.
+
+```ts
+global process = {
+  env: global
+}
+```
+
+The current hosted environment is no longer `process.env.NODE_ENV`, as we aren't in a node environment
+
+Instead, use the global `ENVIRONMENT` which is set automatically by CloudFlare and its tooling.
+
+```js
+if (ENVIRONMENT === 'production') {
+  // production
+} else if (ENVIRONMENT === 'staging') {
+  // staging
+} else if (ENVIRONMENT === 'dev') {
+  // dev
+} else {
+  throw new Error(
+    'You are running an ENVIRONMENT that CloudFlare does not support.',
+  )
+}
+```
+
+## Pages: Environment variables
+
+The code does not know what environment it will be run until request time. It could be on this server, or that server, anywhere in the world.
+
+The only way to access environment variables in Pages is through the Context which is fed to Remix's loaders
+
+## The remix route
+
+The functional part of remix is just a request handler.
+
+We create a Cloudflare Worker that operates on a wildcard, so any request to your server hits the worker.
+
+```yml
+app
+build
+functions
+[[path]].ts
+node_modules
+```
+
+The parametric route `[[path]]` is generic enough to capture all requests, the request path is given as a parameter. Magic!
+
+## \_worker.js
+
+If there is a `_worker.js` file in your output directory (`public`) then Cloudflare Pages will use that instead of the `functions` directory
+
+One downside is that you can only have a single one, instead of multiple, but the Remix integration works by only having a single page function anyway
+
+If you want to customize the esbuild config, you must use this workflow. You can write a custom build script and compile the worker code to `public/_worker.js`.
+
+```yml
+app
+build
+public
+_worker.js
+_worker.map.js
+build
+index.js
+node_modules
+```
+
+## KV
+
+https://gist.github.com/cryptoskillz/98b8e7090b7cc8d51531bb9dcfe7654a
+
+## Durable Objects
+
+Currently, the only way to use Durable Objects with Pages functions is by configuring a binding to an existing Worker's Durable Object namespace. Since it just connects to that namespace and doesn't actually reimplement it, they'll share data.
+
+They're looking at ways to automatically deploy Durable Objects exclusively on your Pages project, but don't have worked out yet.
+
+https://developers.cloudflare.com/workers/learning/using-durable-objects#uploading-a-durable-object-worker
+
+To launch a Durable Object with new wrangler, the script requires the --do flag
+
+```sh
+--do COUNTER=Counter@path/to/root
+```
+
+The path should provide the directory where wrangler.toml is declared. If this is the project root, use this instead
+
+```sh
+--do COUNTER=Counter@
+```
+
+## Error: Cannot read properties of undefined (reading '1')
+
+That error was thrown by `wrangler/pages` which doesn't support publishing yet.
+
+```sh
+npm remove wrangler/pages
+npm install @cloudflare/wrangler
+```
+
+Publish with the standard wrangler v1 package, then switch back if needed.
+
+They both use the same `wrangler` cli tool so they'll fight if both are installed
+
+## Error: Cannot apply new-class migration to class that is already depended on by existing Durable Objects
+
+Removing the [[migrations]] block from the wrangler.toml fixed this, but I don't think that's the right solution
+
+### Patch broken packages
+
+This is optional, but the odds are good that you're eventually going to run into a bug in someone else's code that requires a patch.
+
+I recommend this as part of a postinstall script
+
+```sh
+npx patch-package
+```
+
+### Setup Remix
+
+Remix has a different setup script for each environment it deploys to, but this has to be done after installing or updating remix.
+
+I recommend this as part of a postinstall script
+
+```sh
+remix setup cloudflare-pages
+```
+
+### Setup Prisma
+
+It's time to generate the Prisma client.
+
+The prisma client is created based on your configuration and your schema. The setting plays a huge part in generating the client.
+
+Prisma advertises the Data Proxy as a solution to allow serverless environments to communicate with conventional databases, providing a proxy that optimizes the connection strategy.
+
+You may think that you don't need to worry about the data proxy if you're using Prisma with a serverless database, but that's not the case.
+
+If you don't set the `PRISMA_CLIENT_ENGINE_TYPE` to dataproxy, Prisma will generate a client that is entirely incompatible with Cloudflare Workers.
+
+```sh
+PRISMA_CLIENT_ENGINE_TYPE=dataproxy prisma generate
+```
+
+npm run tailwind:build
+
+remix build
+
+npm run build:server
+
+BROWSER=none npx wrangler pages dev ./public --do SESSION_STORAGE=SessionStorageDurableObject
+
+## internal error on deploy
+
+```
+Failed: an internal error occurred
+```
+
+This cryptic error doesn't provide very much information as to why it may occur, but the most common reason is that your public build directory is misconfigured.
+
+Cloudflare has built your project successfully (or you would have gotten an error sooner) but when trying to serve the built files it fails to find them.
+
+## Error: async_hooks, \_http_common
+
+```
+Could not resolve "async_hooks" (use "platform: 'node'" when building for node)
+Could not resolve "_http_common" (use "platform: 'node'" when building for node)
+```
+
+These errors occur when importing a Prisma client that was not created with the environment variable `PRISMA_CLIENT_ENGINE_TYPE=dataproxy` set properly
+
+See [#setup-prisma](Setup Prisma) for more information
+
+## Error: https, zlib, fs
+
+```
+Could not resolve "https" (use "platform: 'node'" when building for node)
+Could not resolve "zlib" (use "platform: 'node'" when building for node)
+Could not resolve "fs" (use "platform: 'node'" when building for node)
+```
+
+These errors occur because Prisma expects to be running in a node environment with certain low-level packages available.
+
+```js
+import NodeModulesPolyfill from "@esbuild-plugins/node-modules-polyfill"
+const { NodeModulesPolyfillPlugin } = NodeModulesPolyfill
+
+esbuild.build({
+  …
+  plugins: [
+        NodeModulesPolyfillPlugin(),
+        …
+  ],
+})
+```
+
+## Error: Prisma Client cannot run in the browser
+
+The Prisma Client contains code meant to run on the server, but the heuristic it uses to determine if it's running on the server involves reading if it's in a Node environment.
+
+Like many of the issues we face with Cloudflare, this one is also rooted in the fact we're using a non-node javascript server.
+
+The solution is to resolve the path to the prisma client from a Node environment, so that we get the right client (and not the browser honeypot that throws errors at us), and then alias all requests to specifically that path.
+
+Resolving the path with `require.resolve(path)` would work out of the box if we were in an environment that supported Node's module format, CommonJS. But we're not, so we may get any number of errors like this:
+
+```
+require is not defined
+cannot read property resolve of undefined
+require.resolve is not a function
+```
+
+We can fix this by manually importing the require function from the builtin node libraries it comes from.
+
+```js
+import alias from "esbuild-plugin-alias"
+
+import NodeModule from "module"
+const { createRequire } = NodeModule
+
+const require = createRequire(import.meta.url)
+
+esbuild.build({
+  …
+  plugins: [
+        …
+        alias({
+          "@prisma/client": require.resolve("@prisma/client"),
+        }),
+        …
+  ],
+})
+```
+
+## Error: process is not defined
+
+The entirety of `process.env.NODE_ENV` is a Node idea, from using a variable named _node environment_ to determine whether you are in production or not, to the `process` object it's contained in.
+
+Cloudflare Workers and Pages run on V8, which does not have this. However, your build script runs in Node, so you can pass them into the build function using esbuild's `define` feature.
+
+```js
+const environment = process.env.NODE_ENV
+  ? process.env.NODE_ENV.toLowerCase()
+  : "development"
+
+
+const version = process.env.VERSION
+  ? process.env.VERSION
+  : new Date().toISOString()
+
+esbuild.build({
+  …
+  define: {
+    process: JSON.stringify({
+      env: {
+        NODE_ENV: mode,
+        VERSION: version,
+        DATABASE_URL: process.env.DATABASE_URL,
+        …
+      },
+    }),
+  },
+})
+```
+
+## Deployments
+
+When `npm i` runs in NODE_ENV production, only the regular dependencies are installed. Any command line tools that are required to build and deploy should not be in devDependencies
+
+## TODO
+
+- [x] Fix the card upload flow
+
+- [ ] Create profile page with name
+- [ ] Send them automatically to the profile page if they haven't set a name yet.
+- [ ] Run namescan.io on their name when they set it
+
+- [ ] Send OTP as an email
+- [ ] Create reset password page
+- [ ] Create magic link login flow that sets requiresNewPassword flag
