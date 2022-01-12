@@ -21,56 +21,94 @@ npm i --save-dev /
   eslint /
   prettier /
   eslint-config-prettier /
-  eslint-plugin-prettier
+  eslint-plugin-prettier /
+  typescript /
+  @typescript-eslint/eslint-plugin
 ```
 
-## Configuration
+Add these scripts to `package.json`
 
-```json numbered labeled filename[.eslintrc]
+The `lint:changed` script will only lint the currently modified files, which is a great way to slowly integrate linting into a messy codebase
+
+````json
 {
-  "extends": ["plugin:prettier/recommended"]
+  "lint": "eslint",
+  "lint:changed": "eslint $(git diff --name-only --diff-filter=d HEAD ':(exclude)package*.json' | xargs)",
+  "lint:fix": "eslint --fix"
 }
-```
+## Node
 
-```json numbered labeled filename[.prettierrc]
+Create a `tsconfig.json` and place it in the root of your application
+
+```json
 {
-  // These are optional, but you can configure your opinions here
-  "semi": false,
-  "arrowParens": "always",
-  "singleQuote": true,
-  "endOfLine": "auto",
-  "trailingComma": "all",
-  "bracketSpacing": true
+    "compilerOptions": {
+        "target": "es2016",
+        "lib": ["ESNext"],
+        "allowJs": true,
+        "checkJs": true,
+        "skipLibCheck": true,
+        "strictNullChecks": false,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "noEmit": true,
+        "noImplicitAny": false,
+        "esModuleInterop": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "isolatedModules": true,
+        "jsx": "preserve",
+        "baseUrl": "./",
+        "paths": {
+            "@/*": ["./*"],
+            "~/*": ["./*"]
+        }
+    },
+    // When adding new paths, run this command to make sure it matches the right files
+    // npx glob-test "pages/**/**/*.{js,ts,jsx,tsx}"
+    "include": ["**.d.ts", ".eslintrc.js", "./**/**/*.js"],
+    "exclude": ["node_modules"]
 }
-```
+````
 
-```json numbered labeled filename[.vscode/settings.json]
-{
-  "eslint.validate": ["javascript"],
-  "eslint.run": "onType"
-}
-```
+Create a `.eslintrc.js` file and place it at the root of your application
 
-## Deployment
+```js
+module.exports = {
+  env: {
+    node: true,
+    jest: true,
+  },
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'prettier',
+    /** Automatically replaces "" with `` when ${var} is detected inside */
+    'plugin:no-template-curly-in-string-fix/recommended',
+  ],
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    project: './tsconfig.json',
+  },
 
-Since ESLint flags formatting issues as errors, a CI process that checks the lint status can fail. That might seem like a feature, but in a team environment, a small code suggestion in a PR can trigger prettier to expect some code to drop down to the next line. That blocks deployment until it's resolved.
+  plugins: [
+    '@typescript-eslint',
+    'jest',
+    'prettier',
+  ],
+  ignorePatterns: ['package-lock.json'],
+  rules: {
+    // Floating promises are usually a sign of forgetting to await
+    '@typescript-eslint/no-floating-promises':
+      'error',
+    '@typescript-eslint/no-empty-function': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
 
-To resolve this, I like to make a second eslint file called `.eslintrc.ci` that disables Prettier
-
-```json numbered labeled filename[.eslintrc.ci]
-{
-  "rules": {
-    "prettier/prettier": "off"
-  }
-}
-```
-
-Configure a script to load that config instead, and use that script in your CI workflow
-
-```json numbered labeled filename[package.json]
-{
-  "scripts": {
-    "lint:ci": "eslint -c .eslintrc.ci.js"
-  }
+    // MongoDB uses _id for its document ID
+    'no-underscore-dangle': [
+      'error',
+      {allow: ['_id']},
+    ],
+  },
 }
 ```
