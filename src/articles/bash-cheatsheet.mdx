@@ -43,3 +43,40 @@ Append text to a file
 ```sh
 echo "Text" >> file.txt
 ```
+
+Run a function
+```sh
+hello () {
+  echo "Hello!"
+}
+
+hello
+```
+
+Run a function with arguments
+```sh
+hello () {
+  echo "Hello, $1"
+}
+
+hello "world"
+```
+
+Print *Variable VAR not set* if VAR doesn't exist
+```sh
+: ${VAR:?"Variable VAR not set"}
+```
+
+Exit if *docker* is not installed
+```sh
+if [ ! "$(command -v docker)" ]; then
+  echo "🐳 Docker daemon not installed"
+
+  exit 1
+fi
+```
+
+Suppress error output
+```sh
+docker run server 2>/dev/null 
+```
