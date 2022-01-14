@@ -59,6 +59,7 @@ export default {
   p: (props: any) => <p className="mb-5 " {...props} />,
   li: (props: any) => <li className="list-disc" {...props} />,
   ul: (props: any) => <ul className="mb-4 ml-5" {...props} />,
+  ol: (props: any) => <ol className="mb-4 ml-5" {...props} />,
   ins: (props: any) => (
     <ins className="block px-4 -mx-4 bg-green-800" {...props} />
   ),

@@ -1,28 +1,28 @@
 ---
-title: Import ENV file from 1Password shared note into GitPod environment
+title: Import ENV file from 1Password shared note into Gitpod environment
 description: In April 2021, 1Password acquired SecretHub, which means there is now a way to securely store and download text files from a 1Password vault. This is perfect for `.env` files, as vaults can be shared between team members and now also to cloudy development environments.
-tags: 1Password, GitPod
+tags: 1Password, Gitpod
 ---
 
 During local development, I store secrets in a `.env` file on my local disk. The `.gitignore` file keeps it out of my repository for security reasons.
 
-But when I want to develop in a cloud environment like GitPod, there is no stateful disk to store the `.env` file. The easy solution would be to commit it into the repository, but that would risk exposing the secrets to anyone who ever has access in the future.
+But when I want to develop in a cloud environment like Gitpod, there is no stateful disk to store the `.env` file. The easy solution would be to commit it into the repository, but that would risk exposing the secrets to anyone who ever has access in the future.
 
-This is especially important for docker-in-docker, docker compose, or other microservice environments where you may have _many_ `.env` files to orchestrate in GitPod.
+This is especially important for docker-in-docker, docker compose, or other microservice environments where you may have _many_ `.env` files to orchestrate in Gitpod.
 
 In April 2021, 1Password acquired SecretHub, which means there is now a way to securely store and download text files from a 1Password vault. This is perfect for `.env` files, as vaults can be shared between team members and now also to cloudy development environments.
 
 Follow the directions in the [1Password documentation](https://support.1password.com/connect-deploy-docker/#step-1-set-up-a-secrets-automation-workflow) to set up a secret automation workflow.
 
-![1Password Secrets Automation flow, with one Access Token named GitPod](/images/gitpod-env-1pass_2021-10-01-20-02-52.png)
+![1Password Secrets Automation flow, with one Access Token named Gitpod](/images/gitpod-env-1pass_2021-10-01-20-02-52.png)
 
-Open the [GitPod variables dashboard](https://gitpod.io/variables) and create two environment variables using information from the 1Password secret automation workflow.
+Open the [Gitpod variables dashboard](https://gitpod.io/variables) and create two environment variables using information from the 1Password secret automation workflow.
 
 Save the access token as an environment variable named `PASSWORD_TOKEN`.
 
 Save the contents of the `1password-credentials.json` file as an environment variable named `PASSWORD_CREDENTIALS`. This allows us to securely pass in the credentials without committing them into the git repository.
 
-![GitPod environment variables dashboard, contains 2 items. Item 1: name PASSWORD_CREDENTIALS with scope jacobparis. Item 2: name PASSWORD_TOKEN with scope jacobparis](/images/gitpod-env-1pass_2021-10-01-20-00-38.png)
+![Gitpod environment variables dashboard, contains 2 items. Item 1: name PASSWORD_CREDENTIALS with scope jacobparis. Item 2: name PASSWORD_TOKEN with scope jacobparis](/images/gitpod-env-1pass_2021-10-01-20-00-38.png)
 
 ## Loading the 1Password Connect API
 
@@ -52,7 +52,7 @@ docker run -d \
   1password/connect-sync:latest
 ```
 
-When GitPod loads these services, it will ask the user what to do with the newly discovered active port. There is no use exposing that to outside users, so it's best to ignore them. This can be automated in the `ports` section of the `.gitpod.yml` file.
+When Gitpod loads these services, it will ask the user what to do with the newly discovered active port. There is no use exposing that to outside users, so it's best to ignore them. This can be automated in the `ports` section of the `.gitpod.yml` file.
 
 ```yml
 ports:
@@ -70,7 +70,7 @@ The following steps are more exploratory. We need to know the id of the vault we
 
 If your `.env` file is not already in 1Password, add a new Shared Note to your vault and paste in the contents of your `.env` file. This shared note is what we'll be downloading through the 1Password API.
 
-In the terminal within your GitPod VS Code instance, run the following command
+In the terminal within your Gitpod VS Code instance, run the following command
 
 ```sh
 curl http://0.0.0.0:8080/v1/vaults \
