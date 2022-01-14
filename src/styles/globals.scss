@@ -20,6 +20,10 @@
   --font-weight: 300;
 }
 
+ol > .list-disc {
+  list-style-type: decimal !important;
+}
+
 h1 {
   font-size: 2rem;
   font-weight: 300;
