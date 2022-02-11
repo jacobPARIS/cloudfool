@@ -64,8 +64,6 @@ RUN curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.gpg | sudo apt-key
 
 > Scroll to the bottom of this page for an example `.gitpod.yml` file, or follow through these steps to set it up for yourself.
 
-will prompt to log in.
-
 The "Connect to Tailscale" task will prompt the developer to log in. That only has to happen once, and it saves the Tailscale login token into Gitpod's environment variables to skip the login next time.
 
 If you put this one at the bottom of the `tasks` list, it will be the first one the developer sees if they need to log in, but close itself after the login is complete.
@@ -87,12 +85,12 @@ tasks:
     command: |
       if [ -n "${TS_STATE_TAILSCALE_EXAMPLE}" ]; then
         sudo -E tailscale up
-        exit
       else
         sudo -E tailscale up --hostname "gitpod-${GITPOD_GIT_USER_NAME// /-}-$(echo ${GITPOD_WORKSPACE_CONTEXT} | jq -r .repository.name)"
         # store the tailscale state into gitpod user
         gp env TS_STATE_TAILSCALE_EXAMPLE="$(sudo cat /var/lib/tailscale/tailscaled.state)"
       fi
+      exit
 ```
 
 ## 3. Open a workspace for each repo
@@ -121,7 +119,9 @@ We can use a `gitpod.yml` task to search Tailscale and create environment variab
 Given a repository with a name of `backend-service`, you can find the IP address by running this script
 
 ```sh
-tailscale status | grep backend-service | cut -d " " -f 1
+$ tailscale status | grep backend-service | cut -d " " -f 1
+
+100.11.166.123
 ```
 
 If you want your application to automatically connect to your API through Tailscale, you can use that script to set an environment variable in your `gitpod.yml` command
