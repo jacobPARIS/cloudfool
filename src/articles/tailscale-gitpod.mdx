@@ -64,11 +64,13 @@ RUN curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.gpg | sudo apt-key
 
 > Scroll to the bottom of this page for an example `.gitpod.yml` file, or follow through these steps to set it up for yourself.
 
-environment variables, and uses a few different tasks to get it running.
+will prompt to log in.
 
-The task that runs `sudo -E tailscale up` will run in the background, but unauthenticated users will be prompted to log in. If you put this one at the bottom of the `tasks` list, it will prompt the developer to log in. That only has to happen once, and it saves the Tailscale login token into Gitpod's environment variables to skip the login next time.
+The "Connect to Tailscale" task will prompt the developer to log in. That only has to happen once, and it saves the Tailscale login token into Gitpod's environment variables to skip the login next time.
 
-The task that runs `sudo tailscaled` will run in the background and doesn't need any developer interaction, so putting it at the top of the `tasks` list will keep it out of the developer's way.
+If you put this one at the bottom of the `tasks` list, it will be the first one the developer sees if they need to log in, but close itself after the login is complete.
+
+The "Restore Tailscale daemon" task that runs `sudo tailscaled` will run in the background and doesn't need any developer interaction, so putting it at the top of the `tasks` list will keep it out of the developer's way.
 
 ```yml
 tasks:
