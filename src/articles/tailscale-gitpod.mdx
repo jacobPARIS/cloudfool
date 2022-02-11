@@ -108,7 +108,10 @@ Tailscale allows you to log in via GitHub, Google, Microsoft, or email. As long 
 Run `tailscale status` to see the private IP addresses for your other workspaces. These are only accessible to other Tailscale nodes, so your workspaces can communicate with each other but neither your browser nor anyone else will be able to access them.
 
 ```sh
-tailscale status
+$ tailscale status
+
+100.11.166.123  main-backend-service username@  linux   -
+100.11.201.28   main-application username@  linux   -
 ```
 
 It doesn't make for a great experience if the developer has to hunt down IP addresses every time they make a workspace, and Gitpod is all about great developer experience.
