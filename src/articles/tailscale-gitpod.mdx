@@ -9,13 +9,13 @@ A very common multi-repo software architecture involves having one "application"
 
 In a conventional local development environment, you would have two repositories open in two IDE windows and every service can talk to every other service because they are all running on the same machine.
 
-![](images/2022-02-10-15-43-48.png)
+![](/images/2022-02-10-15-43-48.png)
 
 With Gitpod, each workspace runs in a secure sandbox, and while ports can be exposed to localhost so that the browser can access it, the workspaces cannot communicate with one-another.
 
 The workspaces live in sandboxes with specific ports exposed to the browser, so the browser is able to communicate with them.
 
-![](images/2022-02-10-15-54-36.png)
+![](/images/2022-02-10-15-54-36.png)
 
 As long as the browser is the only one interacting with the API, this will work. Many people develop SPAs (single page applications) and static sites where every network request is a client-side fetch. If this describes your development environment, then **you don't need Tailscale.**
 
@@ -23,7 +23,7 @@ But if your application has a server component that fetches data to pre-render t
 
 **This is what Tailscale was made for.**
 
-![](images/2022-02-11-17-46-14.png)
+![](/images/2022-02-11-17-46-14.png)
 
 ## What is Tailscale?
 
