@@ -204,7 +204,7 @@ export default function Home({greeting, sources}) {
             viewBox="0 0 1280 86"
             preserveAspectRatio="xMidYMid slice"
             xmlns="http://www.w3.org/2000/svg"
-            className="absolute top-0 pointer-events-none max-w-none"
+            className="absolute top-0 left-0 pointer-events-none max-w-none"
           >
             <g fill="rgba(255,255,255,0.13)">
               <path
